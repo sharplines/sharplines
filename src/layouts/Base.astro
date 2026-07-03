@@ -56,6 +56,9 @@ const schema = {
     <meta name="theme-color" content="#FAF9F7" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
+    <!-- Enable JS-only enhancements (fade-up) before paint; no flash. -->
+    <script is:inline>document.documentElement.classList.add('js');</script>
+
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
   <body>
@@ -70,6 +73,7 @@ const schema = {
     <!-- Fade-up on section entry (§3.4) -->
     <script>
       const els = document.querySelectorAll('.fade-up');
+      const showAll = () => els.forEach((el) => el.classList.add('in'));
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
         const io = new IntersectionObserver((entries) => {
           entries.forEach((e) => {
@@ -77,8 +81,10 @@ const schema = {
           });
         }, { rootMargin: '0px 0px -8% 0px' });
         els.forEach((el) => io.observe(el));
+        // Safety: never let a section stay hidden if the observer misses it.
+        window.addEventListener('load', () => setTimeout(showAll, 1500));
       } else {
-        els.forEach((el) => el.classList.add('in'));
+        showAll();
       }
     </script>
   </body>
