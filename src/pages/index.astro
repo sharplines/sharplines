@@ -3,28 +3,26 @@ import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-// Who we work with — grid of target clients (mirrors reference layout)
 const clients = [
+  'Mortgage Advisors',
+  'Lawyers',
+  'Solopreneurs',
+  'Real Estate Agents',
   'Small Businesses',
   'Startups',
-  'Real Estate Agents',
   'Financial Advisors',
-  'Lawyers',
   'Coaches & Consultants',
-  'Mortgage Advisors',
-  'Solopreneurs',
 ];
 
-// Services — two-column list
 const services = [
-  'Brand identity & logos',
-  'Website design & build',
-  'Social media graphics',
+  'Logo & identity design',
   'Presentation decks',
-  'Email & newsletter graphics',
-  'Ad creative & campaigns',
-  'Print & collateral',
-  'Ongoing design support',
+  'Website design',
+  'Email marketing graphics',
+  'Social media graphics',
+  'Lead-magnet design',
+  'Co-marketing materials',
+  'Print marketing materials',
 ];
 ---
 
@@ -34,85 +32,119 @@ const services = [
   <main>
     <!-- ============ HERO ============ -->
     <section class="hero">
-      <div class="container hero-inner">
-        <p class="eyebrow">A Design Studio for Small Businesses &amp; Entrepreneurs</p>
-        <h1>A design partner for<br />businesses that run<br />on reputation.</h1>
-        <p class="hero-sub">
-          SharpLines gives growing businesses the kind of creative support that makes
-          them impossible to overlook — sharp branding, sharp websites, sharp everything.
-        </p>
-        <a href="#about" class="link-underline hero-link">Learn More ↓</a>
+      <div class="hero-bg">
+        <img src="/images/hero.svg" alt="" aria-hidden="true" />
+        <span class="hero-overlay"></span>
+      </div>
+      <div class="container hero-content">
+        <h1 class="display-xl">A design partner for<br />businesses that run on reputation</h1>
+        <p class="hero-sub">Creative support built for relationship-driven small businesses and entrepreneurs.</p>
+        <a href="#about" class="btn btn--coral">Learn More →</a>
       </div>
     </section>
 
     <!-- ============ WHO WE WORK WITH ============ -->
-    <section class="section" id="about">
-      <div class="container">
-        <p class="eyebrow">Who We Work With</p>
-        <div class="client-grid">
-          {clients.map((c) => <div class="client-item">{c}</div>)}
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ THE CHALLENGE ============ -->
-    <section class="section theme-dark challenge">
-      <div class="container challenge-inner">
-        <div>
-          <p class="eyebrow">The Challenge</p>
-          <h2>Stand out in a<br />crowded market.</h2>
-        </div>
-        <div class="challenge-body">
-          <p>
-            In competitive markets, the best-known name usually wins — not the best-kept
-            secret. When your work speaks for itself, your design should too. We help you
-            look as credible as you actually are, so the right clients choose you first.
-          </p>
-          <a href="#contact" class="btn btn--ghost-light">Get a project quote</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ THE NAME / BRAND STORY + SERVICES ============ -->
-    <section class="section" id="services">
-      <div class="container story-grid">
-        <div class="story-copy">
-          <p class="eyebrow">The SharpLines Name</p>
-          <h2>Clean lines. Clear signals.</h2>
-          <p>
-            A sharp line is the difference between a shape and a statement. It's how the eye
-            finds the thing that matters. That's how we approach every project — cutting away
-            the noise until what's left is confident, precise, and unmistakably yours.
-          </p>
-          <p>Everything a growing business needs to look the part:</p>
-        </div>
-        <ul class="services-list">
-          {services.map((s) => <li>{s}</li>)}
+    <section class="section who theme-coral" id="about">
+      <div class="container who-inner">
+        <h2 class="display-xxl who-title">Who We<br />Work With</h2>
+        <ul class="who-list">
+          {clients.map((c) => <li>{c}</li>)}
         </ul>
       </div>
     </section>
 
-    <!-- ============ FULL-WIDTH IMAGE ============ -->
-    <section class="image-band" aria-label="Studio workspace">
-      <img src="/images/workspace.svg" alt="A minimal studio workspace with a laptop and design tools." />
+    <!-- ============ THE CHALLENGE ============ -->
+    <section class="section challenge theme-green">
+      <div class="container">
+        <p class="section-label">The Challenge</p>
+        <div class="challenge-inner">
+          <div class="challenge-media" role="img" aria-label="Placeholder feature image">
+            <span>REPLACE — public/images/challenge.jpg</span>
+          </div>
+          <h2 class="display-lg challenge-title">Stand Out in a<br />Crowded&nbsp;Market</h2>
+        </div>
+      </div>
     </section>
 
-    <!-- ============ CONTACT ============ -->
-    <section class="section contact" id="contact">
-      <div class="container contact-inner">
-        <p class="eyebrow">Connect</p>
-        <h2>Let's make your<br />brand impossible<br />to ignore.</h2>
-        <div class="contact-details">
-          <div>
-            <span class="footer-label">Email</span>
-            <a href="mailto:hello@sharplines.studio" class="link-underline contact-email">hello@sharplines.studio</a>
-          </div>
-          <div>
-            <span class="footer-label">Studio</span>
-            <p class="contact-addr">Toronto, Ontario<br />By appointment</p>
+    <!-- ============ THE NAME / BRAND STORY ============ -->
+    <section class="section story theme-coral" id="services">
+      <div class="container">
+        <p class="section-label">The SharpLines Name</p>
+        <div class="story-inner">
+          <h2 class="display-lg story-lead">A sharp line is a signal — the clean, deliberate edge that tells the eye exactly what matters.</h2>
+          <div class="story-body">
+            <p>In a crowded market, brands work the same way. The right visual signals help people recognise credibility, professionalism and trust at a glance.</p>
+            <p>SharpLines helps your brand develop those identifying marks through thoughtful design and consistent creative support.</p>
           </div>
         </div>
-        <a href="mailto:hello@sharplines.studio" class="btn btn--coral contact-btn">Start a project</a>
+      </div>
+    </section>
+
+    <!-- ============ BUILT FOR / SERVICES ============ -->
+    <section class="section built theme-mint">
+      <div class="container built-inner">
+        <div class="built-media" role="img" aria-label="Placeholder studio workspace image">
+          <span>REPLACE — public/images/workspace.jpg</span>
+        </div>
+        <div class="built-copy">
+          <h2 class="built-title">Built for relationship-driven small businesses and entrepreneurs.</h2>
+          <ul class="services-list">
+            {services.map((s) => <li>{s}</li>)}
+          </ul>
+          <a href="#contact" class="btn btn--green">Contact Us →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONNECT ============ -->
+    <section class="section connect theme-green" id="contact">
+      <div class="container connect-inner">
+        <div class="connect-intro">
+          <h2 class="display-xl">Connect</h2>
+          <p class="connect-sub">Questions? Reach out anytime.</p>
+          <span class="connect-rule"></span>
+        </div>
+
+        <form
+          class="connect-form"
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          action="/thank-you/"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <p class="hp"><label>Don't fill this out: <input name="bot-field" /></label></p>
+
+          <div class="field-label">Name <span>(required)</span></div>
+          <div class="field-row">
+            <label class="field">
+              <span>First Name</span>
+              <input type="text" name="first-name" required />
+            </label>
+            <label class="field">
+              <span>Last Name</span>
+              <input type="text" name="last-name" required />
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Email <em>(required)</em></span>
+            <input type="email" name="email" required />
+          </label>
+
+          <label class="field">
+            <span>Phone</span>
+            <input type="tel" name="phone" />
+          </label>
+
+          <label class="field">
+            <span>Message <em>(required)</em></span>
+            <textarea name="message" rows="4" required></textarea>
+          </label>
+
+          <button type="submit" class="btn btn--light">Submit</button>
+        </form>
       </div>
     </section>
   </main>
@@ -121,96 +153,134 @@ const services = [
 </Base>
 
 <style>
-  /* ---- Hero ---- */
-  .hero { padding-block: clamp(5rem, 12vw, 9rem) clamp(4rem, 9vw, 7rem); }
-  .hero-inner { text-align: center; max-width: 900px; }
-  .hero-sub {
-    max-width: 46ch;
-    margin: 1.75rem auto 2rem;
-    font-size: clamp(1.05rem, 1.5vw, 1.3rem);
-    opacity: 0.85;
-  }
-  .hero-link { font-weight: 500; letter-spacing: 0.02em; }
-
-  /* ---- Client grid ---- */
-  .client-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border-top: 1px solid color-mix(in srgb, var(--green) 18%, transparent);
-  }
-  .client-item {
-    padding: clamp(1.5rem, 3vw, 2.5rem) 1rem;
-    font-size: clamp(1.05rem, 1.6vw, 1.5rem);
-    font-weight: 400;
-    border-bottom: 1px solid color-mix(in srgb, var(--green) 18%, transparent);
-    border-right: 1px solid color-mix(in srgb, var(--green) 18%, transparent);
-    transition: background 0.2s ease, color 0.2s ease;
-  }
-  .client-item:hover { background: var(--green); color: var(--ivory); }
-  .client-grid .client-item:nth-child(4n) { border-right: none; }
-
-  /* ---- Challenge ---- */
-  .challenge-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(2rem, 5vw, 5rem);
-    align-items: start;
-  }
-  .challenge-body p { font-size: clamp(1.1rem, 1.6vw, 1.35rem); margin-bottom: 2rem; opacity: 0.9; }
-
-  /* ---- Story + services ---- */
-  .story-grid {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: clamp(2rem, 5vw, 5rem);
-    align-items: start;
-  }
-  .story-copy p { opacity: 0.9; }
-  .services-list {
-    list-style: none;
-    margin: 0; padding: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    border-top: 1px solid color-mix(in srgb, var(--green) 18%, transparent);
-  }
-  .services-list li {
-    padding: 0.9rem 0.25rem;
-    border-bottom: 1px solid color-mix(in srgb, var(--green) 18%, transparent);
-    font-size: 1.02rem;
-  }
-
-  /* ---- Image band ---- */
-  .image-band { width: 100%; }
-  .image-band img { width: 100%; height: clamp(300px, 55vh, 620px); object-fit: cover; }
-
-  /* ---- Contact ---- */
-  .contact-inner { text-align: center; max-width: 820px; }
-  .contact-details {
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    min-height: 100svh;
     display: flex;
-    justify-content: center;
-    gap: clamp(2rem, 8vw, 6rem);
-    margin: 2.5rem 0;
-    text-align: left;
+    align-items: flex-end;
+    color: var(--ivory);
+    overflow: hidden;
   }
-  .footer-label {
-    display: block;
-    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
-    opacity: 0.55; margin-bottom: 0.4rem;
+  .hero-bg { position: absolute; inset: 0; z-index: 0; }
+  .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(10,20,17,0.35) 0%, rgba(10,20,17,0.15) 45%, rgba(10,20,17,0.75) 100%);
   }
-  .contact-email { font-size: 1.15rem; }
-  .contact-addr { margin: 0; }
-  .contact-btn { margin-top: 0.5rem; }
+  .hero-content { position: relative; z-index: 1; padding-bottom: clamp(3.5rem, 8vh, 7rem); max-width: 1100px; }
+  .hero h1 { color: var(--ivory); }
+  .hero-sub { margin: 1.6rem 0 2.2rem; font-size: clamp(1.05rem, 1.5vw, 1.35rem); max-width: 34ch; }
 
-  @media (max-width: 820px) {
-    .client-grid { grid-template-columns: repeat(2, 1fr); }
-    .client-grid .client-item:nth-child(4n) { border-right: 1px solid color-mix(in srgb, var(--green) 18%, transparent); }
-    .client-grid .client-item:nth-child(2n) { border-right: none; }
-    .challenge-inner,
-    .story-grid { grid-template-columns: 1fr; }
+  /* ---------- shared section rhythm ---------- */
+  .section { padding-block: clamp(4rem, 9vw, 8rem); }
+
+  /* ---------- WHO WE WORK WITH ---------- */
+  .who { min-height: 92vh; display: flex; align-items: flex-end; }
+  .who-inner {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: end;
+  }
+  .who-title { color: var(--ivory); }
+  .who-list {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 3.5vw, 2.5rem) 1.5rem;
+  }
+  .who-list li { font-size: clamp(1.2rem, 1.7vw, 1.6rem); color: var(--ivory); }
+
+  /* ---------- CHALLENGE ---------- */
+  .challenge-inner { position: relative; }
+  .challenge-media {
+    width: 74%; aspect-ratio: 16 / 10;
+    background: #000; border-radius: 2px;
+    display: grid; place-items: center;
+  }
+  .challenge-media span,
+  .built-media span { font-size: 0.8rem; letter-spacing: 0.1em; opacity: 0.45; padding: 1rem; text-align: center; }
+  .challenge-title {
+    position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+    color: var(--ivory); text-align: left; max-width: 62%;
+  }
+
+  /* ---------- STORY ---------- */
+  .story-inner {
+    display: grid; grid-template-columns: 1.35fr 1fr;
+    gap: clamp(2rem, 6vw, 6rem); align-items: start;
+  }
+  .story-lead { color: var(--ivory); }
+  .story-body { padding-top: 0.5rem; }
+  .story-body p { font-size: clamp(1.02rem, 1.3vw, 1.2rem); opacity: 0.95; }
+
+  /* ---------- BUILT / SERVICES ---------- */
+  .built-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(2.5rem, 6vw, 6rem); align-items: center;
+  }
+  .built-media {
+    aspect-ratio: 4 / 5; border-radius: 6px;
+    background: linear-gradient(160deg, #dfe9e2, #cdd9cf);
+    display: grid; place-items: center; color: var(--green);
+  }
+  .built-title {
+    font-size: clamp(1.6rem, 2.6vw, 2.4rem); line-height: 1.12;
+    color: var(--green); margin-bottom: 2rem; max-width: 22ch;
+  }
+  .services-list {
+    list-style: none; margin: 0 0 2.5rem; padding: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem 1.5rem;
+  }
+  .services-list li { position: relative; padding-left: 1.6rem; font-size: 1.02rem; }
+  .services-list li::before {
+    content: "✓"; position: absolute; left: 0; top: 0;
+    color: var(--coral); font-weight: 700;
+  }
+
+  /* ---------- CONNECT ---------- */
+  .connect-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(2.5rem, 6vw, 6rem); align-items: start;
+  }
+  .connect-inner h2 { color: var(--ivory); }
+  .connect-sub { margin-top: 1.5rem; font-size: 1.2rem; }
+  .connect-rule { display: block; width: min(420px, 90%); height: 1px; background: rgba(255,255,255,0.3); margin-top: 1.5rem; }
+
+  .connect-form { display: flex; flex-direction: column; gap: 1.5rem; }
+  .hp { position: absolute; left: -9999px; }
+  .field-label { font-size: 1.15rem; }
+  .field-label span { opacity: 0.55; font-size: 0.85rem; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .field > span { font-size: 0.9rem; font-weight: 600; }
+  .field > span em { font-style: normal; font-weight: 400; opacity: 0.55; }
+  .field input, .field textarea {
+    background: transparent; border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.35);
+    color: var(--ivory); font-family: var(--font-body); font-size: 1rem;
+    padding: 0.5rem 0; resize: vertical;
+  }
+  .field input:focus, .field textarea:focus { outline: none; border-bottom-color: var(--coral); }
+  .connect-form .btn { align-self: flex-start; margin-top: 0.5rem; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px) {
+    .who-inner,
+    .story-inner,
+    .built-inner,
+    .connect-inner { grid-template-columns: 1fr; }
+    .who-inner { gap: 2.5rem; }
+    .challenge-media { width: 100%; }
+    .challenge-title {
+      position: static; transform: none; max-width: none; margin-top: 1.5rem;
+    }
+    .built-media { aspect-ratio: 16/11; }
   }
   @media (max-width: 520px) {
-    .services-list { grid-template-columns: 1fr; }
-    .contact-details { flex-direction: column; align-items: center; text-align: center; }
+    .who-list,
+    .services-list,
+    .field-row { grid-template-columns: 1fr; }
   }
 </style>

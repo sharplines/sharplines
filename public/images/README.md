@@ -1,18 +1,20 @@
 # Images — drop your assets here
 
-Anything in `public/` is served from the site root, so a file at
-`public/images/workspace.svg` is referenced in code as `/images/workspace.svg`.
+Files in `public/` are served from the site root, so `public/images/hero.jpg`
+is referenced in code as `/images/hero.jpg`.
 
-## To replace the placeholders
+## Photo slots to fill (all currently placeholders)
 
-1. Drop your photo into this folder, e.g. `public/images/workspace.jpg`.
-2. Update the reference in `src/pages/index.astro`:
-   - Full-width image band → currently `<img src="/images/workspace.svg" ...>`
-     change to `/images/workspace.jpg`.
-3. Add a logo the same way if you have one (e.g. `public/images/logo.svg`) and I can
-   swap the text wordmark in `src/components/Header.astro` for it.
+| Slot | Section | Referenced in |
+|------|---------|---------------|
+| `hero.jpg`      | Full-bleed hero background | `src/pages/index.astro` → `.hero-bg img` (currently `hero.svg`) |
+| `challenge.jpg` | "Stand Out in a Crowded Market" media block | `src/pages/index.astro` → `.challenge-media` (currently a black placeholder box) |
+| `workspace.jpg` | "Built for…" studio photo | `src/pages/index.astro` → `.built-media` (currently a gradient box) |
 
-Recommended: JPG/WebP for photos, SVG/PNG for logos. Aim for the hero/band image to be
-~1600px wide or larger.
+## How to swap one in
 
-Just tell me the filenames + which section each belongs to and I'll wire them in.
+1. Drop the file here, e.g. `public/images/hero.jpg`.
+2. Tell me the filename + slot and I'll wire it into `index.astro` and redeploy —
+   or edit the corresponding element yourself.
+
+Photos: JPG/WebP, hero ideally ≥1920px wide. Logo: SVG/PNG.

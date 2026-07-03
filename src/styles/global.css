@@ -1,31 +1,30 @@
 /* ============================================================
    SharpLines design system
-   Palette + type reverse-engineered to match fieldmark.studio.
-   Colours are the exact theme tokens (HSL) from the reference.
-   Swap --font-display to the real Halyard Display kit if licensed.
+   Layout, palette and type matched to the fieldmark.studio
+   reference. Colours are the exact theme tokens (HSL) sampled
+   from the reference's computed styles.
+   Swap --font-display for licensed Halyard Display if desired.
    ============================================================ */
 
 :root {
-  /* --- Palette (fieldmark theme tokens) --- */
-  --green:      hsl(167, 54%, 12%);   /* #0E2F28  primary dark green (ink / dark bg) */
-  --coral:      hsl(7, 90%, 57%);     /* #F4462F  accent (buttons, highlights) */
-  --mint:       hsl(140, 22%, 92%);   /* #E6EFE9  page background (off-white green) */
-  --ivory:      hsl(60, 100%, 97%);   /* #FFFFF0  light cream */
-  --ink:        hsl(0, 0%, 9%);       /* #171717  near-black */
+  /* --- Palette (exact reference tokens) --- */
+  --green:  hsl(167, 54%, 12%);   /* #0E2F28  dark green */
+  --coral:  hsl(7, 90%, 57%);     /* #F4462F  coral / accent */
+  --mint:   hsl(140, 22%, 92%);   /* #E6EFE9  light background */
+  --ivory:  hsl(60, 100%, 97%);   /* #FFFFF0  cream */
+  --ink:    hsl(0, 0%, 9%);       /* #171717  near-black */
 
   /* --- Semantic --- */
-  --bg:         var(--mint);
-  --text:       var(--green);
-  --heading:    var(--green);
+  --bg: var(--mint);
+  --text: var(--ink);
 
-  /* --- Type --- */
-  --font-display: "Jost", "Halyard Display", system-ui, -apple-system, sans-serif;
-  --font-body:    var(--font-display);
+  /* --- Type: Figtree = free humanist substitute for Halyard Display --- */
+  --font-display: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: var(--font-display);
 
   /* --- Layout --- */
-  --maxw: 1200px;
-  --gutter: clamp(1.25rem, 5vw, 4rem);
-  --section-y: clamp(4rem, 10vw, 8rem);
+  --maxw: 1320px;
+  --gutter: clamp(1.25rem, 5vw, 5.5rem);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -38,28 +37,22 @@ body {
   color: var(--text);
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(1rem, 0.5vw + 0.95rem, 1.15rem);
-  line-height: 1.6;
+  font-size: clamp(1.02rem, 0.4vw + 0.95rem, 1.18rem);
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  color: var(--heading);
-  font-weight: 500;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  margin: 0 0 0.5em;
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  margin: 0;
 }
-
-h1 { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 400; }
-h2 { font-size: clamp(2rem, 4vw, 3.25rem); }
-h3 { font-size: clamp(1.25rem, 2vw, 1.6rem); }
 
 p { margin: 0 0 1rem; }
 a { color: inherit; text-decoration: none; }
-
 img { max-width: 100%; display: block; }
 
 /* --- Layout helpers --- */
@@ -70,50 +63,56 @@ img { max-width: 100%; display: block; }
   padding-inline: var(--gutter);
 }
 
-.section { padding-block: var(--section-y); }
+/* Display sizes (matched to reference) */
+.display-xxl { font-size: clamp(3.25rem, 9vw, 7rem);  line-height: 0.98; }
+.display-xl  { font-size: clamp(2.75rem, 6vw, 5.25rem); line-height: 1.03; }
+.display-lg  { font-size: clamp(2.1rem, 4.6vw, 4rem);  line-height: 1.05; }
 
-.eyebrow {
-  font-size: 0.8rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  font-weight: 500;
-  opacity: 0.7;
-  margin-bottom: 1.25rem;
+/* Section label: thin top rule + small title-case label */
+.section-label {
+  border-top: 1px solid currentColor;
+  padding-top: 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  opacity: 0.85;
+  margin-bottom: clamp(2.5rem, 6vw, 5rem);
 }
 
-/* --- Buttons --- */
+/* --- Buttons: rectangular, generous padding --- */
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
   font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 0.95rem;
+  font-weight: 600;
+  font-size: 0.92rem;
   letter-spacing: 0.02em;
-  padding: 0.85em 1.75em;
-  border-radius: 999px;
+  padding: 1.35em 2.4em;
+  border-radius: 3px;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
 }
-.btn:hover { transform: translateY(-2px); }
+.btn--coral        { background: var(--coral); color: #fff; }
+.btn--coral:hover  { background: hsl(7, 85%, 50%); }
+.btn--green        { background: var(--green); color: var(--ivory); }
+.btn--green:hover  { opacity: 0.88; }
+.btn--light        { background: var(--mint); color: var(--green); }
+.btn--light:hover  { background: #fff; }
+.btn--outline-light        { background: transparent; color: var(--ivory); border-color: rgba(255,255,255,0.45); }
+.btn--outline-light:hover  { background: var(--ivory); color: var(--green); border-color: var(--ivory); }
 
-.btn--coral { background: var(--coral); color: var(--ivory); }
-.btn--coral:hover { background: hsl(7, 90%, 50%); }
+/* Section theming */
+.theme-green { background: var(--green); color: var(--ivory); }
+.theme-coral { background: var(--coral); color: var(--ivory); }
+.theme-mint  { background: var(--mint);  color: var(--ink); }
+.theme-ink   { background: var(--ink);   color: var(--mint); }
 
-.btn--outline { border-color: currentColor; }
-.btn--outline:hover { background: var(--green); color: var(--ivory); border-color: var(--green); }
-
-.btn--ghost-light { border-color: rgba(255,255,255,0.4); color: var(--ivory); }
-.btn--ghost-light:hover { background: var(--ivory); color: var(--green); }
-
-/* --- Theme sections (dark green on light, light on dark) --- */
-.theme-dark { background: var(--green); color: var(--ivory); }
-.theme-dark h1, .theme-dark h2, .theme-dark h3 { color: var(--ivory); }
-
-/* --- Link underline animation --- */
+/* Animated link underline */
 .link-underline { position: relative; }
 .link-underline::after {
-  content: "";
-  position: absolute; left: 0; bottom: -3px;
+  content: ""; position: absolute; left: 0; bottom: -3px;
   width: 100%; height: 1px; background: currentColor;
   transform: scaleX(0); transform-origin: right;
   transition: transform 0.3s ease;

@@ -2,10 +2,15 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="site-footer theme-dark">
+<footer class="site-footer theme-ink">
   <div class="container footer-grid">
     <div class="footer-brand">
-      <a href="/" class="wordmark">SharpLines<sup>™</sup></a>
+      <a href="/" class="wordmark">
+        <svg class="mark" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path d="M3 21 L21 3 M8 21 L21 8 M14 21 L21 14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+        <span>SharpLines<sup>™</sup></span>
+      </a>
       <p class="footer-tag">Sharp design for businesses that run on reputation.</p>
     </div>
 
@@ -23,28 +28,24 @@ const year = new Date().getFullYear();
 
   <div class="container footer-base">
     <span>© {year} SharpLines. All rights reserved.</span>
+    <a href="mailto:hello@sharplines.studio" class="link-underline">hello@sharplines.studio</a>
   </div>
 </footer>
 
 <style>
-  .site-footer { padding-block: clamp(3rem, 7vw, 5rem) 2rem; }
+  .site-footer { padding-block: clamp(3.5rem, 8vw, 6rem) 2.5rem; }
   .footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 2.5rem;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid rgba(255,255,255,0.14);
+    display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2.5rem;
+    padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.12);
   }
-  .footer-brand .wordmark { color: var(--ivory); font-size: 1.5rem; font-family: var(--font-display); font-weight: 500; }
-  .footer-brand .wordmark sup { font-size: 0.55em; opacity: 0.6; }
-  .footer-tag { margin-top: 0.75rem; max-width: 24ch; opacity: 0.75; }
+  .wordmark { display: inline-flex; align-items: center; gap: 0.55rem; font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; color: var(--mint); }
+  .wordmark sup { font-size: 0.5em; font-weight: 400; opacity: 0.7; }
+  .footer-tag { margin-top: 0.9rem; max-width: 26ch; opacity: 0.6; }
   .footer-col { display: flex; flex-direction: column; gap: 0.6rem; }
-  .footer-label {
-    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.55;
-    margin-bottom: 0.35rem;
+  .footer-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.45; margin-bottom: 0.4rem; }
+  .footer-base {
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    padding-top: 1.75rem; font-size: 0.85rem; opacity: 0.55;
   }
-  .footer-base { padding-top: 1.5rem; font-size: 0.85rem; opacity: 0.6; }
-  @media (max-width: 640px) {
-    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-  }
+  @media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr; gap: 2rem; } }
 </style>

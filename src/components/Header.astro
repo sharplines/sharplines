@@ -6,18 +6,23 @@ const nav = [
 ];
 ---
 
-<header class="site-header">
+<header class="site-header" data-header>
   <div class="container header-inner">
-    <a href="/" class="wordmark">SharpLines<sup>™</sup></a>
+    <a href="/" class="wordmark" aria-label="SharpLines home">
+      <svg class="mark" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+        <path d="M3 21 L21 3 M8 21 L21 8 M14 21 L21 14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span>SharpLines<sup>™</sup></span>
+    </a>
 
     <nav class="nav" aria-label="Primary">
       {nav.map((item) => (
         <a href={item.href} class="link-underline">{item.label}</a>
       ))}
-      <a href="#contact" class="btn btn--coral nav-cta">Get a Free Quote</a>
+      <a href="#contact" class="btn btn--outline-light nav-cta">Get A Free Quote</a>
     </nav>
 
-    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" data-toggle>
       <span></span><span></span>
     </button>
   </div>
@@ -25,57 +30,65 @@ const nav = [
 
 <style>
   .site-header {
-    position: sticky;
-    top: 0;
+    position: fixed;
+    top: 0; left: 0; right: 0;
     z-index: 50;
-    background: color-mix(in srgb, var(--mint) 88%, transparent);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid color-mix(in srgb, var(--green) 10%, transparent);
+    color: var(--ivory);
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .site-header.scrolled {
+    background: var(--green);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.08);
   }
   .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 74px;
+    height: 84px;
   }
   .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
     font-family: var(--font-display);
-    font-weight: 500;
-    font-size: 1.35rem;
+    font-weight: 600;
+    font-size: 1.5rem;
     letter-spacing: -0.01em;
-    color: var(--green);
   }
-  .wordmark sup { font-size: 0.55em; opacity: 0.6; }
-  .nav { display: flex; align-items: center; gap: clamp(1rem, 2.5vw, 2.25rem); }
-  .nav > a { font-size: 0.98rem; font-weight: 400; }
-  .nav-cta { font-size: 0.9rem; }
+  .wordmark sup { font-size: 0.5em; font-weight: 400; opacity: 0.7; }
+  .mark { flex: none; }
+
+  .nav { display: flex; align-items: center; gap: clamp(1.25rem, 2.5vw, 2.5rem); }
+  .nav > a { font-size: 1.02rem; }
+  .nav-cta { font-size: 0.82rem; padding: 0.95em 1.6em; }
+
   .menu-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
+    display: none; flex-direction: column; gap: 6px;
     background: none; border: none; cursor: pointer; padding: 8px;
   }
-  .menu-toggle span { width: 24px; height: 2px; background: var(--green); }
+  .menu-toggle span { width: 26px; height: 2px; background: currentColor; }
 
-  @media (max-width: 720px) {
+  @media (max-width: 800px) {
     .nav { display: none; }
     .menu-toggle { display: flex; }
     .nav.open {
       display: flex;
-      position: absolute;
-      top: 74px; left: 0; right: 0;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1.25rem;
-      padding: 1.5rem var(--gutter) 2rem;
-      background: var(--mint);
-      border-bottom: 1px solid color-mix(in srgb, var(--green) 12%, transparent);
+      position: absolute; top: 84px; left: 0; right: 0;
+      flex-direction: column; align-items: flex-start; gap: 1.4rem;
+      padding: 1.75rem var(--gutter) 2.25rem;
+      background: var(--green);
     }
+    .nav.open .nav-cta { align-self: stretch; justify-content: center; }
   }
 </style>
 
 <script>
-  const toggle = document.querySelector('.menu-toggle');
+  const header = document.querySelector('[data-header]');
+  const onScroll = () => header?.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.85);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const toggle = document.querySelector('[data-toggle]');
   const nav = document.querySelector('.nav');
   toggle?.addEventListener('click', () => {
     const open = nav?.classList.toggle('open');
