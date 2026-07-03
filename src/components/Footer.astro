@@ -11,25 +11,25 @@ const services = [
 ];
 ---
 
-<footer class="footer">
+<footer class="footer theme-ink">
   <div class="container footer__grid">
     <div class="footer__brand">
-      <a href="/" class="wordmark"><span class="wordmark__sharp">Sharp</span>lines</a>
+      <a href="/" class="wordmark">Sharplines</a>
       <p>More booked jobs for local GTA businesses.</p>
     </div>
 
     <nav class="footer__col" aria-label="Services">
-      <p class="eyebrow footer__head">Services</p>
+      <p class="footer__head">Services</p>
       {services.map((s) => <a href={s.href} class="footer__link">{s.label}</a>)}
     </nav>
 
     <nav class="footer__col" aria-label="Who we help">
-      <p class="eyebrow footer__head">Who we help</p>
+      <p class="footer__head">Who we help</p>
       {trades.map((t) => <a href={`/for/${t.slug}`} class="footer__link">{t.label}</a>)}
     </nav>
 
     <div class="footer__col">
-      <p class="eyebrow footer__head">Contact</p>
+      <p class="footer__head">Contact</p>
       <a href="tel:+15145602266" class="footer__link">(514) 560-2266</a>
       <a href="mailto:hi@sharplines.ca" class="footer__link">hi@sharplines.ca</a>
       <p class="footer__meta">Toronto &amp; GTA</p>
@@ -37,30 +37,22 @@ const services = [
     </div>
   </div>
 
-  <div class="container footer__base">
-    <span>© 2026 Sharplines Studio</span>
-  </div>
+  <div class="container footer__base"><span>© 2026 Sharplines Studio</span></div>
 </footer>
 
 <style>
-  .footer { background: var(--ink); color: var(--paper); padding-top: clamp(3rem, 7vw, 5rem); padding-bottom: 2rem; }
-  .footer__grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 2.5rem; }
-  .footer .wordmark { color: var(--paper); font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; }
-  .footer .wordmark__sharp { border-bottom-color: var(--chalk); }
-  .footer__brand p { color: var(--steel); margin-top: 0.85rem; max-width: 24ch; }
+  .footer { padding-top: clamp(3.5rem, 7vw, 5rem); padding-bottom: 2rem; }
+  .footer__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.25rem; }
+  .wordmark { color: var(--ivory); font-weight: 600; font-size: 1.5rem; letter-spacing: -0.02em; }
+  .footer__brand { grid-column: 1 / -1; }
+  .footer__brand p { color: var(--mint); opacity: 0.55; margin-top: 0.85rem; max-width: 26ch; }
   .footer__col { display: flex; flex-direction: column; }
-  .footer__head { color: var(--steel); margin-bottom: 1rem; }
-  .footer__link { color: var(--paper); font-size: 0.95rem; padding: 0.35rem 0; opacity: 0.85; }
-  .footer__link:hover { opacity: 1; color: #fff; text-decoration: underline; text-decoration-color: var(--chalk); text-underline-offset: 3px; }
-  .footer__meta { color: var(--steel); font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.04em; margin: 0.5rem 0; }
+  .footer__head { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mint); opacity: 0.45; margin: 0 0 1rem; }
+  .footer__link { color: var(--mint); font-size: 0.95rem; padding: 0.35rem 0; opacity: 0.85; }
+  .footer__link:hover { opacity: 1; color: #fff; text-decoration: underline; text-decoration-color: var(--coral); text-underline-offset: 3px; }
+  .footer__meta { color: var(--mint); opacity: 0.5; font-size: 0.85rem; letter-spacing: 0.04em; margin: 0.5rem 0; }
   .footer__privacy { margin-top: 0.25rem; }
-  .footer__base { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.12); font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.04em; color: var(--steel); }
+  .footer__base { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.12); font-size: 0.82rem; letter-spacing: 0.04em; color: var(--mint); opacity: 0.5; }
 
-  @media (max-width: 760px) {
-    .footer__grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
-    .footer__brand { grid-column: 1 / -1; }
-  }
-  @media (max-width: 420px) {
-    .footer__grid { grid-template-columns: 1fr; }
-  }
+  @media (min-width: 760px) { .footer__grid { grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 2.5rem; } .footer__brand { grid-column: auto; } }
 </style>

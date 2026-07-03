@@ -16,10 +16,10 @@ const steps = [
 </ol>
 
 <style>
-  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-  .step { border-top: 2px solid var(--chalk); padding-top: 1.25rem; }
-  .step__n { font-family: var(--font-mono); font-weight: 500; font-size: 0.8125rem; letter-spacing: 0.08em; color: var(--chalk); }
-  .step__title { margin: 0.5rem 0 0.6rem; font-size: 1.5rem; }
-  .step__body { color: var(--steel); margin: 0; }
-  @media (max-width: 760px) { .steps { grid-template-columns: 1fr; gap: 1.5rem; } }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+  .step { border-top: 2px solid var(--coral); padding-top: 1.25rem; }
+  .step__n { font-size: 0.85rem; letter-spacing: 0.16em; font-weight: 600; color: var(--coral); }
+  .step__title { margin: 0.6rem 0 0.7rem; font-size: 1.75rem; font-weight: 500; color: var(--ivory); }
+  .step__body { color: var(--ivory); opacity: 0.85; margin: 0; }
+  @media (min-width: 760px) { .steps { grid-template-columns: repeat(3, 1fr); gap: 2rem; } }
 </style>

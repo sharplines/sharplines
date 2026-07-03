@@ -10,114 +10,103 @@ const links = [
 
 <header class="nav" data-nav>
   <div class="container nav__inner">
-    <a href="/" class="wordmark" aria-label="Sharplines home">
-      <span class="wordmark__sharp">Sharp</span><span>lines</span>
-    </a>
+    <a href="/" class="wordmark" aria-label="Sharplines home">Sharplines</a>
 
-    <!-- Desktop links -->
     <nav class="nav__links" aria-label="Primary">
       <a href="/services" class="nav__link">Services</a>
-
       <div class="nav__drop" data-drop>
         <button class="nav__link nav__dropbtn" aria-expanded="false" aria-haspopup="true" data-dropbtn>
           Who we help
-          <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="11" height="11" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="nav__menu" role="menu">
-          {trades.map((t) => (
-            <a href={`/for/${t.slug}`} class="nav__menuitem" role="menuitem">{t.label}</a>
-          ))}
+          {trades.map((t) => <a href={`/for/${t.slug}`} class="nav__menuitem" role="menuitem">{t.label}</a>)}
         </div>
       </div>
-
       <a href="/work" class="nav__link">Results</a>
       <a href="/about" class="nav__link">About</a>
       <a href="/contact" class="nav__link">Contact</a>
     </nav>
 
-    <a href="/contact?offer=preview" class="btn btn--primary nav__cta">Get my free preview</a>
+    <a href="/contact?offer=preview" class="btn btn--coral nav__cta">Get my free preview</a>
 
-    <!-- Mobile toggle -->
     <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-burger>
       <span></span><span></span><span></span>
     </button>
   </div>
 
-  <!-- Mobile menu -->
   <div class="nav__mobile" id="mobile-menu" data-mobile hidden>
     <nav aria-label="Mobile">
       {links.map((l) => <a href={l.href} class="nav__mlink">{l.label}</a>)}
-      <p class="nav__mheading eyebrow">Who we help</p>
+      <p class="nav__mheading">Who we help</p>
       <div class="nav__mtrades">
         {trades.map((t) => <a href={`/for/${t.slug}`} class="nav__mtrade">{t.label}</a>)}
       </div>
-      <a href="/contact?offer=preview" class="btn btn--primary nav__mcta">Get my free preview</a>
+      <a href="/contact?offer=preview" class="btn btn--coral nav__mcta">Get my free preview</a>
     </nav>
   </div>
 </header>
 
 <style>
   .nav {
-    position: sticky; top: 0; z-index: 100;
-    background: var(--paper);
-    border-bottom: 1px solid var(--hairline);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    color: var(--ivory);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
   }
-  .nav__inner { display: flex; align-items: center; gap: 1rem; height: 64px; }
+  .nav.scrolled { background: var(--green); box-shadow: 0 1px 0 rgba(255,255,255,0.08); }
+  .nav__inner { display: flex; align-items: center; gap: 1rem; height: 76px; }
 
-  .wordmark {
-    font-family: var(--font-display); font-weight: 700; font-size: 1.35rem;
-    color: var(--ink); letter-spacing: -0.02em; margin-right: auto;
-  }
-  .wordmark__sharp { border-bottom: 2px solid var(--chalk); padding-bottom: 1px; }
+  .wordmark { font-weight: 600; font-size: 1.5rem; letter-spacing: -0.02em; color: var(--ivory); margin-right: auto; }
 
-  .nav__links { display: flex; align-items: center; gap: 1.75rem; margin-right: 1.5rem; }
+  .nav__links { display: none; align-items: center; gap: clamp(1.25rem, 2.5vw, 2.25rem); margin-right: 1.75rem; }
   .nav__link {
-    font-family: var(--font-body); font-weight: 500; font-size: 0.98rem;
-    color: var(--ink); background: none; border: none; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 0.35em; padding: 0;
+    font-weight: 400; font-size: 1rem; color: var(--ivory);
+    background: none; border: none; cursor: pointer; padding: 0;
+    display: inline-flex; align-items: center; gap: 0.35em;
   }
-  .nav__link:hover { color: var(--chalk); }
+  .nav__link:hover { opacity: 0.75; }
 
   .nav__drop { position: relative; }
   .nav__menu {
-    position: absolute; top: calc(100% + 0.75rem); left: 50%; transform: translateX(-50%) translateY(-6px);
-    background: var(--paper); border: 1px solid var(--hairline); border-radius: var(--radius);
-    padding: 0.5rem; min-width: 230px; display: grid;
+    position: absolute; top: calc(100% + 0.85rem); left: 50%; transform: translateX(-50%) translateY(-6px);
+    background: var(--ivory); border-radius: var(--radius); padding: 0.5rem; min-width: 240px; display: grid;
     opacity: 0; visibility: hidden; transition: opacity 0.16s ease, transform 0.16s ease;
-    box-shadow: 0 12px 30px rgba(23,24,28,0.08);
+    box-shadow: 0 16px 40px rgba(14,47,40,0.18);
   }
   .nav__drop.open .nav__menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
-  .nav__menuitem { padding: 0.55rem 0.75rem; border-radius: var(--radius); color: var(--ink); font-size: 0.95rem; }
-  .nav__menuitem:hover { background: var(--paper); color: var(--chalk); box-shadow: inset 3px 0 0 var(--chalk); }
+  .nav__menuitem { padding: 0.6rem 0.8rem; border-radius: var(--radius); color: var(--green); font-size: 0.98rem; }
+  .nav__menuitem:hover { color: var(--coral); box-shadow: inset 3px 0 0 var(--coral); }
 
-  .nav__cta { white-space: nowrap; }
+  .nav__cta { display: none; min-height: 44px; padding: 0.6rem 1.35rem; font-size: 0.9rem; white-space: nowrap; }
 
-  .nav__burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 10px; margin-left: auto; }
-  .nav__burger span { width: 24px; height: 2px; background: var(--ink); transition: transform 0.2s ease, opacity 0.2s ease; }
+  .nav__burger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 12px; margin-left: auto; }
+  .nav__burger span { width: 26px; height: 2px; background: currentColor; transition: transform 0.2s ease, opacity 0.2s ease; }
   .nav[data-open] .nav__burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav[data-open] .nav__burger span:nth-child(2) { opacity: 0; }
   .nav[data-open] .nav__burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  .nav__mobile { border-top: 1px solid var(--hairline); background: var(--paper); }
-  .nav__mobile nav { display: flex; flex-direction: column; padding: 1rem var(--gutter) 1.5rem; gap: 0.25rem; }
-  .nav__mlink { padding: 0.85rem 0; font-size: 1.15rem; font-weight: 500; color: var(--ink); border-bottom: 1px solid var(--hairline); }
-  .nav__mheading { margin: 1.25rem 0 0.5rem; }
+  .nav__mobile { background: var(--green); }
+  .nav__mobile nav { display: flex; flex-direction: column; padding: 0.5rem var(--gutter) 2rem; }
+  .nav__mlink { padding: 1rem 0; font-size: 1.3rem; font-weight: 400; color: var(--ivory); border-bottom: 1px solid rgba(255,255,255,0.14); }
+  .nav__mheading { margin: 1.5rem 0 0.75rem; font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.6; color: var(--ivory); }
   .nav__mtrades { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 1rem; }
-  .nav__mtrade { padding: 0.6rem 0; font-size: 1rem; color: var(--steel); }
-  .nav__mcta { margin-top: 1.25rem; width: 100%; }
+  .nav__mtrade { padding: 0.7rem 0; font-size: 1.02rem; color: var(--mint); opacity: 0.9; }
+  .nav__mcta { margin-top: 1.5rem; width: 100%; }
 
-  @media (max-width: 900px) {
-    .nav__links, .nav__cta { display: none; }
-    .nav__burger { display: flex; }
+  @media (min-width: 940px) {
+    .nav__links, .nav__cta { display: flex; }
+    .nav__burger { display: none; }
     .wordmark { margin-right: 0; }
-  }
-  @media (min-width: 901px) {
     .nav__mobile { display: none; }
   }
 </style>
 
 <script>
-  // Desktop dropdown
+  const header = document.querySelector('[data-nav]');
+  const onScroll = () => header?.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
   const drop = document.querySelector('[data-drop]');
   const dropBtn = document.querySelector('[data-dropbtn]');
   dropBtn?.addEventListener('click', () => {
@@ -128,7 +117,6 @@ const links = [
     if (drop && !drop.contains(e.target as Node)) { drop.classList.remove('open'); dropBtn?.setAttribute('aria-expanded', 'false'); }
   });
 
-  // Mobile menu
   const nav = document.querySelector('[data-nav]');
   const burger = document.querySelector('[data-burger]');
   const mobile = document.querySelector('[data-mobile]') as HTMLElement | null;
@@ -136,9 +124,12 @@ const links = [
     const open = nav?.toggleAttribute('data-open');
     burger.setAttribute('aria-expanded', String(!!open));
     burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    // keep the bar readable while the mobile panel is open
+    if (open) nav?.classList.add('scrolled');
+    else onScroll();
     if (mobile) mobile.hidden = !open;
   });
   mobile?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
-    nav?.removeAttribute('data-open'); mobile.hidden = true; burger?.setAttribute('aria-expanded', 'false');
+    nav?.removeAttribute('data-open'); if (mobile) mobile.hidden = true; burger?.setAttribute('aria-expanded', 'false'); onScroll();
   }));
 </script>

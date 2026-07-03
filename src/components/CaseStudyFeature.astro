@@ -1,5 +1,5 @@
 ---
-// Provolta case study feature (§6.1 CaseStudyFeature).
+// Provolta case study feature (spec §6.1). Copy verbatim.
 interface Props { compact?: boolean; }
 const { compact = false } = Astro.props;
 ---
@@ -9,18 +9,20 @@ const { compact = false } = Astro.props;
          alt="The Provolta Electric website Sharplines built — a conversion-first homepage for a licensed Toronto electrician." />
   </div>
   <div class="casestudy__body">
-    <h2 class="casestudy__h">Provolta Electric doubled their clients.</h2>
+    <h2 class="display-xl casestudy__h">Provolta Electric doubled their clients.</h2>
     <p>A licensed Toronto electrician serving homes, businesses, and industrial sites. We rebuilt provolta.ca from the ground up — conversion-first design, neighbourhood SEO pages, and a quote form people actually finish. Since launch, Provolta reports 2× more residential and commercial clients.</p>
     <a href="/work" class="link casestudy__link">Read the full story →</a>
   </div>
 </div>
 
 <style>
-  .casestudy { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
-  .casestudy__media { border: 1px solid var(--hairline); border-radius: var(--radius); overflow: hidden; background: #fff; }
+  .casestudy { display: grid; grid-template-columns: 1fr; gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center; }
+  .casestudy__media { border: 1px solid rgba(14,47,40,0.14); border-radius: var(--radius); overflow: hidden; background: #fff; box-shadow: 0 24px 60px rgba(14,47,40,0.10); }
   .casestudy__media img { width: 100%; height: auto; display: block; }
-  .casestudy__h { margin-bottom: 1rem; }
-  .casestudy__body p { color: var(--steel); font-size: 1.08rem; }
-  .casestudy__link { display: inline-block; margin-top: 1.25rem; color: var(--ink); font-weight: 600; }
-  @media (max-width: 820px) { .casestudy { grid-template-columns: 1fr; } }
+  .casestudy__h { margin-bottom: 1.25rem; }
+  .casestudy__body p { color: var(--ink); opacity: 0.85; font-size: 1.1rem; }
+  .casestudy__link { display: inline-block; margin-top: 1.25rem; color: var(--coral); font-weight: 600; }
+  @media (min-width: 860px) {
+    .casestudy { grid-template-columns: 1.1fr 1fr; }
+  }
 </style>

@@ -7,7 +7,7 @@ const { items } = Astro.props;
     <details class="faq__item">
       <summary class="faq__q">
         <span>{item.q}</span>
-        <svg class="faq__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <svg class="faq__icon" width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       </summary>
       <div class="faq__a"><p>{item.a}</p></div>
     </details>
@@ -15,16 +15,16 @@ const { items } = Astro.props;
 </div>
 
 <style>
-  .faq { border-top: 1px solid var(--hairline); }
-  .faq__item { border-bottom: 1px solid var(--hairline); }
+  .faq { border-top: 1px solid rgba(14,47,40,0.16); }
+  .faq__item { border-bottom: 1px solid rgba(14,47,40,0.16); }
   .faq__q {
     display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-    padding: 1.25rem 0; cursor: pointer; list-style: none;
-    font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; color: var(--ink);
+    padding: 1.35rem 0; cursor: pointer; list-style: none;
+    font-size: clamp(1.1rem, 2vw, 1.35rem); font-weight: 500; color: var(--green);
   }
   .faq__q::-webkit-details-marker { display: none; }
-  .faq__icon { flex: none; color: var(--chalk); transition: transform 0.2s ease; }
+  .faq__icon { flex: none; color: var(--coral); transition: transform 0.2s ease; }
   .faq__item[open] .faq__icon { transform: rotate(45deg); }
-  .faq__a { padding: 0 0 1.5rem; max-width: 62ch; }
-  .faq__a p { color: var(--steel); margin: 0; }
+  .faq__a { padding: 0 0 1.5rem; max-width: 64ch; }
+  .faq__a p { color: var(--ink); opacity: 0.82; margin: 0; }
 </style>

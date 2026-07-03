@@ -3,7 +3,7 @@
 // ~80% mobile audience: one tap to the free preview, one tap to call.
 ---
 <div class="mcta" data-mcta aria-label="Quick actions">
-  <a href="/contact?offer=preview" class="btn btn--primary mcta__btn">Get my free preview</a>
+  <a href="/contact?offer=preview" class="btn btn--coral mcta__btn">Get my free preview</a>
   <a href="tel:+15145602266" class="mcta__call" aria-label="Call Sharplines">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.2a12 12 0 005.8 5.8L20 12l1 3.5v3a1.5 1.5 0 01-1.6 1.5A16 16 0 013 4.6 1.5 1.5 0 014.5 3z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
   </a>
@@ -12,22 +12,19 @@
 <style>
   .mcta {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
-    display: none; gap: 0.6rem; align-items: stretch;
+    display: flex; gap: 0.6rem; align-items: stretch;
     padding: 0.6rem var(--gutter) calc(0.6rem + env(safe-area-inset-bottom, 0px));
-    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    background: color-mix(in srgb, var(--green) 94%, transparent);
     backdrop-filter: blur(8px);
-    border-top: 1px solid var(--hairline);
+    border-top: 1px solid rgba(255,255,255,0.12);
   }
-  .mcta__btn { flex: 1; }
+  .mcta__btn { flex: 1; min-height: 50px; }
   .mcta__call {
-    flex: none; width: 52px; display: inline-flex; align-items: center; justify-content: center;
-    border: 1px solid var(--ink); border-radius: var(--radius); color: var(--ink);
+    flex: none; width: 54px; display: inline-flex; align-items: center; justify-content: center;
+    border: 1.5px solid rgba(255,255,255,0.5); border-radius: var(--radius); color: var(--ivory);
   }
-  .mcta__call:hover { background: var(--ink); color: var(--paper); }
+  .mcta__call:hover { background: var(--ivory); color: var(--green); }
 
-  @media (max-width: 900px) {
-    .mcta { display: flex; }
-    /* keep footer clear of the fixed bar */
-    :global(.footer) { padding-bottom: 6rem; }
-  }
+  @media (min-width: 940px) { .mcta { display: none; } }
+  @media (max-width: 939px) { :global(.footer) { padding-bottom: 6rem; } }
 </style>

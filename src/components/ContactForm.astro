@@ -2,8 +2,8 @@
 // One form, two variants (§8).
 //  short — CTA bands: Name · Business name · Phone
 //  full  — /contact + trade pages: adds trade, email, current site, interest, notes
-// Delivery: posts to Netlify Forms today (works with no API key). Migrate to
-// the Resend API route from §8 once RESEND_API_KEY is supplied. TODO(arya): key.
+// Delivery: Netlify Forms today (no key needed, inline success). Migrate to the
+// Resend API route from §8 once RESEND_API_KEY is supplied. TODO(arya): key.
 import { trades } from '../data/trades';
 
 interface Props {
@@ -14,24 +14,15 @@ interface Props {
 const { variant = 'short', preselectTrade, theme = 'light' } = Astro.props;
 const full = variant === 'full';
 const interests = [
-  'Free homepage preview',
-  'Full website',
-  'Get found on Google',
-  'Reviews & booking',
-  'Phone answering',
-  'Social & ads',
-  'Not sure yet',
+  'Free homepage preview', 'Full website', 'Get found on Google',
+  'Reviews & booking', 'Phone answering', 'Social & ads', 'Not sure yet',
 ];
 ---
 
 <form
   class:list={['cform', `cform--${theme}`]}
-  name="contact"
-  method="POST"
-  data-netlify="true"
-  netlify-honeypot="company-hp"
-  data-cform
-  data-variant={variant}
+  name="contact" method="POST" data-netlify="true" netlify-honeypot="company-hp"
+  data-cform data-variant={variant} action="/thank-you/"
 >
   <input type="hidden" name="form-name" value="contact" />
   <input type="hidden" name="page-source" value="" data-source />
@@ -43,7 +34,6 @@ const interests = [
       <span class="field__label">Name</span>
       <input type="text" name="name" required autocomplete="name" />
     </label>
-
     <label class="field">
       <span class="field__label">Business name</span>
       <input type="text" name="business" required autocomplete="organization" />
@@ -70,23 +60,18 @@ const interests = [
         <input type="email" name="email" required autocomplete="email" inputmode="email" />
       </label>
     )}
-
     {full && (
       <label class="field field--wide">
         <span class="field__label">Current website <em>(optional)</em></span>
         <input type="url" name="website" placeholder="https://" autocomplete="url" inputmode="url" />
       </label>
     )}
-
     {full && (
       <label class="field field--wide">
         <span class="field__label">What are you interested in?</span>
-        <select name="interest" data-interest>
-          {interests.map((i) => <option value={i}>{i}</option>)}
-        </select>
+        <select name="interest" data-interest>{interests.map((i) => <option value={i}>{i}</option>)}</select>
       </label>
     )}
-
     {full && (
       <label class="field field--wide">
         <span class="field__label">Anything we should know? <em>(optional)</em></span>
@@ -95,7 +80,7 @@ const interests = [
     )}
   </div>
 
-  <button type="submit" class="btn btn--primary cform__submit">Get my free preview</button>
+  <button type="submit" class="btn btn--coral cform__submit">Get my free preview</button>
 
   <p class="cform__consent">
     By sending this you're okay with us contacting you about your request.
@@ -106,36 +91,35 @@ const interests = [
 </form>
 
 <style>
-  .cform { --fg: var(--ink); --line: var(--hairline); color: var(--fg); }
-  .cform--dark { --fg: var(--paper); --line: rgba(255,255,255,0.25); }
+  .cform { --fg: var(--green); --line: rgba(14,47,40,0.3); --ph: rgba(23,23,23,0.5); }
+  .cform--dark { --fg: var(--ivory); --line: rgba(255,255,255,0.32); --ph: rgba(255,255,240,0.5); }
+  .cform { color: var(--fg); }
 
-  .cform__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem 1.25rem; }
-  .field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .cform__grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+  .field { display: flex; flex-direction: column; gap: 0.35rem; }
   .field--wide { grid-column: 1 / -1; }
-  .field__label {
-    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--fg); opacity: 0.75;
-  }
+  .field__label { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg); opacity: 0.8; font-weight: 500; }
   .field__label em { font-style: normal; text-transform: none; letter-spacing: 0; opacity: 0.7; }
   .field input, .field select, .field textarea {
-    min-height: 48px; padding: 0.6rem 0.75rem;
+    min-height: 48px; padding: 0.55rem 0;
     background: transparent; color: var(--fg);
-    border: 1px solid var(--line); border-radius: var(--radius);
-    font-family: var(--font-body); font-size: 1rem; resize: vertical;
+    border: none; border-bottom: 1px solid var(--line); border-radius: 0;
+    font-family: var(--font); font-size: 1.05rem; resize: vertical;
   }
-  .cform--dark .field select option { color: var(--ink); }
-  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--chalk); box-shadow: 0 0 0 1px var(--chalk); }
+  .field select { padding-right: 1rem; }
+  .cform--dark select option { color: var(--green); }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-bottom-color: var(--coral); border-bottom-width: 2px; }
 
   .cform__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-  .cform__submit { margin-top: 1.25rem; }
-  .cform__consent { font-size: 0.85rem; color: var(--fg); opacity: 0.7; margin-top: 0.85rem; max-width: 46ch; }
-  .cform--dark .cform__consent .link { color: var(--paper); }
-  .cform__status { margin-top: 1rem; font-weight: 500; }
-  .cform__status[data-state="ok"] { color: var(--fg); }
-  .cform__status[data-state="err"] { color: #C0392B; }
-  .cform--dark .cform__status[data-state="err"] { color: #ff9b8f; }
+  .cform__submit { margin-top: 1.75rem; }
+  .cform__consent { font-size: 0.85rem; color: var(--fg); opacity: 0.72; margin-top: 1rem; max-width: 46ch; }
+  .cform__status { margin-top: 1.25rem; font-weight: 500; font-size: 1.05rem; }
+  .cform__status[data-state="err"] { color: #ffd2c9; }
+  .cform--light .cform__status[data-state="err"] { color: #b23c26; }
 
-  @media (max-width: 560px) { .cform__grid { grid-template-columns: 1fr; } .cform__submit { width: 100%; } }
+  @media (min-width: 560px) {
+    .cform__grid { grid-template-columns: 1fr 1fr; column-gap: 1.5rem; }
+  }
 </style>
 
 <script>
@@ -146,20 +130,15 @@ const interests = [
     const status = f.querySelector('[data-status]') as HTMLElement | null;
     if (srcEl) srcEl.value = location.pathname + location.search;
     if (tsEl) tsEl.value = String(Date.now());
-
-    // Preselect interest = "Free homepage preview" when ?offer=preview (§6.5)
     if (location.search.includes('offer=preview')) {
       const sel = f.querySelector('[data-interest]') as HTMLSelectElement | null;
       if (sel) sel.value = 'Free homepage preview';
     }
-
     f.addEventListener('submit', async (e) => {
       e.preventDefault();
-      // Spam guards: honeypot + min fill time
       const hp = (f.querySelector('[name="company-hp"]') as HTMLInputElement)?.value;
       const started = Number(tsEl?.value || 0);
       if (hp || (started && Date.now() - started < 2500)) return;
-
       const btn = f.querySelector('button[type="submit"]') as HTMLButtonElement;
       btn.disabled = true; btn.textContent = 'Sending…';
       try {

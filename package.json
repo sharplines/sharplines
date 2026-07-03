@@ -9,9 +9,7 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@fontsource/archivo": "^5.2.8",
-    "@fontsource/ibm-plex-mono": "^5.2.7",
-    "@fontsource/instrument-sans": "^5.2.8",
+    "@fontsource-variable/figtree": "^5.2.10",
     "astro": "^4.15.0"
   }
 }
