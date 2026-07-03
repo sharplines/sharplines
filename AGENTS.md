@@ -28,14 +28,24 @@ Working notes for any agent on this repo. Keep this current as decisions land.
 - CLIs are authed as the **sharplines** GitHub account and **Sharplines** Netlify team —
   keep separate from Provolta.
 
-## Design system (see spec §3)
-- Palette: `--paper #FAF9F7` · `--ink #17181C` · `--steel #6B7080` · `--hairline #E3E1DC`
-  · `--chalk #2946E8` · `--chalk-dk #1C31C7`. No gradients, no other accents.
-- Type: Archivo (display 600/700), Instrument Sans (body 400/500), IBM Plex Mono
-  (mono eyebrows/labels, uppercase +0.08em). Tokens in `src/styles/global.css`.
-- Signature: the **chalk line** — snaps under the hero's key phrase, is the link-hover
-  underline + focus accent, and a left-gutter rail on desktop (`.rail`/`.rail__tick`).
+## Design system (v2 — see spec §3, updated 2026-07-03)
+- **Warm colour-block style** (replaced the earlier chalk-blue "instrument" look at Arya's
+  direction): full-bleed photo hero + full-width saturated colour blocks, one typeface, big
+  display type. Bold in colour/composition, disciplined in copy/layout.
+- Palette: `--green #0E2F28` · `--coral #F4462F` (+`--coral-dk #DB3B27`) · `--mint #E6EFE9`
+  (page bg) · `--ivory #FFFFF0` · `--ink #171717`. Only these six. Tokens in `src/styles/global.css`.
+- Type: **one family — Figtree** (`@fontsource-variable/figtree`), stand-in for the reference's
+  licensed Halyard Display. Headings 400–500, -0.02em; eyebrows uppercase +0.16em in coral.
+- Signature: full-bleed photo hero + alternating coral/green/mint blocks; a coral "sharp line"
+  snaps under the hero keyword (`.line-accent`) and is the link-hover underline.
   Respect `prefers-reduced-motion` (all handled in global.css).
+- Home colour rhythm: hero(photo) → proof(green) → services(mint) → dashboard(coral) →
+  results(mint) → how(green) → who-we-help(coral, signature) → founders(mint) → FAQ(mint) →
+  CTA(green) → footer(ink).
+- Voice (spec §2): plain, concrete, sentence case, no exclamation marks. **Banned words:**
+  solutions, synergy, leverage, cutting-edge, revolutionize, digital transformation,
+  unleash, empower, elevate, seamless, world-class. Only published client metric is
+  Provolta's client-reported 2×. Never invent testimonials/ratings/agency years.
 - Voice (spec §2): plain, concrete, sentence case, no exclamation marks. **Banned words:**
   solutions, synergy, leverage, cutting-edge, revolutionize, digital transformation,
   unleash, empower, elevate, seamless, world-class. Only published client metric is
@@ -54,22 +64,27 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   success state) instead of the spec's Resend API route — because no `RESEND_API_KEY` yet
   and a working form beats a blocked one. Migrate to Resend (spec §8) when Arya supplies a
   key. Honeypot + 2.5s min-fill spam guard included.
-- **Mobile sticky CTA bar** (`MobileCTA.astro`) added for lead capture (not in spec) — free
-  preview + tap-to-call, ≤900px only. Justified by the mobile/leads priorities above.
-- **Fonts**: Fontsource per spec (was briefly a Google Fonts link during the earlier
-  fieldmark experiment — that whole direction is discarded).
+- **Mobile sticky CTA bar** (`MobileCTA.astro`) added for lead capture (not in original spec;
+  now documented in §3.4) — coral "free preview" + tap-to-call, shown < 940px.
+- **v2 rebrand (2026-07-03)**: home restyled to the warm colour-block look (see Design system).
+  Content/sections/voice unchanged — only the visual layer + `docs/site-spec.md` §3 changed.
+- **Fonts**: single family **Figtree** via `@fontsource-variable/figtree` (dropped the v1
+  Archivo/Instrument Sans/IBM Plex Mono trio).
 - **@astrojs/sitemap** deferred — its current version crashes this build; re-add during the
   SEO pass (spec §11 late step) with a pinned/working version.
-- **Images**: founders = Unsplash stock portraits (grayscale, clearly placeholder, 4:5,
-  `TODO(arya)` to replace). Case study = live screenshot of provolta.ca via thum.io
-  (real asset — Arya's own client). Using plain `<img loading=lazy>`; migrate to Astro
-  `<Image>` (AVIF/WebP) in the Lighthouse/polish pass.
+- **Images** (`public/images/`): `hero.jpg` = warm Unsplash café-owner shot (free licence),
+  full-bleed with a dark-green scrim. `founder-arya/amir.jpg` = Unsplash portraits, now shown
+  in colour, `TODO(arya)` to replace. `provolta-site.png` = real screenshot of provolta.ca via
+  thum.io (Arya's own client). Plain `<img loading=lazy>`; migrate to Astro `<Image>`
+  (AVIF/WebP) in the Lighthouse/polish pass.
 
 ## Open TODO(arya) (from spec §10)
 416/647 phone (currently 514, reads as Montreal) · logo files · founder photos · Provolta
-permission + quote + 3 screenshots · Resend/Web3Forms key · favicon (temp chalk "S" shipped).
+permission + quote + 3 screenshots · Resend/Web3Forms key · favicon (temp coral "S" on green shipped).
 
 ## Status
-- **Home page `/`** built and deployed (all §6.1 sections). Awaiting Arya's greenlight
-  before building the rest (services, work, about, contact, 8 trade pages, privacy, 404).
-- Build order for the rest: spec §11.
+- **Home page `/`** built and deployed in the v2 warm colour-block style (all §6.1 sections).
+  Verified on desktop; mobile authored mobile-first but NOT yet screenshot-verified (the Chrome
+  extension viewport is locked at desktop width — check on a real phone).
+- Awaiting Arya's greenlight before building the rest (services, work, about, contact, 8 trade
+  pages, privacy, 404). Build order: spec §11.

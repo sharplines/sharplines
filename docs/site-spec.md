@@ -42,48 +42,76 @@ This spec is the source of truth. Where the existing Astro template conflicts wi
 
 ## 3. Design system
 
-Aesthetic brief: modern, precise, quietly premium. "Frontier high class" without jargon or decoration. The design should feel like a well-calibrated tool, not a marketing brochure.
+> **v2 — updated 2026-07-03 at Arya's direction.** The brand moved from the earlier
+> quiet chalk-blue "instrument" look to a **warm, bold, colour-block** style: a full-bleed
+> photo hero and full-width saturated colour sections, one typeface, big display type.
+> This section supersedes v1 entirely. **Mobile is the priority — ~80% of visitors are on
+> phones; design and QA mobile first.**
 
-### 3.1 Signature element — the chalk line
+Aesthetic brief: confident, warm, editorial. Big photography, big type, bold colour blocks
+that alternate down the page. Premium but human — not a quiet tool, not a busy brochure.
+The boldness lives in the colour and the composition; the copy and layout stay disciplined.
 
-The one memorable device, drawn from the trades world: a **chalk line / laser-level line**. A single 2px line in Chalk Blue that:
-1. In the hero, draws itself horizontally under the key phrase of the H1 (350ms, slight overshoot then settle — like snapping a chalk line).
-2. Continues as a thin vertical thread down the left gutter on desktop, connecting section markers as the user scrolls (static on mobile).
-3. Reappears as the underline treatment on link hover and as the focus ring accent.
+### 3.1 Signature — colour-block rhythm + the sharp line
 
-This is the only place the site spends its boldness. Everything else stays quiet and disciplined. Respect `prefers-reduced-motion`: the line renders instantly with no animation.
+1. **Full-bleed photo hero** with a dark-green scrim and left-aligned display headline sitting
+   at the lower-left.
+2. **Alternating full-width colour blocks** down the page — coral / dark-green / mint — each a
+   distinct, edge-to-edge section. This rhythm *is* the memorable device.
+3. **The "sharp line"** (nods to the name): a 3px **coral** rule that snaps in under the hero's
+   key phrase (~400ms, slight overshoot), plus the thin top-rule on section labels and the
+   underline on link hover. Respect `prefers-reduced-motion`: render instantly, no animation.
 
 ### 3.2 Palette (use these exact tokens)
 
 ```css
---paper:    #FAF9F7;  /* page background, warm white */
---ink:      #17181C;  /* headings, body text, footer bg */
---steel:    #6B7080;  /* secondary text, captions */
---hairline: #E3E1DC;  /* borders, dividers, card strokes */
---chalk:    #2946E8;  /* the blue: CTAs, signature line, links */
---chalk-dk: #1C31C7;  /* hover/pressed state */
+--green:   #0E2F28;  /* dark green: dark sections, headings on light, hero scrim */
+--coral:   #F4462F;  /* accent: primary CTAs, the signature colour block, eyebrows, the line */
+--coral-dk:#DB3B27;  /* coral hover/pressed */
+--mint:    #E6EFE9;  /* page background */
+--ivory:   #FFFFF0;  /* cream: text on dark blocks, light cards */
+--ink:     #171717;  /* body text on light, footer background */
 ```
 
-No gradients. No additional accent colors. Footer is `--ink` with `--paper` text. Do **not** substitute cream+terracotta, dark+acid-green, or any other palette.
+Backgrounds are `--mint` (default) with edge-to-edge `--coral` / `--green` blocks and an
+`--ink` footer. Text: `--ink` on light, `--ivory` on dark/coral, headings `--green` on light.
+Keep it to these six tokens — no gradients beyond the hero scrim, no extra accents.
 
-### 3.3 Type
+### 3.3 Type — one typeface
 
-- **Display:** Archivo (weights 600/700, tracking -0.02em, used for H1–H2 only). Slightly larger and tighter than a default scale — headlines are the personality.
-- **Body:** Instrument Sans (400/500).
-- **Utility:** IBM Plex Mono (400/500) — eyebrows, stat figures, form labels, footer meta. Uppercase, letter-spaced +0.08em, 12–13px. This is the "measurement / engineering" texture of the brand.
-- Load via Fontsource packages; `font-display: swap`; preload the two display weights only.
-- Scale (desktop → mobile): H1 clamp(2.5rem, 5vw, 4rem); H2 clamp(1.75rem, 3vw, 2.5rem); H3 1.25rem; body 1.0625rem/1.65; mono labels 0.8125rem.
+- **Everything** uses a single family: **Figtree** (variable) — the free stand-in for the
+  reference's licensed **Halyard Display**. Swap in Halyard via Adobe Fonts if it's ever licensed.
+- Headings weight 400–500, tracking -0.02em; body 400. Display type is large and confident.
+- **Eyebrows:** uppercase, letter-spaced +0.16em, ~0.8rem, in `--coral` (ivory on coral blocks).
+- **Section labels** (alt style): title-case with a thin top rule (the "sharp line").
+- Load via Fontsource (`@fontsource-variable/figtree`); `font-display: swap`.
+- Fluid scale: hero H1 clamp(2.6rem,8.5vw,5.5rem); signature blocks clamp(3rem,12vw,6.5rem);
+  feature clamp(2.1rem,6vw,4rem); section clamp(1.75rem,4.5vw,2.75rem); body ~1.05rem/1.55.
 
 ### 3.4 Layout & components
 
-- 12-col grid, max-width 1200px, generous section padding (min 96px desktop / 64px mobile).
-- Corners: 2px radius max on buttons and inputs; cards use 1px `--hairline` borders, no shadows (a 4px `--chalk` left border on hover is the card hover state).
-- Section pattern: mono eyebrow → H2 → optional one-line intro → content. Number the eyebrows **only** in the "How it works" section (01/02/03 — it's genuinely sequential); nowhere else.
-- Buttons: primary = solid `--chalk` bg, white text; secondary = 1px `--ink` border, transparent bg. Both 48px min height, sentence case.
-- Nav: sticky, `--paper` bg with bottom hairline; logo left (wordmark: "Sharplines" in Archivo 700 with a 2px chalk-blue underline on "Sharp" — this doubles as the logo until Arya supplies one); links: Services, Who we help ▾ (dropdown → 8 trades), Results, About, Contact; right: primary button "Get my free preview".
-- Footer (ink bg): 4 cols — wordmark + one-liner; Services links; Who we help links; Contact (phone, email, "Toronto & GTA") + privacy link + "© 2026 Sharplines Studio".
-- Motion beyond the signature line: fade-up on section entry (12px, 250ms, once) only. Nothing else animates.
-- Quality floor: responsive to 360px, visible keyboard focus (2px chalk outline), semantic landmarks, alt text on all images, Lighthouse ≥ 95 all categories.
+- Max-width 1200–1280px; generous section padding (clamp 64px mobile → 128px desktop). Bold
+  colour blocks run full-bleed edge-to-edge; inner content stays in the container.
+- Corners: 3px radius on buttons/inputs. Service cards = ivory with a hairline border and a
+  **4px coral left border on hover**. Case-study screenshot sits in a bordered, soft-shadowed frame.
+- Section pattern: eyebrow → big heading → content. Number eyebrows **only** in "How it works"
+  (01/02/03). Contact-form inputs are **underline-only** (no boxes), labels above.
+- Buttons (rounded rect, ≥48px, sentence case): `coral` (primary), `green`, `ivory`,
+  `outline-dark` (green border on light), `outline-light` (ivory border on dark/photo).
+- Nav: **transparent over the hero with ivory text**, turns solid `--green` on scroll; wordmark
+  "Sharplines" left; links Services · Who we help ▾ (8 trades) · Results · About · Contact;
+  right: coral "Get my free preview". Mobile: hamburger → full green panel.
+- **Mobile sticky bottom CTA bar** (`MobileCTA`): coral "Get my free preview" + tap-to-call —
+  the primary mobile lead path. Shown < 940px only.
+- Footer: `--ink` bg, 4 cols — wordmark + one-liner; Services; Who we help; Contact + privacy +
+  "© 2026 Sharplines Studio".
+- Home colour rhythm: hero(photo) → proof(green) → services(mint) → dashboard(coral) →
+  results(mint) → how-it-works(green) → who-we-help(coral, the signature block) →
+  founders(mint) → FAQ(mint) → CTA "Connect"(green) → footer(ink).
+- Motion: fade-up on entry (14px, once, gated behind `.js` so content is never hidden) + the
+  hero coral line snap. Nothing else animates.
+- Quality floor: responsive to 360px, visible focus (2px coral/ivory outline), semantic
+  landmarks, alt text on all images, Lighthouse ≥ 95 all categories.
 
 ---
 
@@ -293,14 +321,14 @@ Delivery: Astro API route → Resend (`RESEND_API_KEY` env) emailing hi@sharplin
 
 - Titles/descriptions: trade pages per §7; Home: `Websites & Marketing for Local GTA Businesses | Sharplines Studio` / `Sharplines builds websites, local SEO, reviews, booking and ad systems that get Toronto & GTA businesses more booked jobs. See your new homepage free in 48 hours.`; write the remaining pages in the same voice, ≤60/≤155 chars.
 - JSON-LD: sitewide `ProfessionalService` (name, url, telephone, email, `areaServed: Toronto & Greater Toronto Area` — **no address**); each trade page adds `Service` + `FAQPage` (from its 3 FAQs); /work adds nothing extra.
-- One OG image at launch (1200×630: ink background, wordmark, chalk line under "Sharp", tagline `More booked jobs.`) — generate as a static asset; per-page OG images are post-launch.
+- One OG image at launch (1200×630: dark-green background, "Sharplines" wordmark, a coral sharp-line accent, tagline `More booked jobs.`) — generate as a static asset; per-page OG images are post-launch.
 - `@astrojs/sitemap` + robots.txt; canonical on every page; trade pages interlink (footer of each: "Also see: 3 sibling trades").
 
 ---
 
 ## 10. Assets needed from Arya (build proceeds with placeholders)
 
-1. Logo files (until then: wordmark per §3.4) · 2. Founder photos (4:5) · 3. Provolta screenshots ×3 + written permission + quote · 4. 416/647 phone number · 5. Resend or Web3Forms key · 6. Favicon (fallback: chalk-blue "S" on ink)
+1. Logo files (until then: wordmark per §3.4) · 2. Founder photos (4:5) · 3. Provolta screenshots ×3 + written permission + quote · 4. 416/647 phone number · 5. Resend or Web3Forms key · 6. Favicon (fallback: coral "S" on dark green)
 
 ## 11. Build order & acceptance
 
