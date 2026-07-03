@@ -1,0 +1,3 @@
+# SharpLines — static site, no build step
+[build]
+  publish = "."
