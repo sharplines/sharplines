@@ -1,0 +1,25 @@
+---
+const steps = [
+  { n: '01', title: 'Preview', body: "Tell us your business name. Within 48 hours you'll see a homepage designed for you — free, no strings." },
+  { n: '02', title: 'Launch', body: 'Like it? We build the full site and switch on the systems you choose. Most launches take 2–3 weeks.' },
+  { n: '03', title: 'Grow', body: "Reviews, rankings, bookings, and posts run week after week. You'll see every call and lead in your dashboard." },
+];
+---
+<ol class="steps">
+  {steps.map((s) => (
+    <li class="step">
+      <span class="step__n">{s.n}</span>
+      <h3 class="step__title">{s.title}</h3>
+      <p class="step__body">{s.body}</p>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .step { border-top: 2px solid var(--chalk); padding-top: 1.25rem; }
+  .step__n { font-family: var(--font-mono); font-weight: 500; font-size: 0.8125rem; letter-spacing: 0.08em; color: var(--chalk); }
+  .step__title { margin: 0.5rem 0 0.6rem; font-size: 1.5rem; }
+  .step__body { color: var(--steel); margin: 0; }
+  @media (max-width: 760px) { .steps { grid-template-columns: 1fr; gap: 1.5rem; } }
+</style>

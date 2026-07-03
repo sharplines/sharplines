@@ -1,120 +1,190 @@
 /* ============================================================
-   SharpLines design system
-   Layout, palette and type matched to the fieldmark.studio
-   reference. Colours are the exact theme tokens (HSL) sampled
-   from the reference's computed styles.
-   Swap --font-display for licensed Halyard Display if desired.
+   Sharplines Studio — design system
+   Source of truth: docs/site-spec.md (§3). Mobile-first.
    ============================================================ */
 
 :root {
-  /* --- Palette (exact reference tokens) --- */
-  --green:  hsl(167, 54%, 12%);   /* #0E2F28  dark green */
-  --coral:  hsl(7, 90%, 57%);     /* #F4462F  coral / accent */
-  --mint:   hsl(140, 22%, 92%);   /* #E6EFE9  light background */
-  --ivory:  hsl(60, 100%, 97%);   /* #FFFFF0  cream */
-  --ink:    hsl(0, 0%, 9%);       /* #171717  near-black */
+  /* Palette (§3.2) */
+  --paper:    #FAF9F7;
+  --ink:      #17181C;
+  --steel:    #6B7080;
+  --hairline: #E3E1DC;
+  --chalk:    #2946E8;
+  --chalk-dk: #1C31C7;
 
-  /* --- Semantic --- */
-  --bg: var(--mint);
-  --text: var(--ink);
+  /* Type (§3.3) */
+  --font-display: "Archivo", system-ui, sans-serif;
+  --font-body: "Instrument Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
-  /* --- Type: Figtree = free humanist substitute for Halyard Display --- */
-  --font-display: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-body: var(--font-display);
+  /* Layout (§3.4) */
+  --maxw: 1200px;
+  --gutter: clamp(1.25rem, 5vw, 2.5rem);
+  --section-y: clamp(4rem, 10vw, 6rem);      /* 64px mobile → 96px desktop */
+  --radius: 2px;
 
-  /* --- Layout --- */
-  --maxw: 1320px;
-  --gutter: clamp(1.25rem, 5vw, 5.5rem);
+  --chalk-focus: 0 0 0 2px var(--paper), 0 0 0 4px var(--chalk);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--text);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(1.02rem, 0.4vw + 0.95rem, 1.18rem);
-  line-height: 1.55;
+  font-size: 1.0625rem;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
+/* ---------- Typography ---------- */
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 400;
-  line-height: 1.04;
-  letter-spacing: -0.015em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
   margin: 0;
+  text-wrap: balance;
 }
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
+h3 { font-size: 1.25rem; font-weight: 600; }
 
 p { margin: 0 0 1rem; }
-a { color: inherit; text-decoration: none; }
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--chalk); text-decoration: none; }
+
 img { max-width: 100%; display: block; }
 
-/* --- Layout helpers --- */
-.container {
-  width: 100%;
-  max-width: var(--maxw);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
+strong { font-weight: 600; }
+
+/* ---------- Mono eyebrow / utility (§3.3) ---------- */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin: 0 0 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+}
+.eyebrow--num::before {
+  content: attr(data-num);
+  color: var(--chalk);
+  font-weight: 500;
 }
 
-/* Display sizes (matched to reference) */
-.display-xxl { font-size: clamp(3.25rem, 9vw, 7rem);  line-height: 0.98; }
-.display-xl  { font-size: clamp(2.75rem, 6vw, 5.25rem); line-height: 1.03; }
-.display-lg  { font-size: clamp(2.1rem, 4.6vw, 4rem);  line-height: 1.05; }
+/* ---------- Layout helpers ---------- */
+.container { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+.section { padding-block: var(--section-y); }
+.section + .section { padding-top: 0; }
+.lede { font-size: 1.15rem; color: var(--steel); max-width: 52ch; }
 
-/* Section label: thin top rule + small title-case label */
-.section-label {
-  border-top: 1px solid currentColor;
-  padding-top: 1.1rem;
-  font-size: 0.95rem;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  opacity: 0.85;
-  margin-bottom: clamp(2.5rem, 6vw, 5rem);
-}
-
-/* --- Buttons: rectangular, generous padding --- */
+/* ---------- Buttons (§3.4) ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5em;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.92rem;
-  letter-spacing: 0.02em;
-  padding: 1.35em 2.4em;
-  border-radius: 3px;
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
   border: 1px solid transparent;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.1;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
-.btn--coral        { background: var(--coral); color: #fff; }
-.btn--coral:hover  { background: hsl(7, 85%, 50%); }
-.btn--green        { background: var(--green); color: var(--ivory); }
-.btn--green:hover  { opacity: 0.88; }
-.btn--light        { background: var(--mint); color: var(--green); }
-.btn--light:hover  { background: #fff; }
-.btn--outline-light        { background: transparent; color: var(--ivory); border-color: rgba(255,255,255,0.45); }
-.btn--outline-light:hover  { background: var(--ivory); color: var(--green); border-color: var(--ivory); }
+.btn--primary { background: var(--chalk); color: #fff; }
+.btn--primary:hover { background: var(--chalk-dk); }
+.btn--secondary { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn--secondary:hover { background: var(--ink); color: var(--paper); }
 
-/* Section theming */
-.theme-green { background: var(--green); color: var(--ivory); }
-.theme-coral { background: var(--coral); color: var(--ivory); }
-.theme-mint  { background: var(--mint);  color: var(--ink); }
-.theme-ink   { background: var(--ink);   color: var(--mint); }
-
-/* Animated link underline */
-.link-underline { position: relative; }
-.link-underline::after {
-  content: ""; position: absolute; left: 0; bottom: -3px;
-  width: 100%; height: 1px; background: currentColor;
-  transform: scaleX(0); transform-origin: right;
-  transition: transform 0.3s ease;
+/* ---------- Signature chalk line (§3.1) ---------- */
+.chalk-underline {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
 }
-.link-underline:hover::after { transform: scaleX(1); transform-origin: left; }
+.chalk-underline::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -0.12em;
+  height: 2px;
+  background: var(--chalk);
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: chalk-snap 0.35s cubic-bezier(0.5, 1.6, 0.4, 1) 0.45s forwards;
+}
+@keyframes chalk-snap {
+  0%   { transform: scaleX(0); }
+  70%  { transform: scaleX(1.04); }
+  100% { transform: scaleX(1); }
+}
+
+/* Link hover = chalk underline (§3.1.3) */
+.link {
+  position: relative;
+  color: var(--ink);
+}
+.link::after {
+  content: "";
+  position: absolute; left: 0; bottom: -2px;
+  width: 100%; height: 2px; background: var(--chalk);
+  transform: scaleX(0); transform-origin: right center;
+  transition: transform 0.25s ease;
+}
+.link:hover::after, .link:focus-visible::after { transform: scaleX(1); transform-origin: left center; }
+
+/* ---------- Fade-up on entry (§3.4) ---------- */
+.fade-up { opacity: 0; transform: translateY(12px); }
+.fade-up.in { opacity: 1; transform: none; transition: opacity 0.25s ease, transform 0.25s ease; }
+
+/* ---------- Focus (quality floor) ---------- */
+:focus-visible { outline: 2px solid var(--chalk); outline-offset: 2px; border-radius: 1px; }
+
+/* ---------- Reduced motion (§3.1) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; animation-delay: 0s !important; transition-duration: 0.001ms !important; }
+  .chalk-underline::after { transform: scaleX(1); }
+  .fade-up { opacity: 1; transform: none; }
+}
+
+/* ---------- Section rail marker (desktop chalk thread, §3.1.2) ---------- */
+.rail { position: relative; }
+@media (min-width: 1000px) {
+  .rail::before {
+    content: "";
+    position: absolute;
+    left: max(calc((100vw - var(--maxw)) / 2 + 0.5rem), 0.9rem);
+    top: 0; bottom: 0;
+    width: 2px;
+    background: var(--hairline);
+  }
+  .rail__tick { position: relative; }
+  .rail__tick::before {
+    content: "";
+    position: absolute;
+    left: calc(max(calc((100vw - var(--maxw)) / 2 + 0.5rem), 0.9rem) - 3px);
+    top: 0.55rem;
+    width: 8px; height: 8px;
+    background: var(--chalk);
+    border-radius: 50%;
+  }
+}
+
+/* visually-hidden */
+.vh { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }

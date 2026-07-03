@@ -1,0 +1,44 @@
+---
+import { trades } from '../data/trades';
+---
+<div class="tradegrid">
+  {trades.map((t) => (
+    <a href={`/for/${t.slug}`} class="tradetile">
+      <span class="tradetile__label">{t.label}</span>
+      <span class="tradetile__hook">{t.hook}</span>
+      <span class="tradetile__arrow" aria-hidden="true">→</span>
+    </a>
+  ))}
+</div>
+<p class="tradegrid__foot">Different trade? The playbook still fits — <a href="/contact" class="link">get in touch</a>.</p>
+
+<style>
+  .tradegrid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--hairline); border-radius: var(--radius); overflow: hidden;
+  }
+  .tradetile {
+    position: relative; display: flex; flex-direction: column; gap: 0.35rem;
+    padding: 1.5rem; min-height: 128px; color: var(--ink);
+    border-right: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
+    transition: background 0.16s ease;
+  }
+  .tradetile:hover { background: #fff; box-shadow: inset 4px 0 0 var(--chalk); }
+  .tradetile__label { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; }
+  .tradetile__hook { color: var(--steel); font-size: 0.92rem; }
+  .tradetile__arrow { position: absolute; top: 1.5rem; right: 1.5rem; color: var(--chalk); opacity: 0; transition: opacity 0.16s ease; }
+  .tradetile:hover .tradetile__arrow { opacity: 1; }
+  /* remove right border on last column */
+  .tradetile:nth-child(4n) { border-right: none; }
+  .tradegrid__foot { margin-top: 1.5rem; color: var(--steel); }
+
+  @media (max-width: 900px) {
+    .tradegrid { grid-template-columns: 1fr 1fr; }
+    .tradetile:nth-child(4n) { border-right: 1px solid var(--hairline); }
+    .tradetile:nth-child(2n) { border-right: none; }
+  }
+  @media (max-width: 480px) {
+    .tradegrid { grid-template-columns: 1fr; }
+    .tradetile { border-right: none !important; min-height: 0; }
+  }
+</style>

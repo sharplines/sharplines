@@ -1,0 +1,31 @@
+---
+interface Props { items?: string[]; }
+const {
+  items = [
+    '2× more clients — Provolta Electric, Toronto',
+    'Built by senior software engineers',
+    'Websites, reviews, booking & ads — one team',
+  ],
+} = Astro.props;
+---
+<section class="proofbar">
+  <div class="container proofbar__inner fade-up">
+    {items.map((item) => <p class="proofbar__item">{item}</p>)}
+  </div>
+</section>
+
+<style>
+  .proofbar { border-block: 1px solid var(--hairline); }
+  .proofbar__inner { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .proofbar__item {
+    margin: 0; padding: 1.25rem 1.5rem 1.25rem 0;
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--ink);
+  }
+  .proofbar__item + .proofbar__item { padding-left: 1.5rem; border-left: 1px solid var(--hairline); }
+  @media (max-width: 760px) {
+    .proofbar__inner { grid-template-columns: 1fr; }
+    .proofbar__item { padding: 0.9rem 0; }
+    .proofbar__item + .proofbar__item { padding-left: 0; border-left: none; border-top: 1px solid var(--hairline); }
+  }
+</style>

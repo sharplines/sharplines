@@ -1,0 +1,176 @@
+---
+// One form, two variants (§8).
+//  short — CTA bands: Name · Business name · Phone
+//  full  — /contact + trade pages: adds trade, email, current site, interest, notes
+// Delivery: posts to Netlify Forms today (works with no API key). Migrate to
+// the Resend API route from §8 once RESEND_API_KEY is supplied. TODO(arya): key.
+import { trades } from '../data/trades';
+
+interface Props {
+  variant?: 'short' | 'full';
+  preselectTrade?: string;
+  theme?: 'light' | 'dark';
+}
+const { variant = 'short', preselectTrade, theme = 'light' } = Astro.props;
+const full = variant === 'full';
+const interests = [
+  'Free homepage preview',
+  'Full website',
+  'Get found on Google',
+  'Reviews & booking',
+  'Phone answering',
+  'Social & ads',
+  'Not sure yet',
+];
+---
+
+<form
+  class:list={['cform', `cform--${theme}`]}
+  name="contact"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="company-hp"
+  data-cform
+  data-variant={variant}
+>
+  <input type="hidden" name="form-name" value="contact" />
+  <input type="hidden" name="page-source" value="" data-source />
+  <input type="hidden" name="ts" value="" data-ts />
+  <p class="cform__hp" aria-hidden="true"><label>Company<input name="company-hp" tabindex="-1" autocomplete="off" /></label></p>
+
+  <div class="cform__grid">
+    <label class="field">
+      <span class="field__label">Name</span>
+      <input type="text" name="name" required autocomplete="name" />
+    </label>
+
+    <label class="field">
+      <span class="field__label">Business name</span>
+      <input type="text" name="business" required autocomplete="organization" />
+    </label>
+
+    {full && (
+      <label class="field">
+        <span class="field__label">Trade / industry</span>
+        <select name="trade">
+          {trades.map((t) => <option value={t.slug} selected={preselectTrade === t.slug}>{t.label}</option>)}
+          <option value="other" selected={preselectTrade === 'other'}>Other</option>
+        </select>
+      </label>
+    )}
+
+    <label class="field">
+      <span class="field__label">Phone</span>
+      <input type="tel" name="phone" required autocomplete="tel" inputmode="tel" />
+    </label>
+
+    {full && (
+      <label class="field">
+        <span class="field__label">Email</span>
+        <input type="email" name="email" required autocomplete="email" inputmode="email" />
+      </label>
+    )}
+
+    {full && (
+      <label class="field field--wide">
+        <span class="field__label">Current website <em>(optional)</em></span>
+        <input type="url" name="website" placeholder="https://" autocomplete="url" inputmode="url" />
+      </label>
+    )}
+
+    {full && (
+      <label class="field field--wide">
+        <span class="field__label">What are you interested in?</span>
+        <select name="interest" data-interest>
+          {interests.map((i) => <option value={i}>{i}</option>)}
+        </select>
+      </label>
+    )}
+
+    {full && (
+      <label class="field field--wide">
+        <span class="field__label">Anything we should know? <em>(optional)</em></span>
+        <textarea name="notes" rows="3"></textarea>
+      </label>
+    )}
+  </div>
+
+  <button type="submit" class="btn btn--primary cform__submit">Get my free preview</button>
+
+  <p class="cform__consent">
+    By sending this you're okay with us contacting you about your request.
+    No newsletters, no spam — ever. <a href="/privacy" class="link">Privacy</a>
+  </p>
+
+  <p class="cform__status" role="status" aria-live="polite" hidden data-status></p>
+</form>
+
+<style>
+  .cform { --fg: var(--ink); --line: var(--hairline); color: var(--fg); }
+  .cform--dark { --fg: var(--paper); --line: rgba(255,255,255,0.25); }
+
+  .cform__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem 1.25rem; }
+  .field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .field--wide { grid-column: 1 / -1; }
+  .field__label {
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--fg); opacity: 0.75;
+  }
+  .field__label em { font-style: normal; text-transform: none; letter-spacing: 0; opacity: 0.7; }
+  .field input, .field select, .field textarea {
+    min-height: 48px; padding: 0.6rem 0.75rem;
+    background: transparent; color: var(--fg);
+    border: 1px solid var(--line); border-radius: var(--radius);
+    font-family: var(--font-body); font-size: 1rem; resize: vertical;
+  }
+  .cform--dark .field select option { color: var(--ink); }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--chalk); box-shadow: 0 0 0 1px var(--chalk); }
+
+  .cform__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .cform__submit { margin-top: 1.25rem; }
+  .cform__consent { font-size: 0.85rem; color: var(--fg); opacity: 0.7; margin-top: 0.85rem; max-width: 46ch; }
+  .cform--dark .cform__consent .link { color: var(--paper); }
+  .cform__status { margin-top: 1rem; font-weight: 500; }
+  .cform__status[data-state="ok"] { color: var(--fg); }
+  .cform__status[data-state="err"] { color: #C0392B; }
+  .cform--dark .cform__status[data-state="err"] { color: #ff9b8f; }
+
+  @media (max-width: 560px) { .cform__grid { grid-template-columns: 1fr; } .cform__submit { width: 100%; } }
+</style>
+
+<script>
+  document.querySelectorAll('[data-cform]').forEach((form) => {
+    const f = form as HTMLFormElement;
+    const srcEl = f.querySelector('[data-source]') as HTMLInputElement | null;
+    const tsEl = f.querySelector('[data-ts]') as HTMLInputElement | null;
+    const status = f.querySelector('[data-status]') as HTMLElement | null;
+    if (srcEl) srcEl.value = location.pathname + location.search;
+    if (tsEl) tsEl.value = String(Date.now());
+
+    // Preselect interest = "Free homepage preview" when ?offer=preview (§6.5)
+    if (location.search.includes('offer=preview')) {
+      const sel = f.querySelector('[data-interest]') as HTMLSelectElement | null;
+      if (sel) sel.value = 'Free homepage preview';
+    }
+
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      // Spam guards: honeypot + min fill time
+      const hp = (f.querySelector('[name="company-hp"]') as HTMLInputElement)?.value;
+      const started = Number(tsEl?.value || 0);
+      if (hp || (started && Date.now() - started < 2500)) return;
+
+      const btn = f.querySelector('button[type="submit"]') as HTMLButtonElement;
+      btn.disabled = true; btn.textContent = 'Sending…';
+      try {
+        const data = new FormData(f);
+        await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(data as any).toString() });
+        f.querySelectorAll('.cform__grid, .cform__submit, .cform__consent').forEach((el) => ((el as HTMLElement).hidden = true));
+        if (status) { status.hidden = false; status.dataset.state = 'ok'; status.textContent = "Got it. You'll hear from us today — and your preview lands within 48 hours."; }
+      } catch {
+        btn.disabled = false; btn.textContent = 'Get my free preview';
+        if (status) { status.hidden = false; status.dataset.state = 'err'; status.textContent = "Something went wrong. Email us at hi@sharplines.ca and we'll jump on it."; }
+      }
+    });
+  });
+</script>

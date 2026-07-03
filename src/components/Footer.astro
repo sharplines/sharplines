@@ -1,51 +1,66 @@
 ---
-const year = new Date().getFullYear();
+import { trades } from '../data/trades';
+const services = [
+  { label: 'Websites that sell', href: '/services#websites' },
+  { label: 'Get found on Google', href: '/services#seo' },
+  { label: 'Reviews on autopilot', href: '/services#reviews' },
+  { label: 'Online booking', href: '/services#booking' },
+  { label: 'Never miss a call', href: '/services#phone' },
+  { label: 'Social on autopilot', href: '/services#social' },
+  { label: 'Ads that pay for themselves', href: '/services#ads' },
+];
 ---
 
-<footer class="site-footer theme-ink">
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <a href="/" class="wordmark">
-        <svg class="mark" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-          <path d="M3 21 L21 3 M8 21 L21 8 M14 21 L21 14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
-        </svg>
-        <span>SharpLines<sup>™</sup></span>
-      </a>
-      <p class="footer-tag">Sharp design for businesses that run on reputation.</p>
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <a href="/" class="wordmark"><span class="wordmark__sharp">Sharp</span>lines</a>
+      <p>More booked jobs for local GTA businesses.</p>
     </div>
 
-    <div class="footer-col">
-      <span class="footer-label">Contact</span>
-      <a href="mailto:hello@sharplines.studio" class="link-underline">hello@sharplines.studio</a>
-    </div>
+    <nav class="footer__col" aria-label="Services">
+      <p class="eyebrow footer__head">Services</p>
+      {services.map((s) => <a href={s.href} class="footer__link">{s.label}</a>)}
+    </nav>
 
-    <div class="footer-col">
-      <span class="footer-label">Legal</span>
-      <a href="#" class="link-underline">Terms &amp; Conditions</a>
-      <a href="#" class="link-underline">Privacy Policy</a>
+    <nav class="footer__col" aria-label="Who we help">
+      <p class="eyebrow footer__head">Who we help</p>
+      {trades.map((t) => <a href={`/for/${t.slug}`} class="footer__link">{t.label}</a>)}
+    </nav>
+
+    <div class="footer__col">
+      <p class="eyebrow footer__head">Contact</p>
+      <a href="tel:+15145602266" class="footer__link">(514) 560-2266</a>
+      <a href="mailto:hi@sharplines.ca" class="footer__link">hi@sharplines.ca</a>
+      <p class="footer__meta">Toronto &amp; GTA</p>
+      <a href="/privacy" class="footer__link footer__privacy">Privacy</a>
     </div>
   </div>
 
-  <div class="container footer-base">
-    <span>© {year} SharpLines. All rights reserved.</span>
-    <a href="mailto:hello@sharplines.studio" class="link-underline">hello@sharplines.studio</a>
+  <div class="container footer__base">
+    <span>© 2026 Sharplines Studio</span>
   </div>
 </footer>
 
 <style>
-  .site-footer { padding-block: clamp(3.5rem, 8vw, 6rem) 2.5rem; }
-  .footer-grid {
-    display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2.5rem;
-    padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.12);
+  .footer { background: var(--ink); color: var(--paper); padding-top: clamp(3rem, 7vw, 5rem); padding-bottom: 2rem; }
+  .footer__grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 2.5rem; }
+  .footer .wordmark { color: var(--paper); font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; }
+  .footer .wordmark__sharp { border-bottom-color: var(--chalk); }
+  .footer__brand p { color: var(--steel); margin-top: 0.85rem; max-width: 24ch; }
+  .footer__col { display: flex; flex-direction: column; }
+  .footer__head { color: var(--steel); margin-bottom: 1rem; }
+  .footer__link { color: var(--paper); font-size: 0.95rem; padding: 0.35rem 0; opacity: 0.85; }
+  .footer__link:hover { opacity: 1; color: #fff; text-decoration: underline; text-decoration-color: var(--chalk); text-underline-offset: 3px; }
+  .footer__meta { color: var(--steel); font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.04em; margin: 0.5rem 0; }
+  .footer__privacy { margin-top: 0.25rem; }
+  .footer__base { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.12); font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.04em; color: var(--steel); }
+
+  @media (max-width: 760px) {
+    .footer__grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .footer__brand { grid-column: 1 / -1; }
   }
-  .wordmark { display: inline-flex; align-items: center; gap: 0.55rem; font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; color: var(--mint); }
-  .wordmark sup { font-size: 0.5em; font-weight: 400; opacity: 0.7; }
-  .footer-tag { margin-top: 0.9rem; max-width: 26ch; opacity: 0.6; }
-  .footer-col { display: flex; flex-direction: column; gap: 0.6rem; }
-  .footer-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.45; margin-bottom: 0.4rem; }
-  .footer-base {
-    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
-    padding-top: 1.75rem; font-size: 0.85rem; opacity: 0.55;
+  @media (max-width: 420px) {
+    .footer__grid { grid-template-columns: 1fr; }
   }
-  @media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr; gap: 2rem; } }
 </style>
