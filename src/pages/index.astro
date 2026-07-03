@@ -1,0 +1,216 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Who we work with — grid of target clients (mirrors reference layout)
+const clients = [
+  'Small Businesses',
+  'Startups',
+  'Real Estate Agents',
+  'Financial Advisors',
+  'Lawyers',
+  'Coaches & Consultants',
+  'Mortgage Advisors',
+  'Solopreneurs',
+];
+
+// Services — two-column list
+const services = [
+  'Brand identity & logos',
+  'Website design & build',
+  'Social media graphics',
+  'Presentation decks',
+  'Email & newsletter graphics',
+  'Ad creative & campaigns',
+  'Print & collateral',
+  'Ongoing design support',
+];
+---
+
+<Base>
+  <Header />
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <p class="eyebrow">A Design Studio for Small Businesses &amp; Entrepreneurs</p>
+        <h1>A design partner for<br />businesses that run<br />on reputation.</h1>
+        <p class="hero-sub">
+          SharpLines gives growing businesses the kind of creative support that makes
+          them impossible to overlook — sharp branding, sharp websites, sharp everything.
+        </p>
+        <a href="#about" class="link-underline hero-link">Learn More ↓</a>
+      </div>
+    </section>
+
+    <!-- ============ WHO WE WORK WITH ============ -->
+    <section class="section" id="about">
+      <div class="container">
+        <p class="eyebrow">Who We Work With</p>
+        <div class="client-grid">
+          {clients.map((c) => <div class="client-item">{c}</div>)}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ THE CHALLENGE ============ -->
+    <section class="section theme-dark challenge">
+      <div class="container challenge-inner">
+        <div>
+          <p class="eyebrow">The Challenge</p>
+          <h2>Stand out in a<br />crowded market.</h2>
+        </div>
+        <div class="challenge-body">
+          <p>
+            In competitive markets, the best-known name usually wins — not the best-kept
+            secret. When your work speaks for itself, your design should too. We help you
+            look as credible as you actually are, so the right clients choose you first.
+          </p>
+          <a href="#contact" class="btn btn--ghost-light">Get a project quote</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ THE NAME / BRAND STORY + SERVICES ============ -->
+    <section class="section" id="services">
+      <div class="container story-grid">
+        <div class="story-copy">
+          <p class="eyebrow">The SharpLines Name</p>
+          <h2>Clean lines. Clear signals.</h2>
+          <p>
+            A sharp line is the difference between a shape and a statement. It's how the eye
+            finds the thing that matters. That's how we approach every project — cutting away
+            the noise until what's left is confident, precise, and unmistakably yours.
+          </p>
+          <p>Everything a growing business needs to look the part:</p>
+        </div>
+        <ul class="services-list">
+          {services.map((s) => <li>{s}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ FULL-WIDTH IMAGE ============ -->
+    <section class="image-band" aria-label="Studio workspace">
+      <img src="/images/workspace.svg" alt="A minimal studio workspace with a laptop and design tools." />
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section contact" id="contact">
+      <div class="container contact-inner">
+        <p class="eyebrow">Connect</p>
+        <h2>Let's make your<br />brand impossible<br />to ignore.</h2>
+        <div class="contact-details">
+          <div>
+            <span class="footer-label">Email</span>
+            <a href="mailto:hello@sharplines.studio" class="link-underline contact-email">hello@sharplines.studio</a>
+          </div>
+          <div>
+            <span class="footer-label">Studio</span>
+            <p class="contact-addr">Toronto, Ontario<br />By appointment</p>
+          </div>
+        </div>
+        <a href="mailto:hello@sharplines.studio" class="btn btn--coral contact-btn">Start a project</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  /* ---- Hero ---- */
+  .hero { padding-block: clamp(5rem, 12vw, 9rem) clamp(4rem, 9vw, 7rem); }
+  .hero-inner { text-align: center; max-width: 900px; }
+  .hero-sub {
+    max-width: 46ch;
+    margin: 1.75rem auto 2rem;
+    font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+    opacity: 0.85;
+  }
+  .hero-link { font-weight: 500; letter-spacing: 0.02em; }
+
+  /* ---- Client grid ---- */
+  .client-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid color-mix(in srgb, var(--green) 18%, transparent);
+  }
+  .client-item {
+    padding: clamp(1.5rem, 3vw, 2.5rem) 1rem;
+    font-size: clamp(1.05rem, 1.6vw, 1.5rem);
+    font-weight: 400;
+    border-bottom: 1px solid color-mix(in srgb, var(--green) 18%, transparent);
+    border-right: 1px solid color-mix(in srgb, var(--green) 18%, transparent);
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .client-item:hover { background: var(--green); color: var(--ivory); }
+  .client-grid .client-item:nth-child(4n) { border-right: none; }
+
+  /* ---- Challenge ---- */
+  .challenge-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+  .challenge-body p { font-size: clamp(1.1rem, 1.6vw, 1.35rem); margin-bottom: 2rem; opacity: 0.9; }
+
+  /* ---- Story + services ---- */
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+  .story-copy p { opacity: 0.9; }
+  .services-list {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid color-mix(in srgb, var(--green) 18%, transparent);
+  }
+  .services-list li {
+    padding: 0.9rem 0.25rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--green) 18%, transparent);
+    font-size: 1.02rem;
+  }
+
+  /* ---- Image band ---- */
+  .image-band { width: 100%; }
+  .image-band img { width: 100%; height: clamp(300px, 55vh, 620px); object-fit: cover; }
+
+  /* ---- Contact ---- */
+  .contact-inner { text-align: center; max-width: 820px; }
+  .contact-details {
+    display: flex;
+    justify-content: center;
+    gap: clamp(2rem, 8vw, 6rem);
+    margin: 2.5rem 0;
+    text-align: left;
+  }
+  .footer-label {
+    display: block;
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    opacity: 0.55; margin-bottom: 0.4rem;
+  }
+  .contact-email { font-size: 1.15rem; }
+  .contact-addr { margin: 0; }
+  .contact-btn { margin-top: 0.5rem; }
+
+  @media (max-width: 820px) {
+    .client-grid { grid-template-columns: repeat(2, 1fr); }
+    .client-grid .client-item:nth-child(4n) { border-right: 1px solid color-mix(in srgb, var(--green) 18%, transparent); }
+    .client-grid .client-item:nth-child(2n) { border-right: none; }
+    .challenge-inner,
+    .story-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .services-list { grid-template-columns: 1fr; }
+    .contact-details { flex-direction: column; align-items: center; text-align: center; }
+  }
+</style>

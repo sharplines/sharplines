@@ -1,0 +1,50 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer theme-dark">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="/" class="wordmark">SharpLines<sup>™</sup></a>
+      <p class="footer-tag">Sharp design for businesses that run on reputation.</p>
+    </div>
+
+    <div class="footer-col">
+      <span class="footer-label">Contact</span>
+      <a href="mailto:hello@sharplines.studio" class="link-underline">hello@sharplines.studio</a>
+    </div>
+
+    <div class="footer-col">
+      <span class="footer-label">Legal</span>
+      <a href="#" class="link-underline">Terms &amp; Conditions</a>
+      <a href="#" class="link-underline">Privacy Policy</a>
+    </div>
+  </div>
+
+  <div class="container footer-base">
+    <span>© {year} SharpLines. All rights reserved.</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer { padding-block: clamp(3rem, 7vw, 5rem) 2rem; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 2.5rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.14);
+  }
+  .footer-brand .wordmark { color: var(--ivory); font-size: 1.5rem; font-family: var(--font-display); font-weight: 500; }
+  .footer-brand .wordmark sup { font-size: 0.55em; opacity: 0.6; }
+  .footer-tag { margin-top: 0.75rem; max-width: 24ch; opacity: 0.75; }
+  .footer-col { display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-label {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.55;
+    margin-bottom: 0.35rem;
+  }
+  .footer-base { padding-top: 1.5rem; font-size: 0.85rem; opacity: 0.6; }
+  @media (max-width: 640px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>

@@ -1,0 +1,87 @@
+---
+const nav = [
+  { label: 'About', href: '#about' },
+  { label: 'Services', href: '#services' },
+  { label: 'Contact', href: '#contact' },
+];
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="wordmark">SharpLines<sup>™</sup></a>
+
+    <nav class="nav" aria-label="Primary">
+      {nav.map((item) => (
+        <a href={item.href} class="link-underline">{item.label}</a>
+      ))}
+      <a href="#contact" class="btn btn--coral nav-cta">Get a Free Quote</a>
+    </nav>
+
+    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--mint) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid color-mix(in srgb, var(--green) 10%, transparent);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 74px;
+  }
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+    color: var(--green);
+  }
+  .wordmark sup { font-size: 0.55em; opacity: 0.6; }
+  .nav { display: flex; align-items: center; gap: clamp(1rem, 2.5vw, 2.25rem); }
+  .nav > a { font-size: 0.98rem; font-weight: 400; }
+  .nav-cta { font-size: 0.9rem; }
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 8px;
+  }
+  .menu-toggle span { width: 24px; height: 2px; background: var(--green); }
+
+  @media (max-width: 720px) {
+    .nav { display: none; }
+    .menu-toggle { display: flex; }
+    .nav.open {
+      display: flex;
+      position: absolute;
+      top: 74px; left: 0; right: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+      padding: 1.5rem var(--gutter) 2rem;
+      background: var(--mint);
+      border-bottom: 1px solid color-mix(in srgb, var(--green) 12%, transparent);
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.nav');
+  toggle?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(!!open));
+  });
+  nav?.querySelectorAll('a').forEach((a) =>
+    a.addEventListener('click', () => nav.classList.remove('open'))
+  );
+</script>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Placeholder workspace image">
+  <rect width="1600" height="900" fill="#0E2F28"/>
+  <rect x="600" y="360" width="400" height="230" rx="10" fill="none" stroke="#E6EFE9" stroke-width="3" opacity="0.5"/>
+  <rect x="560" y="590" width="480" height="16" rx="8" fill="#E6EFE9" opacity="0.5"/>
+  <circle cx="1180" cy="230" r="70" fill="#F4462F" opacity="0.85"/>
+  <text x="800" y="120" font-family="Jost, sans-serif" font-size="42" fill="#FFFFF0" text-anchor="middle" letter-spacing="6" opacity="0.85">REPLACE ME</text>
+  <text x="800" y="770" font-family="Jost, sans-serif" font-size="26" fill="#E6EFE9" text-anchor="middle" opacity="0.7">public/images/workspace.svg — swap for your photo (jpg/png/webp)</text>
+</svg>
