@@ -1,9 +1,17 @@
 ---
-// Full-bleed photo hero. Copy is spec §6.1 verbatim.
+// Shorter hero (not full-screen) with a looping placeholder video.
+// TODO(arya): swap public/videos/hero.mp4 for a better clip. Copy is spec §6.1.
 ---
 <section class="hero">
   <div class="hero__bg">
-    <img src="/images/hero.jpg" alt="" aria-hidden="true" width="2000" height="1125" fetchpriority="high" />
+    <video
+      class="hero__video"
+      autoplay muted loop playsinline
+      poster="/images/hero-poster.jpg"
+      aria-hidden="true"
+    >
+      <source src="/videos/hero.mp4" type="video/mp4" />
+    </video>
     <span class="hero__scrim"></span>
   </div>
 
@@ -22,28 +30,33 @@
 <style>
   .hero {
     position: relative;
-    min-height: 100svh;
+    min-height: 74svh;
     display: flex;
     align-items: flex-end;
     color: var(--ivory);
     overflow: hidden;
   }
   .hero__bg { position: absolute; inset: 0; z-index: 0; }
-  .hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 65% center; }
+  .hero__video { width: 100%; height: 100%; object-fit: cover; object-position: 68% center; }
   .hero__scrim {
     position: absolute; inset: 0;
     background:
-      linear-gradient(180deg, rgba(14,47,40,0.55) 0%, rgba(14,47,40,0.15) 38%, rgba(10,26,22,0.82) 100%),
-      linear-gradient(90deg, rgba(10,26,22,0.55) 0%, rgba(10,26,22,0) 55%);
+      linear-gradient(180deg, rgba(14,47,40,0.5) 0%, rgba(14,47,40,0.12) 34%, rgba(10,26,22,0.85) 100%),
+      linear-gradient(90deg, rgba(10,26,22,0.6) 0%, rgba(10,26,22,0) 58%);
   }
-  .hero__content { position: relative; z-index: 1; padding-block: 7.5rem clamp(3rem, 8vh, 6rem); }
+  .hero__content { position: relative; z-index: 1; padding-block: 6rem clamp(2.5rem, 6vh, 4rem); }
   .hero__eyebrow { color: var(--ivory); opacity: 0.9; }
   .hero__h1 { color: var(--ivory); font-size: var(--t-hero); max-width: 16ch; }
-  .hero__sub { color: var(--ivory); font-size: clamp(1.08rem, 1.6vw, 1.35rem); max-width: 42ch; margin: 1.5rem 0 2rem; opacity: 0.94; }
+  .hero__sub { color: var(--ivory); font-size: clamp(1.05rem, 1.5vw, 1.3rem); max-width: 42ch; margin: 1.35rem 0 1.85rem; opacity: 0.94; }
   .hero__cta { display: flex; flex-direction: column; gap: 0.75rem; }
-  .hero__note { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.85; margin-top: 1.5rem; }
+  .hero__note { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.85; margin-top: 1.35rem; }
 
-  @media (min-width: 640px) {
-    .hero__cta { flex-direction: row; flex-wrap: wrap; }
+  @media (min-width: 640px) { .hero__cta { flex-direction: row; flex-wrap: wrap; } }
+  @media (min-width: 800px) { .hero { min-height: 62vh; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    /* don't autoplay motion for users who opt out — poster stays */
+    .hero__video { display: none; }
+    .hero__bg { background: url("/images/hero-poster.jpg") center/cover no-repeat; }
   }
 </style>
