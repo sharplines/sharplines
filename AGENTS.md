@@ -258,4 +258,17 @@ Resend/Web3Forms key.
 - **Trade pages deepened + video heroes (2026-07-05)**: segments on 6 of 8 trades, video
   hero on all 8, `trade-pages` skill written. Awaiting Arya's review of the 5 new
   segment sections and the videos.
+- **Trade heroes went full-bleed (Arya, 2026-07-05, "like the home hero but obviously
+  not the first page")**: same composition as home (video bg + scrim + lower-left
+  content) but shorter (58svh/52vh vs home's 74svh/62vh) and closed with a full-width
+  3px coral sharp line (`border-bottom` on `.thero`); videos re-encoded at 1920w
+  (CRF 28; noisy clips 33–35 and/or trimmed) with first-frame posters. Nav is
+  transparent over these heroes and turns solid exactly at the hero's end via
+  `[data-nav-hero]` in the Nav script (home keeps the 0.8-viewport rule; `navSolid`
+  stays for heroless pages like /contact).
+- **Browser-verification gotcha (2026-07-05)**: the claude-in-chrome tab can be an
+  OCCLUDED window (`document.visibilityState === 'hidden'`), and Chrome then defers
+  loading autoplay video data (readyState stays 0, no error). Videos that "don't play"
+  under automation are fine for real users; verify markup/attrs + a HEAD request, and
+  eyeball a focused browser for actual playback.
 - Remaining pages: services, work, about, privacy, 404. Build order: spec §11.

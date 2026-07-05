@@ -39,24 +39,25 @@ const faqSchema = {
 };
 ---
 
-<Base title={page.metaTitle} description={page.metaDescription} navSolid>
-  <!-- Hero (green): copy + one per-trade photo in the card language -->
-  <section class="thero theme-green">
-    <div class="container thero__grid">
-      <div class="thero__copy">
-        <p class="eyebrow">For {page.noun} · Toronto &amp; the GTA</p>
-        <h1 class="display-xl thero__h">{h1Before}<span class="line-accent">{page.h1Accent}</span>{h1After}</h1>
-        <p class="thero__sub">{page.sub}</p>
-        <div class="thero__cta">
-          <a href="#preview" class="btn btn--coral">Get my free homepage preview</a>
-          <p class="thero__fine">Free preview in 48 hours · No obligation</p>
-        </div>
-      </div>
-      <div class="thero__media">
-        <video autoplay muted loop playsinline poster={`/images/trades/${page.slug}.jpg`} aria-label={page.imgAlt}>
-          <source src={`/videos/trades/${page.slug}.mp4`} type="video/mp4" />
-        </video>
-        <img class="thero__fallback" src={`/images/trades/${page.slug}.jpg`} alt={page.imgAlt} width="1280" height="720" loading="lazy" decoding="async" />
+<Base title={page.metaTitle} description={page.metaDescription}>
+  <!-- Hero: full-bleed looping video like the home hero, but shorter and closed
+       with a full-width coral sharp line, so the front page keeps the big opening
+       and a visitor can tell at a glance which one they're on (Arya, 2026-07-05). -->
+  <section class="thero" data-nav-hero>
+    <div class="thero__bg" aria-hidden="true">
+      <video autoplay muted loop playsinline poster={`/images/trades/${page.slug}.jpg`}>
+        <source src={`/videos/trades/${page.slug}.mp4`} type="video/mp4" />
+      </video>
+      <img class="thero__fallback" src={`/images/trades/${page.slug}.jpg`} alt="" loading="lazy" decoding="async" />
+      <span class="thero__scrim"></span>
+    </div>
+    <div class="container thero__content">
+      <p class="eyebrow thero__eyebrow">For {page.noun} · Toronto &amp; the GTA</p>
+      <h1 class="display-xl thero__h">{h1Before}<span class="line-accent">{page.h1Accent}</span>{h1After}</h1>
+      <p class="thero__sub">{page.sub}</p>
+      <div class="thero__cta">
+        <a href="#preview" class="btn btn--coral">Get my free homepage preview</a>
+        <p class="thero__fine">Free preview in 48 hours · No obligation</p>
       </div>
     </div>
   </section>
@@ -146,36 +147,34 @@ const faqSchema = {
 </Base>
 
 <style>
-  /* Fixed transparent nav sits over the green hero; pad past its 76px height. */
-  .thero { padding-block: calc(76px + clamp(3rem, 8vw, 5.5rem)) clamp(3rem, 7vw, 5rem); }
-  .thero__grid { display: grid; gap: clamp(1.75rem, 4.5vw, 3rem); }
-  /* Looping muted video in the card language: 14px radius + soft shadow.
-     Modest 16/10 crop on phones so "Sound familiar?" stays one flick away.
-     Poster = the video's first frame, so playback starts without a jump. */
-  .thero__media {
+  /* Full-bleed video hero, deliberately shorter than home (74svh/62vh) so the
+     front page keeps the big opening. The transparent nav turns solid at the
+     hero's end via data-nav-hero. Poster = first frame: no jump at playback. */
+  .thero {
     position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    border-radius: 14px;
+    min-height: 58svh;
+    display: flex;
+    align-items: flex-end;
+    color: var(--ivory);
     overflow: hidden;
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+    /* The slight distinction from home: the sharp line closes the hero. */
+    border-bottom: 3px solid var(--coral);
   }
-  .thero__media video,
-  .thero__media img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .thero__bg { position: absolute; inset: 0; z-index: 0; }
+  .thero__bg video { width: 100%; height: 100%; object-fit: cover; }
+  .thero__fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: none; }
+  .thero__scrim {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(14, 47, 40, 0.55) 0%, rgba(14, 47, 40, 0.2) 34%, rgba(10, 26, 22, 0.85) 100%),
+      linear-gradient(90deg, rgba(10, 26, 22, 0.65) 0%, rgba(10, 26, 22, 0.05) 62%);
   }
-  .thero__fallback { display: none; }
-  @media (min-width: 900px) {
-    .thero__grid { grid-template-columns: 1.1fr 0.9fr; align-items: center; column-gap: clamp(2.5rem, 5vw, 4rem); }
-    .thero__media { aspect-ratio: 4 / 3; }
-  }
+  .thero__content { position: relative; z-index: 1; padding-block: calc(76px + 2.5rem) clamp(2.25rem, 5vh, 3.5rem); }
+  .thero__eyebrow { color: var(--ivory); opacity: 0.9; }
+  @media (min-width: 800px) { .thero { min-height: 52vh; } }
   @media (prefers-reduced-motion: reduce) {
     /* don't autoplay motion for users who opt out — poster stays */
-    .thero__media video { display: none; }
+    .thero__bg video { display: none; }
     .thero__fallback { display: block; }
   }
   .thero__h { color: var(--ivory); max-width: 18ch; }

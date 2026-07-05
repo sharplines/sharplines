@@ -1,5 +1,6 @@
 ---
 import { trades } from '../data/trades';
+import BookCall from './BookCall.astro';
 // solid: start (and stay) on the green background instead of transparent-over-hero.
 // For subpages whose top block is shorter than the home hero — otherwise the
 // ivory links float unreadably over light sections once the page scrolls.
@@ -33,6 +34,7 @@ const links = [
       <a href="/contact" class="nav__link">Contact</a>
     </nav>
 
+    <BookCall class="nav__book" label="Book a call" />
     <a href="/contact?offer=preview" class="btn btn--coral nav__cta">Get my free preview</a>
 
     <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-burger>
@@ -48,6 +50,7 @@ const links = [
         {trades.map((t) => <a href={`/for/${t.slug}`} class="nav__mtrade">{t.label}</a>)}
       </div>
       <a href="/contact?offer=preview" class="btn btn--coral nav__mcta">Get my free preview</a>
+      <BookCall class="btn btn--outline-light nav__mbook" label="Book a 15-minute call" />
     </nav>
   </div>
 </header>
@@ -82,7 +85,14 @@ const links = [
   .nav__menuitem { padding: 0.6rem 0.8rem; border-radius: var(--radius); color: var(--green); font-size: 0.98rem; }
   .nav__menuitem:hover { color: var(--coral); box-shadow: inset 3px 0 0 var(--coral); }
 
-  .nav__cta { display: none; margin-left: auto; min-height: 44px; padding: 0.6rem 1.35rem; font-size: 0.9rem; white-space: nowrap; }
+  /* BookCall renders in its own component scope, so target it globally. */
+  :global(.nav__book) {
+    display: none; background: none; border: none; cursor: pointer; padding: 0;
+    font-family: var(--font); font-size: 1rem; font-weight: 400; color: var(--ivory);
+    margin-left: auto; margin-right: 1.25rem; white-space: nowrap;
+  }
+  :global(.nav__book):hover { opacity: 0.75; }
+  .nav__cta { display: none; margin-left: 0; min-height: 44px; padding: 0.6rem 1.35rem; font-size: 0.9rem; white-space: nowrap; }
 
   .nav__burger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 12px; margin-left: auto; }
   .nav__burger span { width: 26px; height: 2px; background: currentColor; transition: transform 0.2s ease, opacity 0.2s ease; }
@@ -97,9 +107,11 @@ const links = [
   .nav__mtrades { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 1rem; }
   .nav__mtrade { padding: 0.7rem 0; font-size: 1.02rem; color: var(--mint); opacity: 0.9; }
   .nav__mcta { margin-top: 1.5rem; width: 100%; }
+  :global(.nav__mbook) { margin-top: 0.75rem; width: 100%; }
 
   @media (min-width: 940px) {
-    .nav__links, .nav__cta { display: flex; }
+    .nav__links, .nav__cta { display: inline-flex; }
+    :global(.nav__book) { display: inline-flex; align-items: center; }
     .nav__burger { display: none; }
     .wordmark { margin-right: 0; }
     .nav__mobile { display: none; }
@@ -109,7 +121,12 @@ const links = [
 <script>
   const header = document.querySelector('[data-nav]');
   const isSolid = header?.hasAttribute('data-solid');
-  const onScroll = () => { if (!isSolid) header?.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.8); };
+  // Pages with a [data-nav-hero] section (trade pages, short video heroes) turn
+  // the nav solid right where the hero ends; home keeps the 0.8-viewport rule.
+  const heroEl = document.querySelector('[data-nav-hero]');
+  const threshold = () =>
+    heroEl ? heroEl.getBoundingClientRect().bottom + window.scrollY - 76 : window.innerHeight * 0.8;
+  const onScroll = () => { if (!isSolid) header?.classList.toggle('scrolled', window.scrollY > threshold()); };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
