@@ -40,7 +40,7 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   snaps under the hero keyword (`.line-accent`) and is the link-hover underline.
   Respect `prefers-reduced-motion` (all handled in global.css).
 - Home colour rhythm: hero(video, ~62vh not full-screen) → who-we-help(coral, signature; sits
-  directly under the hero) → proof(green) → pricing(green, hairline plan cards) → services(mint) →
+  directly under the hero) → proof(green) → pricing(green, ivory plan cards) → services(mint) →
   dashboard(coral) → results(mint) → how(green) → founders(mint) → FAQ(mint) → CTA(green) →
   footer(ink). (ProofBar + results/case-study are removed from the page "for now" by Arya
   2026-07-05; imports remain, so pricing currently sits right under the coral who-we-help block.)
@@ -99,6 +99,10 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   version with those was replaced same day). Single CTA = free preview (one offer per page).
   Home FAQ #1 and #5 updated to match. Numbers Claude picked for Arya to confirm: $1,000 /
   $2,500 waived-setup anchors.
+  **v3 softened card design (Arya, 2026-07-05, "less code-like")**: ivory cards on the green
+  block, 14px corners (cards only — buttons/inputs keep the 3px token), soft shadow, coral
+  checkmarks instead of dots, upfront+term merged into one sentence under the price, no
+  uppercase row labels, one-line tagline per plan.
 
 ## Open TODO(arya) (from spec §10)
 416/647 phone (currently 514, reads as Montreal) · Provolta permission + quote + 3 screenshots ·
