@@ -2,7 +2,7 @@
 /* Home pricing block — $0-down monthly model (Arya, 2026-07-05; two plans same day).
    Copy follows .claude/skills/site-copy/SKILL.md: no em-dashes, sentence case,
    one offer per page (free preview is the only CTA). Prices in CAD. */
-interface PlanRow { label: string; text: string }
+interface PlanRow { label: string; text?: string; list?: string[]; note?: string }
 interface Plan { name: string; price: string; was: string; featured?: boolean; rows: PlanRow[] }
 
 const plans: Plan[] = [
@@ -14,7 +14,12 @@ const plans: Plan[] = [
     rows: [
       { label: 'Upfront', text: '$0. We waive the $1,000 setup fee.' },
       { label: 'Term', text: 'Monthly. Cancel any time.' },
-      { label: "What's included", text: "A custom site that's yours to keep, hosting, unlimited edits through your dashboard, and support when you need it." },
+      { label: "What's included", list: [
+        "A custom site that's yours to keep",
+        'Hosting',
+        'Unlimited edits through your dashboard',
+        'Support when you need it',
+      ] },
       { label: 'Guarantee', text: 'You see the free preview before you pay a dollar.' },
     ],
   },
@@ -24,8 +29,17 @@ const plans: Plan[] = [
     was: '$949',
     rows: [
       { label: 'Upfront', text: '$0. We waive the $2,500 setup fee.' },
-      { label: 'Term', text: "Monthly. Cancel any time with 30 days' notice." },
-      { label: "What's included", text: 'Everything in Growth, plus your Google Business Profile, pages for each area you serve, review follow-ups, online booking, call tracking, and a monthly report. We also run and track your Google and Meta ads. Ad spend goes straight to the platforms.' },
+      { label: 'Term', text: 'Monthly. Cancel any time.' },
+      { label: "What's included", list: [
+        'Everything in Growth',
+        'Your Google Business Profile',
+        'Pages for each area you serve',
+        'Review follow-ups',
+        'Online booking',
+        'Call tracking',
+        'A monthly report',
+        'Google and Meta ads, run and tracked for you',
+      ], note: 'Ad spend goes straight to the platforms.' },
       { label: 'Guarantee', text: 'More leads within 90 days.' },
       { label: 'Pays for itself at', text: 'About 2 jobs a month.' },
     ],
@@ -54,7 +68,13 @@ const plans: Plan[] = [
           {plan.rows.map((row) => (
             <div class="plan__row">
               <span class="plan__label">{row.label}</span>
-              <p class="plan__text">{row.text}</p>
+              {row.text && <p class="plan__text">{row.text}</p>}
+              {row.list && (
+                <ul class="plan__list">
+                  {row.list.map((item) => <li>{item}</li>)}
+                </ul>
+              )}
+              {row.note && <p class="plan__note">{row.note}</p>}
             </div>
           ))}
         </article>
@@ -139,6 +159,31 @@ const plans: Plan[] = [
     margin-bottom: 0.35rem;
   }
   .plan__text { margin: 0; font-size: 0.95rem; line-height: 1.5; }
+
+  .plan__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .plan__list li {
+    position: relative;
+    padding-left: 1.05rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .plan__list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.58em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--coral);
+  }
+  .plan__note { margin: 0.6rem 0 0; font-size: 0.85rem; opacity: 0.7; }
 
   /* Two columns side by side with rows aligned across plans (subgrid). */
   @media (min-width: 760px) {

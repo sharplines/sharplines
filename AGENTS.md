@@ -93,7 +93,8 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   site + hosting + unlimited dashboard edits + support; cancel any time; coral border +
   "Start here" tag — Arya wants most clients landing here) and **Autopilot $649/mo** (was
   $949; adds GBP, area pages, reviews, booking, call tracking, monthly report, Google **and
-  Meta** ads; 30 days' notice; 90-day more-leads guarantee). The client owns the site outright
+  Meta** ads; 90-day more-leads guarantee). Both plans: monthly, cancel any time, includes
+  shown as bulleted lists. The client owns the site outright
   on both plans ("it's their website" — no buyout/12-payment mechanics; an earlier 3-plan
   version with those was replaced same day). Single CTA = free preview (one offer per page).
   Home FAQ #1 and #5 updated to match. Numbers Claude picked for Arya to confirm: $1,000 /
