@@ -85,11 +85,46 @@ Think each trade through before touching copy; template-filling is visible and f
 
 ## Page anatomy (template: src/pages/for/[slug].astro)
 
-Green hero (video) → mint segments (when present) → coral "Sound familiar?" pains →
-mint playbook (one ivory card, coral checks, 4–6 items) + proof line → green pricing
+Full-bleed video hero → mint segments (when present) → coral "Sound familiar?"
+problem→fix pairs → mint proof band (work photo + Provolta line) → green pricing
 strip (published numbers only, links /#pricing) → mint FAQ (3–5) + sibling links →
 CTABand `id="preview"` with full form, trade preselected, `closing` as lede.
 `Service` + `FAQPage` JSON-LD are generated from the data automatically.
+
+## The problem→fix pairs (the core of the page)
+
+Since 2026-07-05 ("explain the pain … and our solution to that") the old pains +
+playbook sections are ONE section: numbered pairs in `problems` (4 per trade, 5 on
+electricians). Each pair renders as a pain scene on coral, then an ivory fix card
+with a coral check (check = "what you get", same grammar as pricing).
+
+- **The pain is a scene, not a label.** 2–3 sentences the owner recognizes from
+  their own week ("Half the house is dark, the breaker won't reset…"). Specific
+  time, specific job, specific loss. Never a generic marketing pain, never their
+  own trade explained to them.
+- **The fix names the mechanism, then lands the money.** `fixTitle` = the plain
+  mechanism sentence ("Missed calls get answered, sorted, and texted to you.");
+  `fix` = how it works in 2–3 sentences with the money implication last ("One
+  saved emergency a month covers the plan on its own."). Honesty rules apply:
+  state the SEO timeline plainly, never promise rankings or invent numbers.
+- **No sentence may repeat a segments sentence.** Segments cover how buyer types
+  buy; pairs cover the owner's operating pains. Same facts may appear; same
+  wording may not.
+- **Pair order:** most visceral first (tonight's lost call), then daily grind,
+  then growth, then trust/proof. Mobile: each pair must read in about one flick.
+
+## The proof band
+
+After the pairs: a 3:2 work photo (`public/images/trades/{slug}-work.jpg`,
+≤ 200KB, alt = `imgAlt`) beside the `proof` line (required; the shared
+`provoltaLine` everywhere, electricians carries its own direct-experience line).
+No heading on purpose: it is the visual breather before pricing. Photo standard
+is the documentary bar from the hero-photo era (hands at work, warm tones, no
+logos, no camera smiles, GTA-plausible). When a stock shot fails that bar,
+prefer a mid-clip frame from Arya's own trade video
+(`ffmpeg -ss <sec> -frames:v 1 -vf "crop=ih*3/2:ih,scale=1600:1067"`), which is
+what roofers uses. Pexels search pages are bot-blocked for curl; only the
+`images.pexels.com` CDN works (browser UA + pexels.com referer, sequential).
 
 FAQ patterns that work: the fit question ("I only do residential"), the boundary
 question ("Do you handle the permits?"), the growing-search question (EV chargers),
@@ -106,7 +141,8 @@ Each trade has a looping muted video, supplied by Arya in `../sharplines_photos`
 - Poster = the video's first frame, ≤ 200KB, at `public/images/trades/{slug}.jpg`
   (`ffmpeg -frames:v 1 -q:v 4..7`). Playback then starts without a jump.
 - The template autoplays muted/looped/playsinline and falls back to the poster under
-  `prefers-reduced-motion`. `imgAlt` in the data labels the media.
+  `prefers-reduced-motion`. The hero video is decorative (`aria-hidden`); `imgAlt`
+  in the data describes the proof-band work photo.
 
 ## SEO (per page)
 

@@ -267,6 +267,26 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   from the home-grid revert). (e) New `camera` icon in ServiceCard for social.
   (f) Profession rotation beyond the 8 trades (salons, physio, detailers, movers,
   painters) especially on booking/social/reviews, per Arya's "suit more professions".
+- **Trade pages v3: problem→fix pairs + proof band (Arya, 2026-07-05, "explain the pain
+  ... and our solution to that" + "slightly more engaging UI, specially for phone")**:
+  the coral pains list + mint playbook merged into ONE coral section of numbered pairs
+  (contact-page 01/02/03 numerals): pain scene in 2–3 sentences from the owner's week,
+  then an ivory fix card (coral check + mechanism title + how it works + the money line).
+  Data: `problems` replaces `pains`+`plan` in `tradePages.ts` (4 pairs per trade, 5 on
+  electricians as the flagship); `proof` is now required and feeds a new mint **proof
+  band** after the pairs: 3:2 work photo `public/images/trades/{slug}-work.jpg` (≤200KB,
+  alt = `imgAlt`) beside the Provolta line, deliberately heading-less. Photos: the vetted
+  Pexels set above re-cropped to 1600×1067, EXCEPT roofers, whose Pexels shot fails the
+  taste bar up close (big shirt print, shorts) and became a mid-clip frame of Arya's own
+  roofers video (`ffmpeg -ss 4 -frames:v 1 -vf "crop=ih*3/2:ih,scale=1600:1067"`).
+  Prefer frames from his footage whenever stock fails; Pexels SEARCH pages are
+  bot-blocked for curl (5KB challenge), only the image CDN works. Pair-writing rules
+  are in the trade-pages skill: scene not label, mechanism then money, zero sentence
+  overlap with segments, most-visceral-first order, about one flick per pair on a phone.
+  Desktop = 2-col pain|card rows, card top aligned to the pain title (measured, 1px off
+  at 1400w). Barbers' band photo still carries the small polo logo (re-flagged to Arya).
+
+## Open TODO(arya) (from spec §10)
 416/647 phone (currently 514, reads as Montreal) · Provolta permission + quote + 3 screenshots ·
 Resend/Web3Forms key.
 - **Favicon (done 2026-07-05)**: real brush-stroke "S" logo Arya supplied
@@ -317,4 +337,11 @@ Resend/Web3Forms key.
   JSON-LD present). Committed, not deployed. NOTE: verified via dev server because the
   repo build was transiently broken by an in-flight `tradePages.ts` edit from the
   parallel session (undefined `.map` on /for/electricians), not by these pages.
+- **Trade pages v3 (problem→fix pairs + proof band) built 2026-07-05** (see Decisions).
+  All 8 pages: verified at 500px (today's extension width; pairs, band and colour
+  rhythm screenshotted) and measured at 1400px via an injected iframe (2-col pairs,
+  fix-card top 1px from the pain title, every section's left edge at exactly 117px);
+  copy checklist green (0 em-dashes, 0 banned words, you>we on all 8, metas
+  142–153ch); 20-page build green. Committed, not deployed. Awaiting Arya's review
+  of the pair copy and the band photos.
 - Remaining pages: work, privacy, 404. Build order: spec §11.

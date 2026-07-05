@@ -82,36 +82,47 @@ const faqSchema = {
     </section>
   )}
 
-  <!-- Pains (coral) -->
+  <!-- Problems → fixes (coral). Each pair: a pain scene from the owner's week,
+       then our fix in an ivory card. The coral check on the card keeps the
+       site-wide grammar: a check means "what you get" (pricing, old playbook).
+       Replaces the separate pains + playbook sections (Arya, 2026-07-05:
+       "explain the pain ... and our solution to that"). -->
   <section class="section theme-coral">
     <div class="container fade-up">
-      <p class="eyebrow">The problem</p>
+      <p class="eyebrow">The problems we fix</p>
       <h2 class="display-lg tsec-h">Sound familiar?</h2>
-      <div class="pains">
-        {page.pains.map((p) => (
-          <div class="pain">
-            <h3 class="pain__t">{p.title}</h3>
-            <p class="pain__b">{p.body}</p>
-          </div>
+      <div class="probs">
+        {page.problems.map((p, idx) => (
+          <article class="prob">
+            <div class="prob__pain">
+              <p class="prob__n">{String(idx + 1).padStart(2, '0')}</p>
+              <h3 class="prob__t">{p.title}</h3>
+              <p class="prob__body">{p.pain}</p>
+            </div>
+            <div class="prob__fix">
+              <h4 class="prob__fixt">{p.fixTitle}</h4>
+              <p class="prob__fixb">{p.fix}</p>
+            </div>
+          </article>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Playbook (mint, ivory card) -->
+  <!-- Proof band (mint): the trade's work photo beside the honest Provolta line.
+       A visual breather between the pair stack and pricing; no heading on purpose. -->
   <section class="section">
-    <div class="container fade-up">
-      <p class="eyebrow">The playbook</p>
-      <h2 class="display-lg tsec-h">The Sharplines playbook for {page.noun}.</h2>
-      <div class="playbook">
-        {page.plan.map((p) => (
-          <div class="play">
-            <h3 class="play__t">{p.title}</h3>
-            <p class="play__b">{p.body}</p>
-          </div>
-        ))}
-      </div>
-      {page.proof && <p class="tproof">{page.proof}</p>}
+    <div class="container pband fade-up">
+      <img
+        class="pband__img"
+        src={`/images/trades/${page.slug}-work.jpg`}
+        alt={page.imgAlt}
+        width="1600"
+        height="1067"
+        loading="lazy"
+        decoding="async"
+      />
+      <p class="pband__proof">{page.proof}</p>
     </div>
   </section>
 
@@ -196,28 +207,38 @@ const faqSchema = {
   }
   .segs__kicker { margin: 1.75rem 0 0; font-size: clamp(1.02rem, 1.4vw, 1.15rem); color: var(--green); font-weight: 500; max-width: 60ch; }
 
-  /* Pains: hairline rows on mobile (quick to scan), 3 ruled columns on desktop. */
-  .pains { border-top: 1px solid rgba(255, 255, 255, 0.28); }
-  .pain { border-bottom: 1px solid rgba(255, 255, 255, 0.28); padding: 1.1rem 0; }
-  .pain__t { color: var(--ivory); font-size: 1.2rem; font-weight: 500; margin: 0 0 0.35rem; }
-  .pain__b { color: var(--ivory); opacity: 0.85; margin: 0; max-width: 60ch; }
-  @media (min-width: 760px) {
-    .pains { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 2.5rem); border-top: 0; }
-    .pain { border-bottom: 0; border-top: 2px solid rgba(255, 255, 255, 0.45); padding: 1.25rem 0 0; }
+  /* Problem → fix pairs. Mobile: pain scene, then its ivory answer card, one
+     flick per pair. Desktop: pain left, fix right, so the page reads problem →
+     answer across. Numbers follow the contact-page 01/02/03 pattern. */
+  .probs { display: grid; gap: 2.6rem; }
+  .prob__n {
+    margin: 0 0 0.55rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--ivory);
+    opacity: 0.6;
   }
-
-  /* Playbook: one ivory card in the v3 language, coral checkmarks. */
-  .playbook {
+  .prob__t {
+    margin: 0 0 0.6rem;
+    color: var(--ivory);
+    font-size: clamp(1.3rem, 2.6vw, 1.6rem);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+    max-width: 26ch;
+  }
+  .prob__body { margin: 0; color: var(--ivory); opacity: 0.88; max-width: 58ch; }
+  .prob__fix {
+    margin-top: 1.15rem;
     background: var(--ivory);
     border: 1px solid rgba(14, 47, 40, 0.12);
     border-radius: 14px;
-    padding: clamp(1.5rem, 3.5vw, 2.5rem);
-    box-shadow: 0 14px 36px rgba(14, 47, 40, 0.1);
-    display: grid;
-    gap: clamp(1.4rem, 3vw, 2rem);
+    padding: 1.2rem 1.35rem 1.3rem;
+    box-shadow: 0 14px 36px rgba(14, 47, 40, 0.12);
   }
-  .play { position: relative; padding-left: 2rem; }
-  .play::before {
+  .prob__fixt { position: relative; margin: 0 0 0.4rem; padding-left: 1.9rem; color: var(--green); font-size: 1.08rem; font-weight: 500; }
+  .prob__fixt::before {
     content: "";
     position: absolute;
     left: 0.15rem;
@@ -228,12 +249,35 @@ const faqSchema = {
     border-bottom: 2.5px solid var(--coral);
     transform: rotate(-45deg);
   }
-  .play__t { font-size: 1.2rem; font-weight: 500; color: var(--green); margin: 0 0 0.35rem; }
-  .play__b { margin: 0; color: var(--ink); opacity: 0.82; font-size: 0.98rem; }
-  @media (min-width: 760px) {
-    .playbook { grid-template-columns: 1fr 1fr; column-gap: clamp(2rem, 4vw, 3rem); }
+  .prob__fixb { margin: 0; padding-left: 1.9rem; color: var(--ink); opacity: 0.82; font-size: 0.97rem; }
+  @media (min-width: 900px) {
+    .probs { gap: 3.25rem; }
+    .prob { display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(2.5rem, 5vw, 4rem); align-items: start; }
+    /* optically align the card's top with the pain title (number sits above) */
+    .prob__fix { margin-top: 1.95rem; }
   }
-  .tproof { margin: 1.5rem 0 0; opacity: 0.75; max-width: 62ch; font-size: 0.95rem; }
+
+  /* Proof band: work photo in the card language + the Provolta line. */
+  .pband { display: grid; gap: 1.6rem; align-items: center; }
+  .pband__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    box-shadow: 0 14px 36px rgba(14, 47, 40, 0.12);
+  }
+  .pband__proof {
+    margin: 0;
+    color: var(--green);
+    font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+    max-width: 36ch;
+  }
+  @media (min-width: 900px) {
+    .pband { grid-template-columns: 1.15fr 1fr; gap: clamp(2.25rem, 4.5vw, 3.5rem); }
+  }
 
   .tprice__b { max-width: 56ch; opacity: 0.9; }
   .tprice__link { color: var(--ivory); font-weight: 500; }
