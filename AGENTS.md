@@ -111,6 +111,10 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   "Websites that sell" was tried and reverted the same day (Arya: keep it light). Mobile
   (<620px): compact cards (icon beside title, tighter padding, 0.92rem blurb) because six
   stacked full cards made the phone scroll too long (`.scard--accent` kept, unused).
+- **FounderStrip v2 (Arya, 2026-07-05, "looks cheap")**: replaced the small circular avatars +
+  caps labels + detached full-width paragraph with one ivory card (14px radius, soft shadow)
+  holding two rounded 4:5 portraits and the bio beside them (stacked on mobile). Kept because
+  it builds trust; only the presentation changed, copy untouched.
 - **Who-we-help mobile compaction (Arya, 2026-07-05, "too much scroll to reach pricing")**:
   trade tiles are two-column and name-only below 720px (hooks hidden, 0.9rem padding), the
   display heading steps down below 620px. Hooks + big type return on desktop.
