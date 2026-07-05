@@ -92,7 +92,7 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   setup fee waived, anchor (struck) prices beside current: **Growth $179/mo** (was $249;
   site + hosting + unlimited dashboard edits + support; cancel any time; coral border +
   "Start here" tag — Arya wants most clients landing here) and **Autopilot $495/mo** (was
-  $949; adds GBP, area pages, reviews, booking, call tracking, monthly report, Google **and
+  $849; adds GBP, area pages, reviews, booking, call tracking, monthly report, Google **and
   Meta** ads; 90-day more-leads guarantee). Both plans: monthly, cancel any time, includes
   shown as bulleted lists. The client owns the site outright
   on both plans ("it's their website" — no buyout/12-payment mechanics; an earlier 3-plan
@@ -101,8 +101,13 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   $2,500 waived-setup anchors.
 
 ## Open TODO(arya) (from spec §10)
-416/647 phone (currently 514, reads as Montreal) · logo files · founder photos · Provolta
-permission + quote + 3 screenshots · Resend/Web3Forms key · favicon (temp coral "S" on green shipped).
+416/647 phone (currently 514, reads as Montreal) · Provolta permission + quote + 3 screenshots ·
+Resend/Web3Forms key.
+- **Favicon (done 2026-07-05)**: real brush-stroke "S" logo Arya supplied
+  (`~/Downloads/Sharplines Logo Black.png`; its "transparency" was a baked-in checkerboard, so the
+  mark was luma-keyed out and composited on an ivory tile). Files: `favicon-16/32/512.png`,
+  `apple-touch-icon.png`, `favicon.ico` in `public/`; old temp `favicon.svg` removed. Ask Arya's
+  designer for a true transparent-background export for future logo uses (nav, OG image).
 
 ## Status
 - **Home page `/`** built and deployed in the v2 warm colour-block style (all §6.1 sections).
