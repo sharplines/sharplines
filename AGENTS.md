@@ -78,10 +78,10 @@ Working notes for any agent on this repo. Keep this current as decisions land.
 - **Images** (`public/images/`): hero is now a looping video (`public/videos/hero.mp4`) with
   poster `hero-poster.jpg`. `founder-arya.jpg` / `founder-amir.jpg` = real founder photos Arya
   supplied (Image #1 = Amir, #2 = Arya), first names only in captions + bio. `provolta-site.png`
-  = real screenshot of provolta.ca via thum.io (Arya's own client). `dashboard-code.jpg` =
-  Arya-supplied stock shot (engineer at two monitors of code) in the home dashboard card,
-  added 2026-07-05. Plain `<img loading=lazy>`;
+  = real screenshot of provolta.ca via thum.io (Arya's own client). Plain `<img loading=lazy>`;
   migrate to Astro `<Image>` (AVIF/WebP) in the Lighthouse/polish pass.
+  (A stock coding photo in the home dashboard card was tried and removed 2026-07-05 at
+  Arya's direction — keep that card text-only.)
 - **Home services grid = 6** (not 7): dropped "Social media, handled" to make a clean 3×2 and
   keep the strongest direct lead-drivers. Social still lives in the footer + on /services. Swap
   if Arya prefers a different six.
