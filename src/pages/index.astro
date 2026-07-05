@@ -82,7 +82,7 @@ const faqs = [
   <section class="section">
     <div class="container fade-up">
       <p class="eyebrow">Who's behind it</p>
-      <h2 class="display-lg sec-h">Meet the two engineers behind Sharplines.</h2>
+      <h2 class="display-lg sec-h sec-h--center">Meet the two engineers behind Sharplines.</h2>
       <FounderStrip />
     </div>
   </section>
@@ -103,6 +103,7 @@ const faqs = [
 
 <style>
   .sec-h { max-width: 20ch; margin-bottom: clamp(2rem, 5vw, 3.25rem); }
+  .sec-h--center { text-align: center; margin-inline: auto; }
 
   .sgrid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
   @media (min-width: 620px) { .sgrid { grid-template-columns: 1fr 1fr; } }
