@@ -10,6 +10,7 @@ export interface TradePage {
   noun: string; // how the trade reads mid-sentence ("HVAC companies")
   h1: string;
   h1Accent: string; // the phrase inside h1 that takes the coral line (keep short; nowrap)
+  imgAlt: string; // hero photo (/images/trades/{slug}.jpg), one plain sentence
   sub: string;
   pains: { title: string; body: string }[];
   plan: { title: string; body: string }[];
@@ -26,6 +27,7 @@ const provoltaLine =
 export const tradePages: TradePage[] = [
   {
     slug: 'electricians',
+    imgAlt: 'An electrician tests a panel with a multimeter.',
     noun: 'electricians',
     h1: 'More panel upgrades. Fewer missed emergency calls.',
     h1Accent: 'emergency calls.',
@@ -52,6 +54,7 @@ export const tradePages: TradePage[] = [
   },
   {
     slug: 'plumbers',
+    imgAlt: 'A plumber fits a valve to a radiator pipe.',
     noun: 'plumbers',
     h1: "When water's on the floor, be the plumber they find.",
     h1Accent: 'they find.',
@@ -79,6 +82,7 @@ export const tradePages: TradePage[] = [
   },
   {
     slug: 'hvac',
+    imgAlt: 'A technician checks the pressure gauges on an air conditioner.',
     noun: 'HVAC companies',
     h1: 'Full schedules in July and January.',
     h1Accent: 'July and January.',
@@ -106,6 +110,7 @@ export const tradePages: TradePage[] = [
   },
   {
     slug: 'landscapers',
+    imgAlt: 'A landscaper trims a tall cedar hedge.',
     noun: 'landscapers and gardeners',
     h1: 'Your work is visual. Your marketing should be too.',
     h1Accent: 'should be too.',
@@ -133,6 +138,7 @@ export const tradePages: TradePage[] = [
   },
   {
     slug: 'barbers',
+    imgAlt: 'A barber works on a client\'s cut in the shop.',
     noun: 'barbershops and salons',
     h1: 'Every empty chair is money walking past your window.',
     h1Accent: 'your window.',
@@ -160,6 +166,7 @@ export const tradePages: TradePage[] = [
   },
   {
     slug: 'cleaners',
+    imgAlt: 'A cleaner in coveralls squeegees a floor-to-ceiling window.',
     noun: 'cleaning companies',
     h1: 'Build a client list that cleans up every week.',
     h1Accent: 'every week.',
@@ -187,6 +194,7 @@ export const tradePages: TradePage[] = [
   },
   {
     slug: 'roofers',
+    imgAlt: 'A roofer works near the ridge of a roof.',
     noun: 'roofers',
     h1: 'Roofing is a trust business. Look like the safe choice.',
     h1Accent: 'safe choice.',
@@ -214,6 +222,7 @@ export const tradePages: TradePage[] = [
   },
   {
     slug: 'auto-repair',
+    imgAlt: 'A mechanic leans into an engine bay in the shop.',
     noun: 'auto repair shops',
     h1: "Empty bays don't pay the rent.",
     h1Accent: 'the rent.',

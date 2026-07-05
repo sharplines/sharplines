@@ -40,16 +40,19 @@ const faqSchema = {
 ---
 
 <Base title={page.metaTitle} description={page.metaDescription} navSolid>
-  <!-- Hero (green) -->
+  <!-- Hero (green): copy + one per-trade photo in the card language -->
   <section class="thero theme-green">
-    <div class="container">
-      <p class="eyebrow">For {page.noun} · Toronto &amp; the GTA</p>
-      <h1 class="display-xl thero__h">{h1Before}<span class="line-accent">{page.h1Accent}</span>{h1After}</h1>
-      <p class="thero__sub">{page.sub}</p>
-      <div class="thero__cta">
-        <a href="#preview" class="btn btn--coral">Get my free homepage preview</a>
-        <p class="thero__fine">Free preview in 48 hours · No obligation</p>
+    <div class="container thero__grid">
+      <div class="thero__copy">
+        <p class="eyebrow">For {page.noun} · Toronto &amp; the GTA</p>
+        <h1 class="display-xl thero__h">{h1Before}<span class="line-accent">{page.h1Accent}</span>{h1After}</h1>
+        <p class="thero__sub">{page.sub}</p>
+        <div class="thero__cta">
+          <a href="#preview" class="btn btn--coral">Get my free homepage preview</a>
+          <p class="thero__fine">Free preview in 48 hours · No obligation</p>
+        </div>
       </div>
+      <img class="thero__img" src={`/images/trades/${page.slug}.jpg`} alt={page.imgAlt} width="1200" height="900" decoding="async" />
     </div>
   </section>
 
@@ -120,6 +123,20 @@ const faqSchema = {
 <style>
   /* Fixed transparent nav sits over the green hero; pad past its 76px height. */
   .thero { padding-block: calc(76px + clamp(3rem, 8vw, 5.5rem)) clamp(3rem, 7vw, 5rem); }
+  .thero__grid { display: grid; gap: clamp(1.75rem, 4.5vw, 3rem); }
+  /* Photo keeps the ivory-card language: 14px radius + soft shadow. Modest
+     16/10 crop on phones so "Sound familiar?" stays one flick away. */
+  .thero__img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: 14px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+  }
+  @media (min-width: 900px) {
+    .thero__grid { grid-template-columns: 1.1fr 0.9fr; align-items: center; column-gap: clamp(2.5rem, 5vw, 4rem); }
+    .thero__img { aspect-ratio: 4 / 3; }
+  }
   .thero__h { color: var(--ivory); max-width: 18ch; }
   .thero__sub { margin: 1.4rem 0 0; color: var(--mint); opacity: 0.92; font-size: clamp(1.05rem, 1.6vw, 1.3rem); max-width: 52ch; }
   .thero__cta { margin-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.9rem; }

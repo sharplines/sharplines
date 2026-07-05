@@ -42,6 +42,11 @@ const steps = [
           ))}
         </ol>
         <div class="contact__direct">
+          <div class="contact__people">
+            <img src="/images/founder-arya.jpg" alt="Arya, co-founder of Sharplines Studio." width="112" height="140" loading="lazy" decoding="async" />
+            <img src="/images/founder-amir.jpg" alt="Amir, co-founder of Sharplines Studio." width="112" height="140" loading="lazy" decoding="async" />
+            <p>You'll hear directly from Arya or Amir.</p>
+          </div>
           <p>Prefer to talk it through? Call <a href="tel:+15145602266" class="link">(514) 560-2266</a>.</p>
           <p>Or write to <a href="mailto:hi@sharplines.ca" class="link">hi@sharplines.ca</a> and tell us what you're after.</p>
         </div>
@@ -87,6 +92,18 @@ const steps = [
 
   .contact__direct { margin-top: 2rem; color: var(--mint); }
   .contact__direct p { opacity: 0.85; }
+
+  /* The real founders, small: same 4:5 crop as the home founders card. */
+  .contact__people { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.4rem; }
+  .contact__people img {
+    width: 56px;
+    aspect-ratio: 4 / 5;
+    height: auto;
+    object-fit: cover;
+    object-position: center 22%;
+    border-radius: 10px;
+  }
+  .contact__people p { margin: 0 0 0 0.5rem; color: var(--ivory); opacity: 0.92; }
 
   @media (min-width: 900px) {
     .contact__grid {

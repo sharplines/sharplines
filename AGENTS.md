@@ -165,6 +165,24 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   Home keeps the transparent hero behaviour; use `navSolid` on every non-home page.
 - **CTABand props (2026-07-05)**: optional `lede`, `preselectTrade`, `id`, plus existing
   `heading`/`variant`. Default heading stays "See your new homepage before you spend a dollar."
+- **Trade-hero photos (2026-07-05, Arya asked for photos on the new pages)**: one Pexels
+  photo per trade in `public/images/trades/{slug}.jpg`, shown beside the hero copy ≥900px
+  (4:3, 14px radius + soft shadow, card language) and after the CTA on mobile (16:10 so
+  pains stay one flick away). 1200×900 crops via the Pexels CDN (`?w=1200&h=900&fit=crop`),
+  all ≤200KB (ffmpeg `-q:v`, NOT sips — sips formatOptions made them bigger). Selection
+  criteria that survived review: documentary hands-at-work, warm tones, no visible brand
+  logos, no camera-facing stock smiles, GTA-plausible (rejected a palm-tree garden).
+  Pexels IDs for provenance/swaps: electricians 33531830 · plumbers 29226620 ·
+  hvac 6471912 · landscapers 24595772 · barbers 19664892 (small shop-logo on polo,
+  flagged to Arya) · cleaners 6197122 (coral overalls, on-palette) · roofers 37623622 ·
+  auto-repair 4481942. Pexels license: free, no attribution required. **Arya's sign-off on
+  the specific photos is still part of the job — swap any he dislikes.**
+  Pexels access: the API needs a key, but search works in the user's Chrome tab and the
+  `images.pexels.com` CDN downloads fine with curl + a browser UA + `-e https://www.pexels.com/`
+  (sequential; parallel bursts get blocked).
+- **Contact-page people row (2026-07-05)**: the real founder photos (56px, 4:5, 10px radius,
+  `object-position: center 22%` like the founders card) + "You'll hear directly from Arya or
+  Amir." under What-happens-next. Real faces beat stock on the conversion page; deliberate.
 
 ## Open TODO(arya) (from spec §10)
 416/647 phone (currently 514, reads as Montreal) · Provolta permission + quote + 3 screenshots ·
