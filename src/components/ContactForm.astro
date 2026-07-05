@@ -1,9 +1,9 @@
 ---
 // One form, two variants (§8).
-//  short — CTA bands: Name · Business name · Phone
-//  full  — /contact + trade pages: adds trade, email, current site, interest, notes
-// Delivery: Netlify Forms today (no key needed, inline success). Migrate to the
-// Resend API route from §8 once RESEND_API_KEY is supplied. TODO(arya): key.
+//  short — CTA card: Name, Phone, Email (optional), Description (optional), stacked
+//  full  — /contact + trade pages: adds business, trade, website, interest
+// Boxed inputs on a light/ivory card. Delivery: Netlify Forms today (no key
+// needed, inline success). Migrate to Resend (§8) when RESEND_API_KEY exists.
 import { trades } from '../data/trades';
 
 interface Props {
@@ -29,16 +29,18 @@ const interests = [
   <input type="hidden" name="ts" value="" data-ts />
   <p class="cform__hp" aria-hidden="true"><label>Company<input name="company-hp" tabindex="-1" autocomplete="off" /></label></p>
 
-  <div class="cform__grid">
+  <div class:list={['cform__grid', full && 'cform__grid--two']}>
     <label class="field">
       <span class="field__label">Name</span>
       <input type="text" name="name" required autocomplete="name" />
     </label>
-    <label class="field">
-      <span class="field__label">Business name</span>
-      <input type="text" name="business" required autocomplete="organization" />
-    </label>
 
+    {full && (
+      <label class="field">
+        <span class="field__label">Business name</span>
+        <input type="text" name="business" required autocomplete="organization" />
+      </label>
+    )}
     {full && (
       <label class="field">
         <span class="field__label">Trade / industry</span>
@@ -54,12 +56,11 @@ const interests = [
       <input type="tel" name="phone" required autocomplete="tel" inputmode="tel" />
     </label>
 
-    {full && (
-      <label class="field">
-        <span class="field__label">Email</span>
-        <input type="email" name="email" required autocomplete="email" inputmode="email" />
-      </label>
-    )}
+    <label class="field field--wide">
+      <span class="field__label">Email {!full && <em>(optional)</em>}</span>
+      <input type="email" name="email" required={full} autocomplete="email" inputmode="email" />
+    </label>
+
     {full && (
       <label class="field field--wide">
         <span class="field__label">Current website <em>(optional)</em></span>
@@ -72,12 +73,11 @@ const interests = [
         <select name="interest" data-interest>{interests.map((i) => <option value={i}>{i}</option>)}</select>
       </label>
     )}
-    {full && (
-      <label class="field field--wide">
-        <span class="field__label">Anything we should know? <em>(optional)</em></span>
-        <textarea name="notes" rows="3"></textarea>
-      </label>
-    )}
+
+    <label class="field field--wide">
+      <span class="field__label">{full ? 'Anything we should know?' : 'What do you need?'} <em>(optional)</em></span>
+      <textarea name="notes" rows="4" placeholder="A few words about your business or what you're after."></textarea>
+    </label>
   </div>
 
   <button type="submit" class="btn btn--coral cform__submit">Get my free preview</button>
@@ -91,35 +91,53 @@ const interests = [
 </form>
 
 <style>
-  .cform { --fg: var(--green); --line: rgba(14,47,40,0.3); --ph: rgba(23,23,23,0.5); }
-  .cform--dark { --fg: var(--ivory); --line: rgba(255,255,255,0.32); --ph: rgba(255,255,240,0.5); }
-  .cform { color: var(--fg); }
-
-  .cform__grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
-  .field { display: flex; flex-direction: column; gap: 0.35rem; }
-  .field--wide { grid-column: 1 / -1; }
-  .field__label { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg); opacity: 0.8; font-weight: 500; }
-  .field__label em { font-style: normal; text-transform: none; letter-spacing: 0; opacity: 0.7; }
-  .field input, .field select, .field textarea {
-    min-height: 48px; padding: 0.55rem 0;
-    background: transparent; color: var(--fg);
-    border: none; border-bottom: 1px solid var(--line); border-radius: 0;
-    font-family: var(--font); font-size: 1.05rem; resize: vertical;
+  .cform {
+    --fg: var(--green);
+    --field-bg: rgba(14, 47, 40, 0.045);
+    --line: rgba(14, 47, 40, 0.18);
+    color: var(--fg);
   }
-  .field select { padding-right: 1rem; }
+  .cform--dark {
+    --fg: var(--ivory);
+    --field-bg: rgba(255, 255, 255, 0.08);
+    --line: rgba(255, 255, 255, 0.28);
+  }
+
+  .cform__grid { display: grid; grid-template-columns: 1fr; gap: 1.1rem; }
+  @media (min-width: 560px) { .cform__grid--two { grid-template-columns: 1fr 1fr; column-gap: 1.25rem; } }
+
+  .field { display: flex; flex-direction: column; gap: 0.45rem; }
+  .field--wide { grid-column: 1 / -1; }
+  .field__label { font-size: 0.95rem; font-weight: 600; color: var(--fg); }
+  .field__label em { font-style: normal; font-weight: 400; opacity: 0.6; }
+
+  .field input, .field select, .field textarea {
+    width: 100%;
+    min-height: 54px;
+    padding: 0.85rem 1rem;
+    background: var(--field-bg);
+    color: var(--fg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-family: var(--font);
+    font-size: 1.02rem;
+    resize: vertical;
+  }
+  .field textarea { min-height: 128px; line-height: 1.5; }
+  .field input::placeholder, .field textarea::placeholder { color: var(--fg); opacity: 0.4; }
   .cform--dark select option { color: var(--green); }
-  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-bottom-color: var(--coral); border-bottom-width: 2px; }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none;
+    border-color: var(--coral);
+    box-shadow: 0 0 0 3px rgba(244, 70, 47, 0.16);
+  }
 
   .cform__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-  .cform__submit { margin-top: 1.75rem; }
-  .cform__consent { font-size: 0.85rem; color: var(--fg); opacity: 0.72; margin-top: 1rem; max-width: 46ch; }
+  .cform__submit { width: 100%; margin-top: 1.5rem; }
+  .cform__consent { font-size: 0.85rem; color: var(--fg); opacity: 0.7; margin-top: 1rem; }
   .cform__status { margin-top: 1.25rem; font-weight: 500; font-size: 1.05rem; }
-  .cform__status[data-state="err"] { color: #ffd2c9; }
-  .cform--light .cform__status[data-state="err"] { color: #b23c26; }
-
-  @media (min-width: 560px) {
-    .cform__grid { grid-template-columns: 1fr 1fr; column-gap: 1.5rem; }
-  }
+  .cform__status[data-state="err"] { color: #c0392b; }
+  .cform--dark .cform__status[data-state="err"] { color: #ffd2c9; }
 </style>
 
 <script>
