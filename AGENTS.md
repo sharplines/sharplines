@@ -73,11 +73,14 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   Archivo/Instrument Sans/IBM Plex Mono trio).
 - **@astrojs/sitemap** deferred — its current version crashes this build; re-add during the
   SEO pass (spec §11 late step) with a pinned/working version.
-- **Images** (`public/images/`): `hero.jpg` = warm Unsplash café-owner shot (free licence),
-  full-bleed with a dark-green scrim. `founder-arya/amir.jpg` = Unsplash portraits, now shown
-  in colour, `TODO(arya)` to replace. `provolta-site.png` = real screenshot of provolta.ca via
-  thum.io (Arya's own client). Plain `<img loading=lazy>`; migrate to Astro `<Image>`
-  (AVIF/WebP) in the Lighthouse/polish pass.
+- **Images** (`public/images/`): hero is now a looping video (`public/videos/hero.mp4`) with
+  poster `hero-poster.jpg`. `founder-arya.jpg` / `founder-amir.jpg` = real founder photos Arya
+  supplied (Image #1 = Amir, #2 = Arya), first names only in captions + bio. `provolta-site.png`
+  = real screenshot of provolta.ca via thum.io (Arya's own client). Plain `<img loading=lazy>`;
+  migrate to Astro `<Image>` (AVIF/WebP) in the Lighthouse/polish pass.
+- **Home services grid = 6** (not 7): dropped "Social media, handled" to make a clean 3×2 and
+  keep the strongest direct lead-drivers. Social still lives in the footer + on /services. Swap
+  if Arya prefers a different six.
 
 ## Open TODO(arya) (from spec §10)
 416/647 phone (currently 514, reads as Montreal) · logo files · founder photos · Provolta
