@@ -91,7 +91,7 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   before the services grid (spec §6.1 has full copy). Two CAD plans, both $0 down with the
   setup fee waived, anchor (struck) prices beside current: **Growth $179/mo** (was $249;
   site + hosting + unlimited dashboard edits + support; cancel any time; coral border +
-  "Start here" tag — Arya wants most clients landing here) and **Autopilot $649/mo** (was
+  "Start here" tag — Arya wants most clients landing here) and **Autopilot $495/mo** (was
   $949; adds GBP, area pages, reviews, booking, call tracking, monthly report, Google **and
   Meta** ads; 90-day more-leads guarantee). Both plans: monthly, cancel any time, includes
   shown as bulleted lists. The client owns the site outright
