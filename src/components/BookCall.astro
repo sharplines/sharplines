@@ -1,0 +1,25 @@
+---
+// Cal.com element-click trigger (§ booking). Any element carrying these three
+// data attributes opens the 15-minute booking popup; the loader lives once in
+// Base.astro. Keep the link/namespace/config here so every button stays in sync.
+// Default label follows the site-copy skill's secondary CTA: "Book a 15-minute call".
+interface Props {
+  label?: string;
+  class?: string;
+  ariaLabel?: string;
+}
+const { label = 'Book a 15-minute call', class: cls = 'btn btn--outline-light', ariaLabel } = Astro.props;
+
+const CAL_LINK = 'sharplines-vqqmqp/15min';
+const CAL_CONFIG = JSON.stringify({ layout: 'month_view', useSlotsViewOnSmallScreen: 'true' });
+---
+<button
+  type="button"
+  class={cls}
+  data-cal-link={CAL_LINK}
+  data-cal-namespace="15min"
+  data-cal-config={CAL_CONFIG}
+  aria-label={ariaLabel}
+>
+  <slot>{label}</slot>
+</button>
