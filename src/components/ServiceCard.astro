@@ -1,11 +1,21 @@
 ---
-interface Props { title: string; blurb: string; href: string; }
-const { title, blurb, href } = Astro.props;
+/* v3 soft look (Arya, 2026-07-05): coral line icon per card, no per-card link
+   label (the whole card is the link), optional coral accent variant, 14px soft
+   radius (buttons/inputs keep the 3px token). */
+interface Props { title: string; blurb: string; href: string; icon: string; accent?: boolean }
+const { title, blurb, href, icon, accent = false } = Astro.props;
 ---
-<a href={href} class="scard">
+<a href={href} class={accent ? 'scard scard--accent' : 'scard'}>
+  <svg class="scard__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    {icon === 'browser' && <><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M3 9h18" /></>}
+    {icon === 'pin' && <><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z" /><circle cx="12" cy="10" r="2.5" /></>}
+    {icon === 'star' && <path d="M12 3l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6-4.4-4.3 6.1-.9L12 3z" />}
+    {icon === 'calendar' && <><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 10h18" /><path d="M8 3v4" /><path d="M16 3v4" /></>}
+    {icon === 'phone' && <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z" />}
+    {icon === 'trend' && <><path d="M3 17l6-6 4 4 7-7" /><path d="M14 8h6v6" /></>}
+  </svg>
   <h3 class="scard__title">{title}</h3>
   <p class="scard__blurb">{blurb}</p>
-  <span class="scard__more">Learn more →</span>
 </a>
 
 <style>
@@ -13,12 +23,19 @@ const { title, blurb, href } = Astro.props;
     display: flex; flex-direction: column; height: 100%;
     padding: clamp(1.5rem, 3vw, 2rem);
     background: var(--ivory); color: var(--green);
-    border: 1px solid rgba(14,47,40,0.12); border-radius: var(--radius);
+    border: 1px solid rgba(14,47,40,0.12); border-radius: 14px;
     box-shadow: inset 0 0 0 0 var(--coral);
     transition: box-shadow 0.18s ease, transform 0.18s ease;
   }
   .scard:hover { box-shadow: inset 5px 0 0 0 var(--coral); transform: translateY(-3px); }
+
+  .scard__icon { width: 30px; height: 30px; color: var(--coral); margin-bottom: 1.1rem; }
   .scard__title { font-size: 1.4rem; font-weight: 500; margin-bottom: 0.7rem; }
   .scard__blurb { color: var(--ink); opacity: 0.8; font-size: 1rem; margin: 0; flex: 1; }
-  .scard__more { margin-top: 1.5rem; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); font-weight: 600; }
+
+  .scard--accent { background: var(--coral); border-color: var(--coral); }
+  .scard--accent .scard__icon { color: var(--ivory); }
+  .scard--accent .scard__title { color: var(--ivory); }
+  .scard--accent .scard__blurb { color: var(--ivory); opacity: 0.92; }
+  .scard--accent:hover { box-shadow: inset 5px 0 0 0 var(--ivory); }
 </style>
