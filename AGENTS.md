@@ -202,6 +202,13 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   Pexels access: the API needs a key, but search works in the user's Chrome tab and the
   `images.pexels.com` CDN downloads fine with curl + a browser UA + `-e https://www.pexels.com/`
   (sequential; parallel bursts get blocked).
+  **Superseded 2026-07-05 (same day): trade heroes are now VIDEOS.** Arya supplied one
+  clip per trade (originals in `../sharplines_photos`, never committed). Compressed to
+  `public/videos/trades/{slug}.mp4` (1280w, CRF 28, 30fps, muted, faststart, ≤3MB;
+  the noisy landscaper footage needed CRF 32 + a 10s trim). Posters = first frame,
+  ≤200KB, overwrote the Pexels stills at `public/images/trades/{slug}.jpg`, so the
+  Pexels IDs above are historical. Template autoplays muted/loop/playsinline with a
+  reduced-motion poster fallback (same pattern as the home Hero).
 - **Contact-page people row (2026-07-05)**: the real founder photos (56px, 4:5, 10px radius,
   `object-position: center 22%` like the founders card) + "You'll hear directly from Arya or
   Amir." under What-happens-next. Real faces beat stock on the conversion page; deliberate.
@@ -214,11 +221,15 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   likes the EV-charger angle; keep it. Implementation: optional `segments` /
   `segmentsHeading` / `segmentsKicker` in `tradePages.ts` render a mint "The work" section
   between hero and pains (hairline rows mobile, coral-ruled 3-col desktop). Colour rhythm
-  became green→mint→coral→mint→green→mint→green. Electricians-only until Arya reviews;
-  then write equally deep segment content per trade (each needs real thinking about how
-  that trade's customer types differ, not a template fill). FAQ pattern: "Have you worked
+  became green→mint→coral→mint→green→mint→green. FAQ pattern: "Have you worked
   with electricians before?" answered with the Provolta build, plus "I only do residential.
   Does this still fit?" mirroring the some-do-all-three-most-pick-a-lane reality.
+  **Approved by Arya ("I love it") and rolled out 2026-07-05**: segments written for the
+  5 other trades where buyer types genuinely differ (plumbers, HVAC, landscapers,
+  cleaners, roofers); barbers + auto repair deliberately skip the section ("not every
+  industry needs this detail") and carry their depth in operator-true pains/playbook
+  instead. The build standard lives in **`.claude/skills/trade-pages/SKILL.md`**
+  (sibling of `service-pages`); read it before touching any trade page.
 
 ## Open TODO(arya) (from spec §10)
 416/647 phone (currently 514, reads as Montreal) · Provolta permission + quote + 3 screenshots ·
@@ -244,4 +255,7 @@ Resend/Web3Forms key.
   desktop + 420px; copy checklist run (0 em-dashes/banned words, you>we on every new page);
   content edges measured equal to home (238–1390 @1642px viewport). Committed, NOT deployed
   (prod deploy still returns Forbidden; Arya ok batching).
+- **Trade pages deepened + video heroes (2026-07-05)**: segments on 6 of 8 trades, video
+  hero on all 8, `trade-pages` skill written. Awaiting Arya's review of the 5 new
+  segment sections and the videos.
 - Remaining pages: services, work, about, privacy, 404. Build order: spec §11.
