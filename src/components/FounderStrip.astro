@@ -1,6 +1,7 @@
 ---
-// §6.1 FounderStrip. Real founder photos supplied by Arya (Image #1 = Amir,
-// Image #2 = Arya). First names only. Copy follows the site-copy voice skill.
+// §6.1 FounderStrip. Real founder photos supplied by Arya. First names only.
+// Compact circular avatars side by side (Fieldmark-style). Copy follows the
+// site-copy voice skill.
 const founders = [
   { name: 'Arya', img: '/images/founder-arya.jpg' },
   { name: 'Amir', img: '/images/founder-amir.jpg' },
@@ -10,7 +11,7 @@ const founders = [
   <div class="founders__photos">
     {founders.map((f) => (
       <figure class="founders__fig">
-        <img src={f.img} width="545" height="820" loading="lazy" decoding="async" alt={`${f.name}, co-founder of Sharplines Studio.`} />
+        <img src={f.img} width="600" height="600" loading="lazy" decoding="async" alt={`${f.name}, co-founder of Sharplines Studio.`} />
         <figcaption>{f.name}</figcaption>
       </figure>
     ))}
@@ -21,14 +22,20 @@ const founders = [
 </div>
 
 <style>
-  .founders { display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 5vw, 3.5rem); align-items: center; }
-  .founders__photos { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.85rem, 2vw, 1.5rem); }
-  .founders__fig { margin: 0; }
-  .founders__fig img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 22%; border-radius: var(--radius); }
+  .founders { display: grid; grid-template-columns: 1fr; gap: clamp(1.75rem, 4vw, 3rem); align-items: center; }
+  .founders__photos { display: flex; gap: clamp(1.25rem, 3vw, 2rem); }
+  .founders__fig { margin: 0; text-align: center; }
+  .founders__fig img {
+    width: clamp(112px, 20vw, 164px);
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: center 20%;
+    border-radius: 50%;
+  }
   .founders__fig figcaption { margin-top: 0.75rem; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); opacity: 0.65; }
-  .founders__copy .lede { color: var(--ink); max-width: 40ch; }
+  .founders__copy .lede { color: var(--ink); max-width: 44ch; }
 
-  @media (min-width: 820px) {
-    .founders { grid-template-columns: 1.3fr 1fr; gap: clamp(2.5rem, 5vw, 4.5rem); }
+  @media (min-width: 720px) {
+    .founders { grid-template-columns: auto 1fr; gap: clamp(2.5rem, 6vw, 5rem); }
   }
 </style>
