@@ -39,9 +39,11 @@ Working notes for any agent on this repo. Keep this current as decisions land.
 - Signature: full-bleed photo hero + alternating coral/green/mint blocks; a coral "sharp line"
   snaps under the hero keyword (`.line-accent`) and is the link-hover underline.
   Respect `prefers-reduced-motion` (all handled in global.css).
-- Home colour rhythm: hero(photo) → proof(green) → services(mint) → dashboard(coral) →
-  results(mint) → how(green) → who-we-help(coral, signature) → founders(mint) → FAQ(mint) →
-  CTA(green) → footer(ink).
+- Home colour rhythm: hero(video, ~62vh not full-screen) → who-we-help(coral, signature; sits
+  directly under the hero) → proof(green) → services(mint) → dashboard(coral) → results(mint) →
+  how(green) → founders(mint) → FAQ(mint) → CTA(green) → footer(ink).
+- Hero media: looping muted `public/videos/hero.mp4` (2.8MB Pexels café clip, free licence),
+  poster `public/images/hero-poster.jpg` (a frame of it). TODO(arya): supply a better clip.
 - Voice (spec §2): plain, concrete, sentence case, no exclamation marks. **Banned words:**
   solutions, synergy, leverage, cutting-edge, revolutionize, digital transformation,
   unleash, empower, elevate, seamless, world-class. Only published client metric is

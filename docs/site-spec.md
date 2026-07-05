@@ -54,8 +54,9 @@ The boldness lives in the colour and the composition; the copy and layout stay d
 
 ### 3.1 Signature — colour-block rhythm + the sharp line
 
-1. **Full-bleed photo hero** with a dark-green scrim and left-aligned display headline sitting
-   at the lower-left.
+1. **Shorter hero** (~62vh desktop, ~74svh mobile — deliberately *not* full-screen, so the next
+   section peeks in) with a **looping muted video** (image poster; `prefers-reduced-motion`
+   falls back to the poster), a dark-green scrim, and the left-aligned display headline lower-left.
 2. **Alternating full-width colour blocks** down the page — coral / dark-green / mint — each a
    distinct, edge-to-edge section. This rhythm *is* the memorable device.
 3. **The "sharp line"** (nods to the name): a 3px **coral** rule that snaps in under the hero's
@@ -105,9 +106,9 @@ Keep it to these six tokens — no gradients beyond the hero scrim, no extra acc
   the primary mobile lead path. Shown < 940px only.
 - Footer: `--ink` bg, 4 cols — wordmark + one-liner; Services; Who we help; Contact + privacy +
   "© 2026 Sharplines Studio".
-- Home colour rhythm: hero(photo) → proof(green) → services(mint) → dashboard(coral) →
-  results(mint) → how-it-works(green) → who-we-help(coral, the signature block) →
-  founders(mint) → FAQ(mint) → CTA "Connect"(green) → footer(ink).
+- Home colour rhythm: hero(video) → who-we-help(coral, signature block — sits directly under
+  the hero) → proof(green) → services(mint) → dashboard(coral) → results(mint) →
+  how-it-works(green) → founders(mint) → FAQ(mint) → CTA "Connect"(green) → footer(ink).
 - Motion: fade-up on entry (14px, once, gated behind `.js` so content is never hidden) + the
   hero coral line snap. Nothing else animates.
 - Quality floor: responsive to 360px, visible focus (2px coral/ivory outline), semantic
