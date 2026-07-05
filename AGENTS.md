@@ -111,6 +111,9 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   "Websites that sell" was tried and reverted the same day (Arya: keep it light). Mobile
   (<620px): compact cards (icon beside title, tighter padding, 0.92rem blurb) because six
   stacked full cards made the phone scroll too long (`.scard--accent` kept, unused).
+- **Who-we-help mobile compaction (Arya, 2026-07-05, "too much scroll to reach pricing")**:
+  trade tiles are two-column and name-only below 720px (hooks hidden, 0.9rem padding), the
+  display heading steps down below 620px. Hooks + big type return on desktop.
 
 ## Open TODO(arya) (from spec §10)
 416/647 phone (currently 514, reads as Montreal) · Provolta permission + quote + 3 screenshots ·

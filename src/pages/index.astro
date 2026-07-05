@@ -113,4 +113,8 @@ const faqs = [
   }
 
   .who__h { max-width: 18ch; margin-bottom: clamp(2.5rem, 6vw, 4.5rem); }
+  /* Smaller display heading on phones so the section is quicker to scroll past. */
+  @media (max-width: 619px) {
+    .who__h { font-size: clamp(2.1rem, 9.5vw, 2.9rem); margin-bottom: 1.75rem; }
+  }
 </style>

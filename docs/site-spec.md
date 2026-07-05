@@ -213,7 +213,7 @@ Below the grid, a full-width card: **The Sharplines dashboard** — `Log in any 
 2. **Launch** — Like it? We build the full site and switch on the systems you choose. Most launches take 2–3 weeks.
 3. **Grow** — Reviews, rankings, bookings, and posts run week after week. You'll see every call and lead in your dashboard.
 
-**TradeGrid** — eyebrow `WHO WE HELP`, H2 `Built for the businesses that keep the GTA running.` 8 tiles linking to /for/* (label + one-line hook from §7 data). Footer line: `Don't see your trade? The same approach works for most local businesses. Get in touch.`
+**TradeGrid** — eyebrow `WHO WE HELP`, H2 `Built for the businesses that keep the GTA running.` 8 tiles linking to /for/* (label + one-line hook from §7 data). Footer line: `Don't see your trade? The same approach works for most local businesses. Get in touch.` Mobile (<720px, Arya 2026-07-05): tiles go two-column and **name-only** (hooks hidden, tighter padding) and the display heading steps down (<620px), so the section scans fast and pricing is reachable without a long scroll.
 
 **FounderStrip** — eyebrow `WHO'S BEHIND IT`, H2 `Meet the two engineers behind Sharplines.` Body: `Sharplines is Arya Khaligh and Amir Gholizad, two senior software engineers who spent years shipping software in tech. We now put that experience toward one problem: getting local businesses more customers. Everything we build is fast, measurable, and yours to keep.` Photos: `TODO(arya): supply photos (stock placeholders for now, 4:5 ratio)`.
 
