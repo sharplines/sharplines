@@ -19,9 +19,15 @@ const { title, blurb, href, icon, accent = false } = Astro.props;
 </a>
 
 <style>
+  /* Mobile-first: compact card (icon beside title, tight padding) so six stacked
+     cards don't dominate the phone scroll — Arya, 2026-07-05. */
   .scard {
-    display: flex; flex-direction: column; height: 100%;
-    padding: clamp(1.5rem, 3vw, 2rem);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 0.8rem;
+    align-items: center;
+    height: 100%;
+    padding: 1.15rem 1.25rem;
     background: var(--ivory); color: var(--green);
     border: 1px solid rgba(14,47,40,0.12); border-radius: 14px;
     box-shadow: inset 0 0 0 0 var(--coral);
@@ -29,10 +35,20 @@ const { title, blurb, href, icon, accent = false } = Astro.props;
   }
   .scard:hover { box-shadow: inset 5px 0 0 0 var(--coral); transform: translateY(-3px); }
 
-  .scard__icon { width: 30px; height: 30px; color: var(--coral); margin-bottom: 1.1rem; }
-  .scard__title { font-size: 1.4rem; font-weight: 500; margin-bottom: 0.7rem; }
-  .scard__blurb { color: var(--ink); opacity: 0.8; font-size: 1rem; margin: 0; flex: 1; }
+  .scard__icon { grid-row: 1; width: 24px; height: 24px; color: var(--coral); }
+  .scard__title { grid-row: 1; font-size: 1.15rem; font-weight: 500; margin: 0; }
+  .scard__blurb { grid-column: 1 / -1; color: var(--ink); opacity: 0.8; font-size: 0.92rem; margin: 0.55rem 0 0; }
 
+  /* Roomier stacked layout once cards sit in columns. */
+  @media (min-width: 620px) {
+    .scard { display: flex; flex-direction: column; align-items: stretch; padding: clamp(1.5rem, 3vw, 2rem); }
+    .scard__icon { width: 30px; height: 30px; margin-bottom: 1.1rem; }
+    .scard__title { font-size: 1.4rem; margin-bottom: 0.7rem; }
+    .scard__blurb { font-size: 1rem; margin: 0; flex: 1; }
+  }
+
+  /* Accent variant: tried on "Websites that sell" and reverted the same day at
+     Arya's direction. Kept for possible use on /services. */
   .scard--accent { background: var(--coral); border-color: var(--coral); }
   .scard--accent .scard__icon { color: var(--ivory); }
   .scard--accent .scard__title { color: var(--ivory); }

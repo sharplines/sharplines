@@ -106,9 +106,11 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   coral-tinted shadow.
 - **Services grid soften (Arya, 2026-07-05, "a bit soulless / simplify clutter")**: per-card
   coral line icons (inline SVGs in `ServiceCard.astro`), caps "Learn more →" labels removed
-  (whole card was already the link; label was also a voice violation), "Websites that sell"
-  promoted to a coral accent card (top-left, away from the coral dashboard band below),
-  14px radius on service cards + dashboard band to match pricing v3, grid gap 1.25rem.
+  (whole card was already the link; label was also a voice violation), 14px radius on service
+  cards + dashboard band to match pricing v3, grid gap 1.25rem. A coral accent card on
+  "Websites that sell" was tried and reverted the same day (Arya: keep it light). Mobile
+  (<620px): compact cards (icon beside title, tighter padding, 0.92rem blurb) because six
+  stacked full cards made the phone scroll too long (`.scard--accent` kept, unused).
 
 ## Open TODO(arya) (from spec §10)
 416/647 phone (currently 514, reads as Montreal) · Provolta permission + quote + 3 screenshots ·

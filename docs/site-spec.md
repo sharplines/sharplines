@@ -112,9 +112,11 @@ Keep it to these six tokens — no gradients beyond the hero scrim, no extra acc
 - Corners: 3px radius on buttons/inputs. Service cards = ivory with a hairline border and a
   **4px coral left border on hover**. Case-study screenshot sits in a bordered, soft-shadowed frame.
   v3 soften (Arya, 2026-07-05): big cards/bands (pricing, services, dashboard) use a **14px
-  soft radius** (buttons/inputs keep 3px); service cards get a coral 2px-stroke line icon,
-  no visible link label (the whole card is the link), and one coral **accent card**
-  ("Websites that sell", top-left) so the grid isn't six identical ivory boxes.
+  soft radius** (buttons/inputs keep 3px); service cards get a coral 2px-stroke line icon and
+  no visible link label (the whole card is the link). A coral accent card was tried on
+  "Websites that sell" and reverted the same day (Arya prefers all-light cards). On phones
+  (<620px) service cards use a **compact layout** (icon beside title, tight padding, smaller
+  blurb) so six stacked cards don't dominate the scroll.
 - Section pattern: eyebrow → big heading → content. Number eyebrows **only** in "How it works"
   (01/02/03). Contact-form inputs are **underline-only** (no boxes), labels above.
 - Buttons (rounded rect, ≥48px, sentence case): `coral` (primary), `green`, `ivory`,
@@ -193,7 +195,7 @@ Keep it to these six tokens — no gradients beyond the hero scrim, no extra acc
 
 Single CTA under the grid (one offer per page, per the site-copy skill): coral `Get my free homepage preview` → /contact?offer=preview, fine print `Free preview in 48 hours · No obligation · Prices in Canadian dollars`.
 
-**Services grid** — eyebrow `WHAT YOU GET`, H2 `Everything a local business needs to win online.` Seven `ServiceCard`s (title / two-line blurb / whole card links to /services#slug; per-card icon; "Websites that sell" is the coral accent card; the caps "Learn more" labels were removed 2026-07-05 as clutter + voice violation):
+**Services grid** — eyebrow `WHAT YOU GET`, H2 `Everything a local business needs to win online.` Seven `ServiceCard`s (title / two-line blurb / whole card links to /services#slug; per-card coral icon; compact icon-beside-title layout on phones; the caps "Learn more" labels were removed 2026-07-05 as clutter + voice violation; a coral accent card was tried and reverted same day):
 1. **Websites that sell** — A fast, clean site built to turn visitors into calls and quotes. We rebuild it from scratch and take it live in weeks.
 2. **Get found on Google** — Local SEO and your Google Business Profile, tuned so you show up when your neighbourhood searches for what you do.
 3. **Reviews that keep coming** — Every finished job triggers a friendly follow-up asking for a Google review. Your rating climbs while you work.
