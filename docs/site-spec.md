@@ -123,8 +123,9 @@ Keep it to these six tokens — no gradients beyond the hero scrim, no extra acc
 - Footer: `--ink` bg, 4 cols — wordmark + one-liner; Services; Who we help; Contact + privacy +
   "© 2026 Sharplines Studio".
 - Home colour rhythm: hero(video) → who-we-help(coral, signature block — sits directly under
-  the hero) → proof(green) → services(mint) → dashboard(coral) → results(mint) →
-  how-it-works(green) → founders(mint) → FAQ(mint) → CTA "Connect"(green) → footer(ink).
+  the hero) → proof(green) → pricing(green, hairline plan cards) → services(mint) →
+  dashboard(coral) → results(mint) → how-it-works(green) → founders(mint) → FAQ(mint) →
+  CTA "Connect"(green) → footer(ink).
 - Motion: fade-up on entry (14px, once, gated behind `.js` so content is never hidden) + the
   hero coral line snap. Nothing else animates.
 - Quality floor: responsive to 360px, visible focus (2px coral/ivory outline), semantic
@@ -182,6 +183,12 @@ Keep it to these six tokens — no gradients beyond the hero scrim, no extra acc
 - `Built by senior software engineers`
 - `Websites, reviews, booking and ads from one team`
 
+**Pricing** (added 2026-07-05 — Arya adopted a $0-down monthly model, two plans; sits before the services grid, dark green block, `id="pricing"`, component `Pricing.astro`) — eyebrow `PRICING`, H2 `Clear pricing, nothing up front.`, lede `Both plans run month to month and start at $0 down. You see the free homepage preview before you pay anything, and you can start small and move up any time.` Two plan cards, hairline rows, subgrid-aligned side by side ≥760px, stacked on mobile. Prices CAD; anchor (struck) price beside current. The client owns the site outright on both plans (no buyout mechanics — Arya, 2026-07-05).
+1. **Growth** — $179/mo (was $249), coral border + `Start here` tag (Arya wants most clients landing here). Upfront `$0. We waive the $1,000 setup fee.` Term `Monthly. Cancel any time.` Includes `A custom site that's yours to keep, hosting, unlimited edits through your dashboard, and support when you need it.` Guarantee `You see the free preview before you pay a dollar.`
+2. **Autopilot** — $649/mo (was $949). Upfront `$0. We waive the $2,500 setup fee.` Term `Monthly. Cancel any time with 30 days' notice.` Includes everything in Growth plus Google Business Profile, area pages, review follow-ups, online booking, call tracking, monthly report, and Google **and Meta** ads run and tracked (ad spend goes straight to the platforms). Guarantee `More leads within 90 days.` Pays for itself at about 2 jobs a month.
+
+Single CTA under the grid (one offer per page, per the site-copy skill): coral `Get my free homepage preview` → /contact?offer=preview, fine print `Free preview in 48 hours · No obligation · Prices in Canadian dollars`.
+
 **Services grid** — eyebrow `WHAT YOU GET`, H2 `Everything a local business needs to win online.` Seven `ServiceCard`s (title / two-line blurb / anchor link to /services#slug):
 1. **Websites that sell** — A fast, clean site built to turn visitors into calls and quotes. We rebuild it from scratch and take it live in weeks.
 2. **Get found on Google** — Local SEO and your Google Business Profile, tuned so you show up when your neighbourhood searches for what you do.
@@ -205,11 +212,11 @@ Below the grid, a full-width card: **The Sharplines dashboard** — `Log in any 
 **FounderStrip** — eyebrow `WHO'S BEHIND IT`, H2 `Meet the two engineers behind Sharplines.` Body: `Sharplines is Arya Khaligh and Amir Gholizad, two senior software engineers who spent years shipping software in tech. We now put that experience toward one problem: getting local businesses more customers. Everything we build is fast, measurable, and yours to keep.` Photos: `TODO(arya): supply photos (stock placeholders for now, 4:5 ratio)`.
 
 **FAQ** (5):
-1. *How much does it cost?* — Our pricing is competitive with GTA agencies, and every plan is scoped to what your business actually needs. The preview is free either way. Book a call and we'll give you a straight number.
+1. *How much does it cost?* — Plans start at $179 a month with $0 down, and the full pricing is published right on this page. The preview is free either way, so you see the work before you spend anything. (updated 2026-07-05 for published pricing)
 2. *What's the catch with the free homepage preview?* — There isn't one. We design a homepage concept for your business in 48 hours. If you don't love it, you've lost nothing.
 3. *How fast will I see results?* — The site and booking improvements show up right away. Reviews build within weeks. Google rankings usually take two to four months, and we'll show you the progress along the way.
 4. *I already have a website.* — Most of our clients did. If your site isn't bringing you calls, it isn't doing its job. The free preview shows you the difference side by side.
-5. *Am I locked into a contract?* — No. There's no long-term contract. We keep clients by getting results, month after month.
+5. *Am I locked into a contract?* — No. Both plans are monthly and you can cancel any time, and the website we build is yours. Autopilot just asks for 30 days' notice. (updated 2026-07-05 to match published pricing terms)
 
 **CTABand** (ink bg, paper text): H2 `See your new homepage before you spend a dollar.` + `<ContactForm variant="short" />` + mono line `Prefer to talk? (514) 560-2266 · hi@sharplines.ca`
 

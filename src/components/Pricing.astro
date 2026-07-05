@@ -1,5 +1,5 @@
 ---
-/* Home pricing block — $0-down monthly model (Arya, 2026-07-05).
+/* Home pricing block — $0-down monthly model (Arya, 2026-07-05; two plans same day).
    Copy follows .claude/skills/site-copy/SKILL.md: no em-dashes, sentence case,
    one offer per page (free preview is the only CTA). Prices in CAD. */
 interface PlanRow { label: string; text: string }
@@ -7,42 +7,27 @@ interface Plan { name: string; price: string; was: string; featured?: boolean; r
 
 const plans: Plan[] = [
   {
-    name: 'Website',
+    name: 'Growth',
     price: '$179',
     was: '$249',
+    featured: true,
     rows: [
-      { label: 'Upfront', text: '$0. You pay when the site is live.' },
+      { label: 'Upfront', text: '$0. We waive the $1,000 setup fee.' },
       { label: 'Term', text: 'Monthly. Cancel any time.' },
-      { label: 'Your site', text: "Every payment builds toward the site. After 12 payments it's yours, and you can buy it out early any time." },
-      { label: "What's included", text: 'A custom site, hosting, unlimited edits through your dashboard, and support when you need it.' },
+      { label: "What's included", text: "A custom site that's yours to keep, hosting, unlimited edits through your dashboard, and support when you need it." },
       { label: 'Guarantee', text: 'You see the free preview before you pay a dollar.' },
     ],
   },
   {
-    name: 'Growth',
+    name: 'Autopilot',
     price: '$649',
     was: '$949',
-    featured: true,
-    rows: [
-      { label: 'Upfront', text: '$0. We waive the $1,500 setup fee.' },
-      { label: 'Term', text: "Monthly. Cancel any time with 30 days' notice." },
-      { label: 'Your site', text: 'Same terms as the Website plan.' },
-      { label: "What's included", text: 'Everything in Website, plus your Google Business Profile, pages for each area you serve, review follow-ups, online booking, call tracking, and a monthly report.' },
-      { label: 'Guarantee', text: 'More leads within 90 days.' },
-      { label: 'Pays for itself at', text: 'About 2 jobs a month.' },
-    ],
-  },
-  {
-    name: 'Autopilot',
-    price: '$1,249',
-    was: '$1,799',
     rows: [
       { label: 'Upfront', text: '$0. We waive the $2,500 setup fee.' },
       { label: 'Term', text: "Monthly. Cancel any time with 30 days' notice." },
-      { label: 'Your site', text: 'Same terms as the Website plan.' },
-      { label: "What's included", text: 'Everything in Growth, plus after-hours call answering, social posts handled for you, Google Ads run and tracked for you, and a quarterly strategy call. Ad spend goes straight to Google.' },
+      { label: "What's included", text: 'Everything in Growth, plus your Google Business Profile, pages for each area you serve, review follow-ups, online booking, call tracking, and a monthly report. We also run and track your Google and Meta ads. Ad spend goes straight to the platforms.' },
       { label: 'Guarantee', text: 'More leads within 90 days.' },
-      { label: 'Pays for itself at', text: 'About 3–4 jobs a month.' },
+      { label: 'Pays for itself at', text: 'About 2 jobs a month.' },
     ],
   },
 ];
@@ -52,14 +37,14 @@ const plans: Plan[] = [
   <div class="container fade-up">
     <p class="eyebrow">Pricing</p>
     <h2 class="display-lg pricing__h">Clear pricing, nothing up front.</h2>
-    <p class="lede pricing__lede">Every plan runs month to month and starts at $0 down. You see the free homepage preview before you pay anything.</p>
+    <p class="lede pricing__lede">Both plans run month to month and start at $0 down. You see the free homepage preview before you pay anything, and you can start small and move up any time.</p>
 
     <div class="plans">
       {plans.map((plan) => (
         <article class={plan.featured ? 'plan plan--featured' : 'plan'}>
           <header class="plan__head">
             <h3 class="plan__name">{plan.name}</h3>
-            {plan.featured && <span class="plan__tag">Recommended</span>}
+            {plan.featured && <span class="plan__tag">Start here</span>}
           </header>
           <p class="plan__price">
             <span class="plan__amount">{plan.price}</span>
@@ -84,9 +69,6 @@ const plans: Plan[] = [
 </section>
 
 <style>
-  /* Sits directly under the green proof bar, so ease into it. */
-  .pricing { padding-top: clamp(1.5rem, 3.5vw, 3rem); }
-
   .pricing__h { max-width: 22ch; margin-bottom: 1.1rem; }
   .pricing__lede { opacity: 0.9; }
 
@@ -94,6 +76,7 @@ const plans: Plan[] = [
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.25rem;
+    max-width: 60rem;
     margin-top: clamp(2.25rem, 5vw, 3.25rem);
   }
 
@@ -157,16 +140,16 @@ const plans: Plan[] = [
   }
   .plan__text { margin: 0; font-size: 0.95rem; line-height: 1.5; }
 
-  /* Desktop: three columns with rows aligned across plans (subgrid). */
-  @media (min-width: 900px) {
+  /* Two columns side by side with rows aligned across plans (subgrid). */
+  @media (min-width: 760px) {
     .plans {
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(8, auto);
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(7, auto);
     }
     .plan {
       display: grid;
       grid-template-rows: subgrid;
-      grid-row: 1 / span 8;
+      grid-row: 1 / span 7;
       align-content: start;
     }
     .plan__head { align-items: start; }

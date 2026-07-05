@@ -40,8 +40,10 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   snaps under the hero keyword (`.line-accent`) and is the link-hover underline.
   Respect `prefers-reduced-motion` (all handled in global.css).
 - Home colour rhythm: hero(video, ~62vh not full-screen) → who-we-help(coral, signature; sits
-  directly under the hero) → proof(green) → services(mint) → dashboard(coral) → results(mint) →
-  how(green) → founders(mint) → FAQ(mint) → CTA(green) → footer(ink).
+  directly under the hero) → proof(green) → pricing(green, hairline plan cards) → services(mint) →
+  dashboard(coral) → results(mint) → how(green) → founders(mint) → FAQ(mint) → CTA(green) →
+  footer(ink). (ProofBar + results/case-study are removed from the page "for now" by Arya
+  2026-07-05; imports remain, so pricing currently sits right under the coral who-we-help block.)
 - Hero media: looping muted `public/videos/hero.mp4` — warm studio/workspace clip Arya supplied
   2026-07-05 (source: stock download "UHD 2560x1080 30fps", compressed to 1920×810 H.264 CRF 28,
   no audio, faststart, 1.6MB via ffmpeg, now installed via brew). Poster
@@ -55,8 +57,8 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   testimonials/ratings/agency years.
 
 ## Structure
-- `src/components/` — Nav, Footer, MobileCTA, Hero, ProofBar, ServiceCard, CaseStudyFeature,
-  StepTimeline, TradeGrid, FounderStrip, FAQ, ContactForm, CTABand.
+- `src/components/` — Nav, Footer, MobileCTA, Hero, ProofBar, Pricing, ServiceCard,
+  CaseStudyFeature, StepTimeline, TradeGrid, FounderStrip, FAQ, ContactForm, CTABand.
 - `src/data/trades.ts` — 8 trade tiles (slug/label/hook) for Nav dropdown + TradeGrid.
   Full trade-page content becomes a content collection when `/for/[slug]` is built.
 - `src/layouts/Base.astro` — fonts, SEO/OG, JSON-LD (ProfessionalService, no address), Nav
@@ -85,6 +87,17 @@ Working notes for any agent on this repo. Keep this current as decisions land.
 - **Home services grid = 6** (not 7): dropped "Social media, handled" to make a clean 3×2 and
   keep the strongest direct lead-drivers. Social still lives in the footer + on /services. Swap
   if Arya prefers a different six.
+- **Published pricing, $0-down monthly model (Arya, 2026-07-05)**: `Pricing.astro` on home
+  before the services grid (spec §6.1 has full copy). Two CAD plans, both $0 down with the
+  setup fee waived, anchor (struck) prices beside current: **Growth $179/mo** (was $249;
+  site + hosting + unlimited dashboard edits + support; cancel any time; coral border +
+  "Start here" tag — Arya wants most clients landing here) and **Autopilot $649/mo** (was
+  $949; adds GBP, area pages, reviews, booking, call tracking, monthly report, Google **and
+  Meta** ads; 30 days' notice; 90-day more-leads guarantee). The client owns the site outright
+  on both plans ("it's their website" — no buyout/12-payment mechanics; an earlier 3-plan
+  version with those was replaced same day). Single CTA = free preview (one offer per page).
+  Home FAQ #1 and #5 updated to match. Numbers Claude picked for Arya to confirm: $1,000 /
+  $2,500 waived-setup anchors.
 
 ## Open TODO(arya) (from spec §10)
 416/647 phone (currently 514, reads as Montreal) · logo files · founder photos · Provolta
@@ -94,5 +107,7 @@ permission + quote + 3 screenshots · Resend/Web3Forms key · favicon (temp cora
 - **Home page `/`** built and deployed in the v2 warm colour-block style (all §6.1 sections).
   Verified on desktop; mobile authored mobile-first but NOT yet screenshot-verified (the Chrome
   extension viewport is locked at desktop width — check on a real phone).
+- **Pricing section** added 2026-07-05 (two-plan $0-down model, see Decisions). Desktop uses
+  CSS subgrid to align rows across the two cards; check the stacked cards on a real phone.
 - Awaiting Arya's greenlight before building the rest (services, work, about, contact, 8 trade
   pages, privacy, 404). Build order: spec §11.
