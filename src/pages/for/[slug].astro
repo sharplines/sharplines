@@ -1,0 +1,173 @@
+---
+// Trade pages (§7): one template, 8 data entries from src/data/tradePages.ts.
+// Colour rhythm mirrors home: green hero → coral pains → mint playbook (ivory
+// card) → green pricing strip → mint FAQ → green CTA with the form on-page.
+// Proof is a single Provolta line (the published 2×), not a proof section —
+// Arya pulled the heavy proof blocks from home; keep these pages light too.
+import Base from '../../layouts/Base.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTABand from '../../components/CTABand.astro';
+import { tradePages } from '../../data/tradePages';
+
+export function getStaticPaths() {
+  return tradePages.map((t) => ({ params: { slug: t.slug }, props: { page: t } }));
+}
+
+const { page } = Astro.props;
+const [h1Before, h1After = ''] = page.h1.split(page.h1Accent);
+
+// 3 sibling trades for interlinking (§9).
+const i = tradePages.findIndex((t) => t.slug === page.slug);
+const siblings = [1, 2, 3].map((n) => tradePages[(i + n) % tradePages.length]);
+
+// Per-page schema (§9): Service + FAQPage from the page's own Q&As.
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: `Websites and marketing for ${page.noun}`,
+  areaServed: 'Toronto & Greater Toronto Area',
+  provider: { '@type': 'ProfessionalService', name: 'Sharplines Studio', url: 'https://sharplines.ca' },
+};
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: page.faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Base title={page.metaTitle} description={page.metaDescription} navSolid>
+  <!-- Hero (green) -->
+  <section class="thero theme-green">
+    <div class="container">
+      <p class="eyebrow">For {page.noun} · Toronto &amp; the GTA</p>
+      <h1 class="display-xl thero__h">{h1Before}<span class="line-accent">{page.h1Accent}</span>{h1After}</h1>
+      <p class="thero__sub">{page.sub}</p>
+      <div class="thero__cta">
+        <a href="#preview" class="btn btn--coral">Get my free homepage preview</a>
+        <p class="thero__fine">Free preview in 48 hours · No obligation</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pains (coral) -->
+  <section class="section theme-coral">
+    <div class="container fade-up">
+      <p class="eyebrow">The problem</p>
+      <h2 class="display-lg tsec-h">Sound familiar?</h2>
+      <div class="pains">
+        {page.pains.map((p) => (
+          <div class="pain">
+            <h3 class="pain__t">{p.title}</h3>
+            <p class="pain__b">{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Playbook (mint, ivory card) -->
+  <section class="section">
+    <div class="container fade-up">
+      <p class="eyebrow">The playbook</p>
+      <h2 class="display-lg tsec-h">The Sharplines playbook for {page.noun}.</h2>
+      <div class="playbook">
+        {page.plan.map((p) => (
+          <div class="play">
+            <h3 class="play__t">{p.title}</h3>
+            <p class="play__b">{p.body}</p>
+          </div>
+        ))}
+      </div>
+      {page.proof && <p class="tproof">{page.proof}</p>}
+    </div>
+  </section>
+
+  <!-- Pricing strip (green) -->
+  <section class="section theme-green">
+    <div class="container fade-up">
+      <p class="eyebrow">Pricing</p>
+      <h2 class="display-lg tsec-h">From $179 a month, with $0 down.</h2>
+      <p class="tprice__b">Both plans are monthly and you can cancel any time. The website is yours to keep, and you see the free preview before you pay anything.</p>
+      <a href="/#pricing" class="link tprice__link">See what both plans include</a>
+    </div>
+  </section>
+
+  <!-- FAQ (mint) + sibling trades -->
+  <section class="section">
+    <div class="container fade-up">
+      <p class="eyebrow">Questions</p>
+      <h2 class="display-lg tsec-h">What {page.noun} ask us.</h2>
+      <FAQ items={page.faq} />
+      <p class="talso">
+        Not your trade? We also help
+        <a href={`/for/${siblings[0].slug}`} class="link">{siblings[0].noun}</a>,
+        <a href={`/for/${siblings[1].slug}`} class="link">{siblings[1].noun}</a>, and
+        <a href={`/for/${siblings[2].slug}`} class="link">{siblings[2].noun}</a>.
+      </p>
+    </div>
+  </section>
+
+  <CTABand id="preview" variant="full" preselectTrade={page.slug} lede={page.closing} />
+
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</Base>
+
+<style>
+  /* Fixed transparent nav sits over the green hero; pad past its 76px height. */
+  .thero { padding-block: calc(76px + clamp(3rem, 8vw, 5.5rem)) clamp(3rem, 7vw, 5rem); }
+  .thero__h { color: var(--ivory); max-width: 18ch; }
+  .thero__sub { margin: 1.4rem 0 0; color: var(--mint); opacity: 0.92; font-size: clamp(1.05rem, 1.6vw, 1.3rem); max-width: 52ch; }
+  .thero__cta { margin-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.9rem; }
+  .thero__fine { margin: 0; font-size: 0.85rem; letter-spacing: 0.02em; color: var(--mint); opacity: 0.75; }
+
+  .tsec-h { max-width: 22ch; margin-bottom: clamp(1.75rem, 4.5vw, 3rem); }
+
+  /* Pains: hairline rows on mobile (quick to scan), 3 ruled columns on desktop. */
+  .pains { border-top: 1px solid rgba(255, 255, 255, 0.28); }
+  .pain { border-bottom: 1px solid rgba(255, 255, 255, 0.28); padding: 1.1rem 0; }
+  .pain__t { color: var(--ivory); font-size: 1.2rem; font-weight: 500; margin: 0 0 0.35rem; }
+  .pain__b { color: var(--ivory); opacity: 0.85; margin: 0; max-width: 60ch; }
+  @media (min-width: 760px) {
+    .pains { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 2.5rem); border-top: 0; }
+    .pain { border-bottom: 0; border-top: 2px solid rgba(255, 255, 255, 0.45); padding: 1.25rem 0 0; }
+  }
+
+  /* Playbook: one ivory card in the v3 language, coral checkmarks. */
+  .playbook {
+    background: var(--ivory);
+    border: 1px solid rgba(14, 47, 40, 0.12);
+    border-radius: 14px;
+    padding: clamp(1.5rem, 3.5vw, 2.5rem);
+    box-shadow: 0 14px 36px rgba(14, 47, 40, 0.1);
+    display: grid;
+    gap: clamp(1.4rem, 3vw, 2rem);
+  }
+  .play { position: relative; padding-left: 2rem; }
+  .play::before {
+    content: "";
+    position: absolute;
+    left: 0.15rem;
+    top: 0.5em;
+    width: 0.7rem;
+    height: 0.38rem;
+    border-left: 2.5px solid var(--coral);
+    border-bottom: 2.5px solid var(--coral);
+    transform: rotate(-45deg);
+  }
+  .play__t { font-size: 1.2rem; font-weight: 500; color: var(--green); margin: 0 0 0.35rem; }
+  .play__b { margin: 0; color: var(--ink); opacity: 0.82; font-size: 0.98rem; }
+  @media (min-width: 760px) {
+    .playbook { grid-template-columns: 1fr 1fr; column-gap: clamp(2rem, 4vw, 3rem); }
+  }
+  .tproof { margin: 1.5rem 0 0; opacity: 0.75; max-width: 62ch; font-size: 0.95rem; }
+
+  .tprice__b { max-width: 56ch; opacity: 0.9; }
+  .tprice__link { color: var(--ivory); font-weight: 500; }
+
+  .talso { margin: 1.75rem 0 0; opacity: 0.85; }
+</style>

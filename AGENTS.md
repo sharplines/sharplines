@@ -141,6 +141,30 @@ Working notes for any agent on this repo. Keep this current as decisions land.
 - **Who-we-help mobile compaction (Arya, 2026-07-05, "too much scroll to reach pricing")**:
   trade tiles are two-column and name-only below 720px (hooks hidden, 0.9rem padding), the
   display heading steps down below 620px. Hooks + big type return on desktop.
+- **Contact page `/contact` (2026-07-05)**: spec §6.5 copy verbatim. One green block, single
+  purpose (free preview): H1 + sub + "Free · No obligation · No contract" line, full-variant
+  form in an ivory card (form comes right after the heading on mobile; desktop puts the
+  what-happens-next 01/02/03 list + tap-to-call/email in the left column via grid areas).
+  `?offer=preview` interest preselect was already wired in ContactForm.
+- **Trade pages `/for/[slug]` ×8 (2026-07-05)**: one template + `src/data/tradePages.ts`.
+  Deviations from spec, on purpose: (a) data is a typed TS module, NOT a content collection
+  (§4) — same single-template pattern, less machinery; (b) §7 sample copy was rewritten into
+  the site-copy voice (it predates the skill: em-dashes, "on autopilot", "five stars" etc.);
+  substance/angles kept; (c) no proof SECTION — proof is one Provolta line under the playbook
+  (hero sub on electricians), matching Arya pulling the heavy proof blocks from home.
+  Page rhythm mirrors home: green hero (short H1 + coral line-accent, CTA anchors to the
+  on-page form `#preview`) → coral "Sound familiar?" pains (hairline rows mobile / 3 ruled
+  cols desktop) → mint playbook as ONE ivory card with coral checks → green pricing strip
+  (published $179/$0-down numbers only, links to /#pricing) → mint FAQ (3 real questions) +
+  "Not your trade?" sibling links (§9 interlinking) → CTABand with full form, trade
+  preselected, per-trade closing line as lede. Each page: title ≤60, meta 140–160, and
+  `Service` + `FAQPage` JSON-LD inline.
+- **Nav `solid` mode (2026-07-05)**: `Base navSolid` → nav starts (and stays) green instead
+  of transparent-over-hero. Needed because subpage heroes are shorter than the 0.8·vh scroll
+  threshold, which left ivory links floating over light blocks (measured, not eyeballed).
+  Home keeps the transparent hero behaviour; use `navSolid` on every non-home page.
+- **CTABand props (2026-07-05)**: optional `lede`, `preselectTrade`, `id`, plus existing
+  `heading`/`variant`. Default heading stays "See your new homepage before you spend a dollar."
 
 ## Open TODO(arya) (from spec §10)
 416/647 phone (currently 514, reads as Montreal) · Provolta permission + quote + 3 screenshots ·
@@ -153,9 +177,17 @@ Resend/Web3Forms key.
 
 ## Status
 - **Home page `/`** built and deployed in the v2 warm colour-block style (all §6.1 sections).
-  Verified on desktop; mobile authored mobile-first but NOT yet screenshot-verified (the Chrome
-  extension viewport is locked at desktop width — check on a real phone).
+  Verified on desktop and at ~500px via the Chrome extension (its tab is locked ~500px wide
+  and won't resize; that width doubles as the phone check — still eyeball a real phone
+  before launch).
+- **Chrome-extension viewport note**: the locked width VARIES by session (~500px one day,
+  1642px desktop the next) and `resize_window` doesn't take. When it's stuck at desktop,
+  do the phone check by injecting same-origin 420px iframes of the pages and scrolling
+  their `contentWindow` (set `scrollBehavior='auto'` first or `scrollTo` silently no-ops).
 - **Pricing section** added 2026-07-05 (two-plan $0-down model, see Decisions). Desktop uses
   CSS subgrid to align rows across the two cards; check the stacked cards on a real phone.
-- Awaiting Arya's greenlight before building the rest (services, work, about, contact, 8 trade
-  pages, privacy, 404). Build order: spec §11.
+- **`/contact` + 8 `/for/[slug]` trade pages** built 2026-07-05 (see Decisions). Verified
+  desktop + 420px; copy checklist run (0 em-dashes/banned words, you>we on every new page);
+  content edges measured equal to home (238–1390 @1642px viewport). Committed, NOT deployed
+  (prod deploy still returns Forbidden; Arya ok batching).
+- Remaining pages: services, work, about, privacy, 404. Build order: spec §11.

@@ -1,5 +1,10 @@
 ---
 import { trades } from '../data/trades';
+// solid: start (and stay) on the green background instead of transparent-over-hero.
+// For subpages whose top block is shorter than the home hero — otherwise the
+// ivory links float unreadably over light sections once the page scrolls.
+interface Props { solid?: boolean }
+const { solid = false } = Astro.props;
 const links = [
   { label: 'Services', href: '/services' },
   { label: 'Results', href: '/work' },
@@ -8,7 +13,7 @@ const links = [
 ];
 ---
 
-<header class="nav" data-nav>
+<header class:list={['nav', solid && 'scrolled']} data-nav data-solid={solid ? '' : undefined}>
   <div class="container nav__inner">
     <a href="/" class="wordmark" aria-label="Sharplines home">Sharplines</a>
 
@@ -103,7 +108,8 @@ const links = [
 
 <script>
   const header = document.querySelector('[data-nav]');
-  const onScroll = () => header?.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.8);
+  const isSolid = header?.hasAttribute('data-solid');
+  const onScroll = () => { if (!isSolid) header?.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.8); };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 

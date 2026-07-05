@@ -1,20 +1,24 @@
 ---
 import ContactForm from './ContactForm.astro';
-interface Props { heading?: string; variant?: 'short' | 'full'; }
+interface Props { heading?: string; lede?: string; variant?: 'short' | 'full'; preselectTrade?: string; id?: string; }
 const {
   heading = 'See your new homepage before you spend a dollar.',
+  lede,
   variant = 'short',
+  preselectTrade,
+  id,
 } = Astro.props;
 ---
-<section class="ctaband theme-green">
+<section class="ctaband theme-green" id={id}>
   <div class="container ctaband__inner">
     <div class="ctaband__copy">
       <p class="eyebrow">Free homepage preview</p>
       <h2 class="display-xl">{heading}</h2>
+      {lede && <p class="ctaband__lede">{lede}</p>}
       <p class="ctaband__meta">Prefer to talk? <a href="tel:+15145602266" class="link">(514) 560-2266</a> · <a href="mailto:hi@sharplines.ca" class="link">hi@sharplines.ca</a></p>
     </div>
     <div class="ctaband__card">
-      <ContactForm variant={variant} theme="light" />
+      <ContactForm variant={variant} preselectTrade={preselectTrade} theme="light" />
     </div>
   </div>
 </section>
@@ -24,6 +28,7 @@ const {
   .ctaband__inner { display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 5vw, 3.5rem); align-items: start; }
   .ctaband .eyebrow { color: var(--coral); }
   .ctaband h2 { color: var(--ivory); max-width: 16ch; }
+  .ctaband__lede { margin: 1.25rem 0 0; color: var(--mint); opacity: 0.92; font-size: clamp(1.05rem, 1.6vw, 1.25rem); max-width: 44ch; }
   .ctaband__meta { margin-top: 1.5rem; font-size: 0.9rem; letter-spacing: 0.02em; color: var(--mint); opacity: 0.85; }
 
   /* Ivory form card, matching the pricing plan cards. */

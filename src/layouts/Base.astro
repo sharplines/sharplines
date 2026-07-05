@@ -11,10 +11,12 @@ import MobileCTA from '../components/MobileCTA.astro';
 interface Props {
   title?: string;
   description?: string;
+  navSolid?: boolean; // subpages: nav starts green instead of transparent-over-hero
 }
 const {
   title = 'Websites & Marketing for Local GTA Businesses | Sharplines Studio',
   description = 'Sharplines builds websites, local SEO, reviews, booking and ad systems that get Toronto & GTA businesses more booked jobs. See your new homepage free in 48 hours.',
+  navSolid = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://sharplines.ca').href;
@@ -61,7 +63,7 @@ const schema = {
   </head>
   <body>
     <a href="#main" class="vh">Skip to content</a>
-    <Nav />
+    <Nav solid={navSolid} />
     <main id="main">
       <slot />
     </main>
