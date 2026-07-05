@@ -13,7 +13,30 @@ Working notes for any agent on this repo. Keep this current as decisions land.
 ## Owner priorities (from Arya, over the spec baseline)
 - **Mobile is the product.** ~80% of visitors are on phones. Design/verify mobile first;
   desktop is secondary. Every new section must be checked at ≤400px.
+- **Every section must earn its mobile height** (2026-07-05, repeated across sections). Arya
+  keeps cutting phone scroll: name-only trade tiles, compact icon-beside-title service cards,
+  display headings stepped down on small screens. A visitor should be able to review or skip
+  any section in one flick. Build a compact <620–720px variant for anything tall before
+  shipping it.
 - **When in doubt, optimise for leads.** Prefer choices that get more form fills / calls.
+- **Pricing exists to win clients, not margin** (2026-07-05). Published, simple, $0 down;
+  Arya is explicitly happy if most clients take the cheapest plan ("Start here" tag lives on
+  it). Strip any term that could scare a lead away: he cut "30 days' notice", the ad-spend
+  caveat, and buyout mechanics. The client owns their website outright, always say so plainly.
+- **Simplify before decorating** (2026-07-05, "focus on what matters"). When a section feels
+  off, remove clutter first: repeated link labels, caps micro-labels, fine print, extra
+  colour blocks. Fewer, warmer elements beat more elements.
+- **Soft-technical aesthetic** (2026-07-05, "less code-like"). Arya likes the engineered look
+  but wants it softened for trades owners: warm ivory cards (14px radius + soft shadow;
+  buttons/inputs keep 3px), human sentences instead of spec-sheet rows, coral checkmarks over
+  terminal dots, no uppercase row labels. "Think deep, coherent, professional and modern."
+- **Feature lists are bullets, never paragraphs** (2026-07-05). One item per line; a
+  comma-separated prose list is "hard to read".
+- **Trust sections stay, but must look premium** (2026-07-05). If something "looks cheap"
+  (old founders avatar strip), redesign it in the card language rather than deleting it —
+  faces and proof build the trust that makes the pricing land.
+- **Blocks share the container width.** Cards/grids must span the same width as the sections
+  above and below them; no arbitrary narrower caps.
 - **Use real/stock imagery, never empty boxes.** No blank placeholder frames in front of
   the user — put a real or stock image in every slot.
 - Casing is **"Sharplines"** (not "SharpLines"). Wordmark underlines "Sharp" in chalk blue.
