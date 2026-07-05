@@ -35,6 +35,11 @@ Working notes for any agent on this repo. Keep this current as decisions land.
 - **Trust sections stay, but must look premium** (2026-07-05). If something "looks cheap"
   (old founders avatar strip), redesign it in the card language rather than deleting it —
   faces and proof build the trust that makes the pricing land.
+- **Build to small-business-agency best practice (Arya, 2026-07-05, while /about was
+  built).** When a page pattern is in question, default to what the best agencies serving
+  small businesses do: real faces and local grounding over stock polish, the client as the
+  hero of the copy (you > we), niche specifics over generalist claims, risk reversal stated
+  beside every CTA, one offer per page, and book-a-call as the easy secondary path.
 - **Blocks share the container width.** Cards/grids must span the same width as the sections
   above and below them; no arbitrary narrower caps.
 - **Use real/stock imagery, never empty boxes.** No blank placeholder frames in front of
@@ -230,6 +235,20 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   industry needs this detail") and carry their depth in operator-true pains/playbook
   instead. The build standard lives in **`.claude/skills/trade-pages/SKILL.md`**
   (sibling of `service-pages`); read it before touching any trade page.
+- **About page `/about` (2026-07-05)**: §6.4 substance kept (engineer framing, the
+  Verifiable/Plain-spoken/Fast trio, CTABand) but copy rewritten into the site-copy voice
+  (the spec's "Precision people." H1 predates the skill). Rhythm: green hero (navSolid,
+  /contact-style block, not a full-bleed video), H1 "The two people behind Sharplines."
+  with the two real 4:5 portraits (eager-loaded, card language), free-preview CTA anchored
+  to the on-page form `#preview` + BookCall secondary → mint story (the gap → live
+  provolta.ca link carrying the published 2× → "you reach Arya or Amir, no account manager
+  in between") → coral trio rewritten as "Everything is checkable / Plain answers /
+  Software speed" + ownership/cancel-any-time kicker linking /#pricing → mint "Built for
+  the trades." name-only links to all 8 /for pages under a specialization lede (§9
+  interlinking) → CTABand full form. `AboutPage` JSON-LD with founders as `Person`,
+  **first names only in schema too** (extends the visible-copy rule so SERPs can't surface
+  last names). Title 50ch, meta 150ch, you 26 vs we 12 on the built page. Nav/Footer
+  already pointed at /about, so this also fixed a dead nav link.
 
 ## Open TODO(arya) (from spec §10)
 416/647 phone (currently 514, reads as Montreal) · Provolta permission + quote + 3 screenshots ·
@@ -271,4 +290,8 @@ Resend/Web3Forms key.
   loading autoplay video data (readyState stays 0, no error). Videos that "don't play"
   under automation are fine for real users; verify markup/attrs + a HEAD request, and
   eyeball a focused browser for actual playback.
-- Remaining pages: services, work, about, privacy, 404. Build order: spec §11.
+- **`/about` built 2026-07-05** (see Decisions). Verified at 500px (extension tab is the
+  phone check today) and at 1400px via an injected same-origin iframe (container edges
+  measured equal, 53–1333, across all five sections); copy checklist run (0 em-dashes,
+  0 banned words, you 26 vs we 12). Committed, not deployed.
+- Remaining pages: services, work, privacy, 404. Build order: spec §11.

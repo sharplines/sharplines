@@ -1,0 +1,203 @@
+---
+// About (§6.4, rewritten into the site-copy voice): the page a skeptical owner
+// reads to decide the people are real. Rhythm mirrors the subpages: green hero
+// with the two real faces → mint story carrying the one published proof point
+// (Provolta 2×) → coral how-we-work trio → mint trade links (§9 interlinking)
+// → green CTA with the form on-page.
+import Base from '../layouts/Base.astro';
+import CTABand from '../components/CTABand.astro';
+import BookCall from '../components/BookCall.astro';
+import { trades } from '../data/trades';
+
+const founders = [
+  { name: 'Arya', img: '/images/founder-arya.jpg' },
+  { name: 'Amir', img: '/images/founder-amir.jpg' },
+];
+
+// §6.4 "How we work" trio (Verifiable / Plain-spoken / Fast), in the voice.
+const habits = [
+  {
+    title: 'Everything is checkable',
+    body: 'Your dashboard shows every call, form fill, and review as it happens. Claims you can verify beat promises you have to trust.',
+  },
+  {
+    title: 'Plain answers',
+    body: "No jargon and no padded reports. If Google rankings will take two to four months, you hear that up front, and you'll see the progress along the way.",
+  },
+  {
+    title: 'Software speed',
+    body: 'Years of shipping software set the pace. Your free preview lands in 48 hours, and most sites launch in 2–3 weeks.',
+  },
+];
+
+// AboutPage schema (§9). First names only, matching the visible-copy rule.
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About Sharplines Studio',
+  url: 'https://sharplines.ca/about',
+  mainEntity: {
+    '@type': 'ProfessionalService',
+    name: 'Sharplines Studio',
+    url: 'https://sharplines.ca',
+    email: 'hi@sharplines.ca',
+    telephone: '+15145602266',
+    areaServed: 'Toronto & Greater Toronto Area',
+    founder: founders.map((f) => ({ '@type': 'Person', givenName: f.name, jobTitle: 'Co-founder' })),
+  },
+};
+---
+
+<Base
+  title="About Sharplines Studio | Two engineers in Toronto"
+  description="Sharplines is Arya and Amir, two senior software engineers in Toronto. Meet the people who'll build your site, and see your homepage free in 48 hours."
+  navSolid
+>
+  <!-- Hero (green): the two real faces above the fold -->
+  <section class="ahero theme-green">
+    <div class="container ahero__grid">
+      <div class="ahero__copy">
+        <p class="eyebrow">About us · Toronto &amp; the GTA</p>
+        <h1 class="display-xl ahero__h">The two <span class="line-accent">people</span> behind Sharplines.</h1>
+        <p class="ahero__sub">Sharplines is Arya and Amir, two senior software engineers who spent years shipping software in tech. That experience now goes into one thing: getting GTA trades more booked jobs.</p>
+        <div class="ahero__cta">
+          <div class="ahero__btns">
+            <a href="#preview" class="btn btn--coral">Get my free homepage preview</a>
+            <BookCall class="btn btn--outline-light" />
+          </div>
+          <p class="ahero__fine">Free preview in 48 hours · No obligation</p>
+        </div>
+      </div>
+      <div class="ahero__photos">
+        {founders.map((f, i) => (
+          <figure class="ahero__fig">
+            <img
+              src={f.img}
+              width="336"
+              height="420"
+              loading="eager"
+              fetchpriority={i === 0 ? 'high' : 'auto'}
+              decoding="async"
+              alt={`${f.name}, co-founder of Sharplines Studio.`}
+            />
+            <figcaption>{f.name} · co-founder</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Story (mint), carrying the one published proof point -->
+  <section class="section">
+    <div class="container fade-up">
+      <p class="eyebrow">The story</p>
+      <h2 class="display-lg asec-h">Good work deserves to be found.</h2>
+      <div class="astory">
+        <p>The GTA is full of excellent tradespeople with websites that don't do them justice. The quotes are honest, the work holds up, and the jobs still go to whoever shows up first on Google. Sharplines exists to close that gap.</p>
+        <p>The proof we point to is <a href="https://provolta.ca" class="link" target="_blank" rel="noopener">provolta.ca</a>, the site we built and run for Provolta Electric, a licensed Toronto electrical contractor. Since launch, Provolta reports 2× more residential and commercial clients.</p>
+        <p>You get the same treatment: a site built to turn searches into calls, a dashboard that shows you every lead as it comes in, and when you call or email, you reach Arya or Amir. There's no account manager in between.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we work (coral): §6.4 trio + the risk-removers kicker -->
+  <section class="section theme-coral">
+    <div class="container fade-up">
+      <p class="eyebrow">How we work</p>
+      <h2 class="display-lg asec-h">Three things you can count on.</h2>
+      <div class="habits">
+        {habits.map((h) => (
+          <div class="habit">
+            <h3 class="habit__t">{h.title}</h3>
+            <p class="habit__b">{h.body}</p>
+          </div>
+        ))}
+      </div>
+      <p class="habits__kicker">And whatever gets built is yours to keep. Both plans are monthly, you can cancel any time, and the website belongs to you. <a href="/#pricing" class="link">See the plans and pricing</a></p>
+    </div>
+  </section>
+
+  <!-- Who we help (mint): compact trade links, §9 interlinking -->
+  <section class="section">
+    <div class="container fade-up">
+      <p class="eyebrow">Who we help</p>
+      <h2 class="display-lg asec-h asec-h--tight">Built for the trades.</h2>
+      <p class="atrades__lede">Each one below is its own playbook, written for how that trade's customers buy.</p>
+      <div class="atrades">
+        {trades.map((t) => <a href={`/for/${t.slug}`} class="atrade">{t.label}</a>)}
+      </div>
+      <p class="atrades__more">Don't see your trade? The same approach works for most local businesses. <a href="/contact" class="link">Get in touch</a>.</p>
+    </div>
+  </section>
+
+  <CTABand
+    id="preview"
+    variant="full"
+    lede="Send the form and you'll hear from Arya or Amir the same business day. The preview is free, and if you don't love it, you've lost nothing."
+  />
+
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</Base>
+
+<style>
+  /* Fixed nav sits over the green hero; pad past its 76px height. */
+  .ahero { padding-block: calc(76px + clamp(3rem, 8vw, 5.5rem)) clamp(3rem, 7vw, 5rem); }
+  .ahero__grid { display: grid; gap: clamp(1.75rem, 4.5vw, 3rem); }
+  .ahero__h { color: var(--ivory); max-width: 16ch; }
+  .ahero__sub { margin: 1.4rem 0 0; color: var(--mint); opacity: 0.92; font-size: clamp(1.05rem, 1.6vw, 1.3rem); max-width: 52ch; }
+  .ahero__cta { margin-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.9rem; }
+  .ahero__btns { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+  .ahero__fine { margin: 0; font-size: 0.85rem; letter-spacing: 0.02em; color: var(--mint); opacity: 0.75; }
+
+  /* The two real portraits in the card language: 14px radius + soft shadow.
+     Same 4:5 crop as the home founders card; photos follow the CTA on mobile. */
+  .ahero__photos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1rem, 2.5vw, 1.5rem);
+    max-width: 560px;
+  }
+  .ahero__fig { margin: 0; }
+  .ahero__fig img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 22%;
+    border-radius: 14px;
+    display: block;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+  }
+  .ahero__fig figcaption { margin-top: 0.65rem; font-size: 0.95rem; color: var(--mint); opacity: 0.9; }
+
+  @media (min-width: 900px) {
+    .ahero__grid { grid-template-columns: 1.1fr 0.9fr; align-items: center; column-gap: clamp(2.5rem, 5vw, 4rem); }
+  }
+
+  .asec-h { max-width: 22ch; margin-bottom: clamp(1.75rem, 4.5vw, 3rem); }
+  .asec-h--tight { margin-bottom: 1rem; }
+  .atrades__lede { margin: 0 0 1.75rem; max-width: 60ch; opacity: 0.85; }
+
+  .astory { display: grid; gap: 1.1rem; }
+  .astory p { margin: 0; max-width: 62ch; font-size: clamp(1.02rem, 1.5vw, 1.15rem); color: var(--ink); }
+
+  /* Trio: hairline rows on mobile, 3 ruled columns on desktop (pains pattern). */
+  .habits { border-top: 1px solid rgba(255, 255, 255, 0.28); }
+  .habit { border-bottom: 1px solid rgba(255, 255, 255, 0.28); padding: 1.1rem 0; }
+  .habit__t { color: var(--ivory); font-size: 1.2rem; font-weight: 500; margin: 0 0 0.35rem; }
+  .habit__b { color: var(--ivory); opacity: 0.85; margin: 0; max-width: 60ch; }
+  @media (min-width: 760px) {
+    .habits { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 2.5rem); border-top: 0; }
+    .habit { border-bottom: 0; border-top: 2px solid rgba(255, 255, 255, 0.45); padding: 1.25rem 0 0; }
+  }
+  .habits__kicker { margin: 1.75rem 0 0; color: var(--ivory); font-size: clamp(1.02rem, 1.4vw, 1.15rem); max-width: 60ch; }
+  .habits__kicker .link { color: var(--ivory); font-weight: 500; white-space: nowrap; }
+
+  /* Name-only trade links: 2-col rows on mobile, 4-col on desktop. */
+  .atrades { display: grid; grid-template-columns: repeat(2, 1fr); column-gap: 1.5rem; border-top: 1px solid rgba(14, 47, 40, 0.16); }
+  .atrade { padding: 0.8rem 0; border-bottom: 1px solid rgba(14, 47, 40, 0.16); color: var(--green); font-weight: 500; }
+  .atrade:hover { color: var(--coral); }
+  @media (min-width: 760px) {
+    .atrades { grid-template-columns: repeat(4, 1fr); column-gap: 2rem; }
+  }
+  .atrades__more { margin: 1.75rem 0 0; opacity: 0.85; }
+</style>
