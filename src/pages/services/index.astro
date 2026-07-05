@@ -1,0 +1,130 @@
+---
+// Services hub (§6.2): overview that routes into the seven /services/[slug]
+// pages. Keeps the legacy /services#anchor ids (home cards + footer linked
+// them) on the cards themselves. Websites is the featured card (the accent
+// variant AGENTS kept for this page); dashboard stays a text-only band (Arya).
+import Base from '../../layouts/Base.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import CTABand from '../../components/CTABand.astro';
+import BookCall from '../../components/BookCall.astro';
+import { servicePages } from '../../data/servicePages';
+import { trades } from '../../data/trades';
+
+const featured = servicePages.find((s) => s.slug === 'websites');
+const rest = servicePages.filter((s) => s.slug !== 'websites');
+
+const listSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Sharplines Studio services',
+  itemListElement: servicePages.map((s, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: s.label,
+    url: `https://sharplines.ca/services/${s.slug}`,
+  })),
+};
+---
+
+<Base
+  title="Services for GTA trades and local businesses | Sharplines"
+  description="Websites, local SEO, reviews, booking, call answering, social and ads for GTA trades. One team, one dashboard. See your homepage free in 48 hours."
+  navSolid
+>
+  <!-- Hero (green) -->
+  <section class="hhero theme-green">
+    <div class="container">
+      <p class="eyebrow">What we do · Toronto &amp; the GTA</p>
+      <h1 class="display-xl hhero__h">Everything you need to be the <span class="line-accent">obvious choice</span>.</h1>
+      <p class="hhero__sub">Pick one service or run the full system. Either way, it's one team, one dashboard, one number to call.</p>
+      <div class="hhero__cta">
+        <div class="hhero__btns">
+          <a href="#preview" class="btn btn--coral">Get my free homepage preview</a>
+          <BookCall class="btn btn--outline-light" />
+        </div>
+        <p class="hhero__fine">Free preview in 48 hours · No obligation</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The seven services (mint) -->
+  <section class="section">
+    <div class="container fade-up">
+      <p class="eyebrow">The services</p>
+      <h2 class="display-lg hsec-h">Pick what you need. It all works together.</h2>
+      <div class="hubgrid">
+        {featured && (
+          <div class="hubgrid__feat" id={featured.anchorId}>
+            <ServiceCard title={featured.label} blurb={featured.blurb} href={`/services/${featured.slug}`} icon={featured.icon} accent />
+          </div>
+        )}
+        {rest.map((s) => (
+          <div id={s.anchorId}>
+            <ServiceCard title={s.label} blurb={s.blurb} href={`/services/${s.slug}`} icon={s.icon} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- The dashboard (coral, text-only band; legacy #dashboard anchor) -->
+  <section class="section theme-coral" id="dashboard">
+    <div class="container fade-up">
+      <p class="eyebrow">The dashboard</p>
+      <h2 class="display-lg hsec-h">One dashboard for all of it.</h2>
+      <p class="hdash__b">Log in any time and type what you want changed, like "add a photo of yesterday's panel job" or "post about our spring special". It's live in minutes. No tickets, no waiting on an agency.</p>
+      <p class="hdash__b">Every call, form fill and review shows up there too, so you always know what's working. It comes with both plans.</p>
+    </div>
+  </section>
+
+  <!-- Who it's for (mint) -->
+  <section class="section">
+    <div class="container fade-up">
+      <p class="eyebrow">Who we help</p>
+      <h2 class="display-lg hsec-h hsec-h--tight">Built for the businesses that live on calls.</h2>
+      <p class="htrades__lede">Every trade below has its own page, written for how that trade's customers buy.</p>
+      <div class="htrades">
+        {trades.map((t) => <a href={`/for/${t.slug}`} class="htrade">{t.label}</a>)}
+      </div>
+      <p class="htrades__more">Also a fit for movers, painters, detailers, clinics, and most local businesses that run on bookings and calls. <a href="/contact" class="link">Get in touch</a>.</p>
+    </div>
+  </section>
+
+  <CTABand
+    id="preview"
+    variant="full"
+    lede="Tell us which piece you need first. You'll hear from Arya or Amir the same business day, and the free preview shows you the work before you pay anything."
+  />
+
+  <script type="application/ld+json" set:html={JSON.stringify(listSchema)} />
+</Base>
+
+<style>
+  /* Fixed nav sits over the green block; pad past its 76px height. */
+  .hhero { padding-block: calc(76px + clamp(3rem, 8vw, 5.5rem)) clamp(3rem, 7vw, 5rem); }
+  .hhero__h { color: var(--ivory); max-width: 18ch; }
+  .hhero__sub { margin: 1.4rem 0 0; color: var(--mint); opacity: 0.92; font-size: clamp(1.05rem, 1.6vw, 1.3rem); max-width: 52ch; }
+  .hhero__cta { margin-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.9rem; }
+  .hhero__btns { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+  .hhero__fine { margin: 0; font-size: 0.85rem; letter-spacing: 0.02em; color: var(--mint); opacity: 0.75; }
+
+  .hsec-h { max-width: 24ch; margin-bottom: clamp(1.75rem, 4.5vw, 3rem); }
+  .hsec-h--tight { margin-bottom: 1rem; }
+
+  /* Featured card spans the grid; six below make a clean 3×2 on desktop. */
+  .hubgrid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+  .hubgrid > div { display: grid; }
+  .hubgrid__feat { grid-column: 1 / -1; }
+  @media (min-width: 620px) { .hubgrid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 900px) { .hubgrid { grid-template-columns: repeat(3, 1fr); } }
+
+  .hdash__b { margin: 0 0 1rem; max-width: 62ch; color: var(--ivory); opacity: 0.92; font-size: clamp(1.02rem, 1.5vw, 1.15rem); }
+
+  /* Name-only trade links, matching the about page. */
+  .htrades__lede { margin: 0 0 1.75rem; max-width: 60ch; opacity: 0.85; }
+  .htrades { display: grid; grid-template-columns: repeat(2, 1fr); column-gap: 1.5rem; border-top: 1px solid rgba(14, 47, 40, 0.16); }
+  .htrade { padding: 0.8rem 0; border-bottom: 1px solid rgba(14, 47, 40, 0.16); color: var(--green); font-weight: 500; }
+  .htrade:hover { color: var(--coral); }
+  @media (min-width: 760px) { .htrades { grid-template-columns: repeat(4, 1fr); column-gap: 2rem; } }
+  .htrades__more { margin: 1.75rem 0 0; opacity: 0.85; max-width: 62ch; }
+</style>

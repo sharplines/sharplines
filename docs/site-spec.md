@@ -226,9 +226,12 @@ Below the grid, a full-width card: **The Sharplines dashboard** — `Log in any 
 
 **CTABand** (ink bg, paper text): H2 `See your new homepage before you spend a dollar.` + `<ContactForm variant="short" />` + mono line `Prefer to talk? (514) 560-2266 · hi@sharplines.ca`
 
-### 6.2 Services `/services`
-Hero: H1 `Everything you need to be the obvious choice.` Sub: `Pick one service or run the full system. Either way, it's one team, one dashboard, one number to call.`
-Then 8 anchored sections (`#websites #seo #reviews #booking #phone #social #ads #dashboard`). Each: mono eyebrow (category), H3, 2 short paragraphs expanding the §6.1 blurb (what it is → what changes for the owner), and a 3-item "What's included" list. Keep each section under 120 words. End with CTABand. `TODO(claude-code): write these 8 expansions following §2 voice; lead every section with the owner outcome, not the mechanism.`
+### 6.2 Services — hub `/services` + seven `/services/[slug]` pages (built 2026-07-05)
+Split from the earlier one-page plan into a hub + seven single-intent pages; the build standard is **`.claude/skills/service-pages/SKILL.md`** (structure, SEO, per-service depth), with data in `src/data/servicePages.ts` + one template, the tradePages pattern.
+- **Hub**: green hero (H1 `Everything you need to be the obvious choice.`, sub kept from the old spec) → mint grid of 7 `ServiceCard`s routing to the slug pages (Websites featured as the full-width coral accent card; the legacy anchor ids `#websites #seo #reviews #booking #phone #social #ads` live on the cards so old links still land) → coral dashboard band (`id="dashboard"`, text-only per Arya) → mint name-only trade links → CTABand. `ItemList` JSON-LD.
+- **Slugs**: `websites` · `local-seo` · `reviews` · `booking` · `call-answering` · `social` · `ads`.
+- **Per page**: green hero with a CSS product artifact (no stock photos; see the skill) → coral `What this costs you today.` ×3 pains → mint `How it actually works.` ivory playbook (4–6 coral checks) + one plain money line → green pricing strip naming the plan (Growth: websites; Autopilot: local-seo, reviews, booking, ads; call-answering + social use the neutral both-plans strip because neither is in a published plan list) → FAQ (3–4 real objections) + `Also useful:` sibling links + one trade link → CTABand full form at `#preview`. `Service` + `FAQPage` JSON-LD inline; titles ≤60, metas 140–160, you>we verified on all 8 pages.
+- Home services grid + footer now link the slug pages directly (was `/services#anchor`).
 
 ### 6.3 Work `/work`
 H1 `Results, not promises.` Provolta case study long-form: Challenge (a skilled licensed electrician invisible online) → Build (conversion-first Astro site, neighbourhood pages across the GTA, trust signals — licence numbers, certifications — front and centre, a quote form with an urgency selector) → Result (2× residential and commercial clients, client-reported). Screenshots ×3 `TODO(arya)`. Closing CTABand: `Your business could be the next case study.`

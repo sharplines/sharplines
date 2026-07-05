@@ -1,0 +1,388 @@
+---
+// Service pages: one template, 7 entries from src/data/servicePages.ts.
+// Build standard: .claude/skills/service-pages/SKILL.md. Rhythm mirrors the
+// subpages: green hero (navSolid; no video, so a CSS product artifact shows the
+// mechanism instead of a stock photo) → coral "what it costs you today" →
+// mint how-it-works (ivory card, coral checks) + the plain money line →
+// green pricing strip (published numbers only) → mint FAQ + sibling links →
+// CTABand with the form on-page.
+import Base from '../../layouts/Base.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTABand from '../../components/CTABand.astro';
+import { servicePages, getService } from '../../data/servicePages';
+
+export function getStaticPaths() {
+  return servicePages.map((s) => ({ params: { slug: s.slug }, props: { page: s } }));
+}
+
+const { page } = Astro.props;
+const [h1Before, h1After = ''] = page.h1.split(page.h1Accent);
+const siblings = page.siblings.map(getService).filter(Boolean);
+
+const artifactCaptions: Record<string, string> = {
+  'phone-site': 'Tap-to-call and a real quote form, above the fold.',
+  'map-pack': 'The map pack is where the calls happen.',
+  'review-request': 'Sent a couple of hours after the job, automatically.',
+  'booking-card': "Two taps from your customer's couch.",
+  'call-summary': 'What a missed call turns into.',
+  'social-post': 'You send the photos. Posting, captions and timing are handled.',
+  'ad-call': 'Every ad tracked to the call it made.',
+};
+
+// Per-page schema: Service + FAQPage from the page's own Q&As.
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: page.label,
+  serviceType: page.label,
+  description: page.metaDescription,
+  areaServed: 'Toronto & Greater Toronto Area',
+  provider: { '@type': 'ProfessionalService', name: 'Sharplines Studio', url: 'https://sharplines.ca' },
+};
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: page.faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Base title={page.metaTitle} description={page.metaDescription} navSolid>
+  <!-- Hero (green): copy + the product artifact in the card language -->
+  <section class="shero theme-green">
+    <div class="container shero__grid">
+      <div class="shero__copy">
+        <p class="eyebrow">What we do · Toronto &amp; the GTA</p>
+        <h1 class="display-xl shero__h">{h1Before}<span class="line-accent">{page.h1Accent}</span>{h1After}</h1>
+        <p class="shero__sub">{page.sub}</p>
+        <div class="shero__cta">
+          <a href="#preview" class="btn btn--coral">Get my free homepage preview</a>
+          <p class="shero__fine">Free preview in 48 hours · No obligation</p>
+        </div>
+      </div>
+
+      <div class="shero__media">
+        {page.artifact === 'phone-site' && (
+          <div class="art">
+            <div class="phone">
+              <div class="phone__bar">
+                <span class="phone__brand">Your business</span>
+                <span class="phone__call">Call now</span>
+              </div>
+              <div class="phone__body">
+                <span class="ph-line ph-line--lg" aria-hidden="true"></span>
+                <span class="ph-line" style="width:72%" aria-hidden="true"></span>
+                <span class="ph-field">Job type</span>
+                <span class="ph-field">How urgent is it?</span>
+                <span class="ph-btn">Get a quote</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {page.artifact === 'map-pack' && (
+          <div class="art">
+            <div class="map__search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
+              <span>electrician near me</span>
+            </div>
+            <div class="map__row map__row--you">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z" /><circle cx="12" cy="10" r="2.5" /></svg>
+              <div class="map__lines"><strong>Your business</strong><span class="ph-line" style="width:58%" aria-hidden="true"></span></div>
+            </div>
+            <div class="map__row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z" /><circle cx="12" cy="10" r="2.5" /></svg>
+              <div class="map__lines"><span class="ph-line" style="width:46%" aria-hidden="true"></span><span class="ph-line" style="width:64%" aria-hidden="true"></span></div>
+            </div>
+            <div class="map__row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z" /><circle cx="12" cy="10" r="2.5" /></svg>
+              <div class="map__lines"><span class="ph-line" style="width:52%" aria-hidden="true"></span><span class="ph-line" style="width:38%" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        )}
+
+        {page.artifact === 'review-request' && (
+          <div class="art">
+            <p class="sms">Thanks for having us out today. If everything looks good, would you leave us a quick Google review? Here's the link:</p>
+            <span class="sms__chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.5 6.1.9-4.4 4.3 1 6-5.4-2.8-5.4 2.8 1-6-4.4-4.3 6.1-.9L12 3z" /></svg>
+              Review us on Google
+            </span>
+            <p class="sms__meta">Delivered · right after the job is marked done</p>
+          </div>
+        )}
+
+        {page.artifact === 'booking-card' && (
+          <div class="art">
+            <p class="book__svc">Men's cut · 30 min</p>
+            <div class="book__times">
+              <span>Tue 9:00</span>
+              <span class="book__picked">Tue 11:30</span>
+              <span>Wed 8:00</span>
+            </div>
+            <span class="ph-btn">Book it</span>
+            <p class="book__note">Reminder goes out the day before.</p>
+          </div>
+        )}
+
+        {page.artifact === 'call-summary' && (
+          <div class="art">
+            <p class="call__head">Missed call · 9:12 pm</p>
+            <p class="call__line">New caller · Etobicoke</p>
+            <p class="call__quote">"No power in half the house. Can someone come tonight?"</p>
+            <div class="call__foot">
+              <span class="call__urgent">Urgent</span>
+              <span class="ph-btn">Call back</span>
+            </div>
+          </div>
+        )}
+
+        {page.artifact === 'social-post' && (
+          <div class="art art--post">
+            <div class="post__top">
+              <span class="post__avatar" aria-hidden="true"></span>
+              <span class="post__handle">yourbusiness</span>
+            </div>
+            <img src="/images/trades/landscapers.jpg" alt="A finished backyard from a landscaping job, posted for the business." width="640" height="400" loading="lazy" decoding="async" />
+            <p class="post__cap"><strong>yourbusiness</strong> Backyard cleanup in Leaside, before and after.</p>
+          </div>
+        )}
+
+        {page.artifact === 'ad-call' && (
+          <div class="art">
+            <p class="ad__tag">Sponsored</p>
+            <p class="ad__title">Emergency furnace repair, North York</p>
+            <span class="ph-line" style="width:82%" aria-hidden="true"></span>
+            <span class="ph-line" style="width:60%" aria-hidden="true"></span>
+            <div class="ad__track">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z" /></svg>
+              <span>Call · 3 min 40 s · from this ad</span>
+            </div>
+          </div>
+        )}
+
+        <p class="art__cap">{artifactCaptions[page.artifact]}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What it costs you today (coral) -->
+  <section class="section theme-coral">
+    <div class="container fade-up">
+      <p class="eyebrow">The problem</p>
+      <h2 class="display-lg ssec-h">What this costs you today.</h2>
+      <div class="pains">
+        {page.pains.map((p) => (
+          <div class="pain">
+            <h3 class="pain__t">{p.title}</h3>
+            <p class="pain__b">{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it actually works (mint, ivory card) -->
+  <section class="section">
+    <div class="container fade-up">
+      <p class="eyebrow">How it works</p>
+      <h2 class="display-lg ssec-h">How it actually works.</h2>
+      <div class="playbook">
+        {page.how.map((h) => (
+          <div class="play">
+            <h3 class="play__t">{h.title}</h3>
+            <p class="play__b">{h.body}</p>
+          </div>
+        ))}
+      </div>
+      <p class="sworth">{page.worth}</p>
+    </div>
+  </section>
+
+  <!-- Pricing strip (green): published numbers only -->
+  <section class="section theme-green">
+    <div class="container fade-up">
+      <p class="eyebrow">Pricing</p>
+      {page.plan === 'growth' && (
+        <>
+          <h2 class="display-lg ssec-h">From $179 a month, with $0 down.</h2>
+          <p class="sprice__b">This is the Growth plan: your site built and looked after, hosting, support, and unlimited edits through your dashboard. It's monthly, you can cancel any time, and the site is yours to keep.</p>
+        </>
+      )}
+      {page.plan === 'autopilot' && (
+        <>
+          <h2 class="display-lg ssec-h">Part of the Autopilot plan.</h2>
+          <p class="sprice__b">Autopilot is $495 a month with $0 down: everything in the Growth plan, plus your Google Business Profile, pages for each area you serve, review follow-ups, online booking, call tracking, a monthly report, and Google and Meta ads run and tracked. We guarantee more leads within 90 days.</p>
+        </>
+      )}
+      {page.plan === 'either' && (
+        <>
+          <h2 class="display-lg ssec-h">From $179 a month, with $0 down.</h2>
+          <p class="sprice__b">Both plans are monthly, you can cancel any time, and the website we build is yours to keep. Tell us this is the piece you care about and you'll get the exact cost before you commit to anything.</p>
+        </>
+      )}
+      <a href="/#pricing" class="link sprice__link">See what both plans include</a>
+    </div>
+  </section>
+
+  <!-- FAQ (mint) + sibling services -->
+  <section class="section">
+    <div class="container fade-up">
+      <p class="eyebrow">Questions</p>
+      <h2 class="display-lg ssec-h">What owners ask us.</h2>
+      <FAQ items={page.faq} />
+      <p class="salso">
+        Also useful:
+        <a href={`/services/${siblings[0].slug}`} class="link">{siblings[0].label}</a> and
+        <a href={`/services/${siblings[1].slug}`} class="link">{siblings[1].label}</a>.
+        {page.tradeLink && (
+          <>See it working for <a href={`/for/${page.tradeLink.slug}`} class="link">{page.tradeLink.noun}</a>.</>
+        )}
+      </p>
+    </div>
+  </section>
+
+  <CTABand id="preview" variant="full" lede={page.closing} />
+
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</Base>
+
+<style>
+  /* Fixed nav sits over the green hero; pad past its 76px height. */
+  .shero { padding-block: calc(76px + clamp(3rem, 8vw, 5.5rem)) clamp(3rem, 7vw, 5rem); }
+  .shero__grid { display: grid; gap: clamp(2rem, 4.5vw, 3rem); }
+  .shero__h { color: var(--ivory); max-width: 18ch; }
+  .shero__sub { margin: 1.4rem 0 0; color: var(--mint); opacity: 0.92; font-size: clamp(1.05rem, 1.6vw, 1.3rem); max-width: 52ch; }
+  .shero__cta { margin-top: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.9rem; }
+  .shero__fine { margin: 0; font-size: 0.85rem; letter-spacing: 0.02em; color: var(--mint); opacity: 0.75; }
+  @media (min-width: 900px) {
+    .shero__grid { grid-template-columns: 1.1fr 0.9fr; align-items: center; column-gap: clamp(2.5rem, 5vw, 4rem); }
+  }
+
+  /* ------- The product artifact: one ivory card showing the mechanism. -------
+     Cards keep 14px; the button/input stubs inside keep the 3px token. */
+  .art {
+    background: var(--ivory);
+    border: 1px solid rgba(14, 47, 40, 0.12);
+    border-radius: 14px;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+    max-width: 420px;
+    display: grid;
+    gap: 0.8rem;
+    color: var(--ink);
+  }
+  .art__cap { margin: 0.75rem 0 0; font-size: 0.85rem; letter-spacing: 0.02em; color: var(--mint); opacity: 0.75; }
+
+  /* Greeked lines + form/button stubs, shared across artifacts. */
+  .ph-line { display: block; height: 9px; border-radius: 4px; background: rgba(14, 47, 40, 0.14); }
+  .ph-line--lg { height: 14px; width: 88%; background: rgba(14, 47, 40, 0.24); }
+  .ph-field {
+    display: block; padding: 0.7rem 0.85rem; border: 1px solid rgba(14, 47, 40, 0.18);
+    border-radius: var(--radius); background: #fff; font-size: 0.88rem; color: var(--ink); opacity: 0.75;
+  }
+  .ph-btn {
+    display: inline-block; justify-self: start; padding: 0.7rem 1.2rem; border-radius: var(--radius);
+    background: var(--coral); color: #fff; font-size: 0.9rem; font-weight: 500;
+  }
+
+  /* Websites: mini site above the fold. */
+  .phone { border: 1px solid rgba(14, 47, 40, 0.16); border-radius: 10px; overflow: hidden; }
+  .phone__bar { display: flex; justify-content: space-between; align-items: center; background: var(--green); color: var(--ivory); padding: 0.6rem 0.8rem; }
+  .phone__brand { font-weight: 600; font-size: 0.9rem; }
+  .phone__call { background: var(--coral); color: #fff; font-size: 0.78rem; font-weight: 500; padding: 0.3rem 0.65rem; border-radius: var(--radius); }
+  .phone__body { display: grid; gap: 0.6rem; padding: 0.9rem 0.8rem 1rem; }
+
+  /* Local SEO: search + map pack. */
+  .map__search { display: flex; align-items: center; gap: 0.6rem; border: 1px solid rgba(14, 47, 40, 0.18); border-radius: 999px; padding: 0.55rem 0.9rem; font-size: 0.9rem; color: var(--ink); }
+  .map__search svg { width: 16px; height: 16px; color: var(--green); flex: none; }
+  .map__row { display: flex; align-items: center; gap: 0.7rem; border-top: 1px solid rgba(14, 47, 40, 0.12); padding-top: 0.7rem; }
+  .map__row svg { width: 20px; height: 20px; color: rgba(14, 47, 40, 0.35); flex: none; }
+  .map__row--you svg { color: var(--coral); }
+  .map__lines { display: grid; gap: 0.35rem; flex: 1; }
+  .map__lines strong { font-size: 0.92rem; color: var(--green); }
+
+  /* Reviews: the follow-up text. */
+  .sms { margin: 0; background: var(--green); color: var(--ivory); border-radius: 14px 14px 14px 4px; padding: 0.9rem 1rem; font-size: 0.92rem; line-height: 1.5; max-width: 34ch; }
+  .sms__chip { display: inline-flex; align-items: center; gap: 0.5rem; justify-self: start; border: 1px solid rgba(14, 47, 40, 0.18); border-radius: 999px; padding: 0.45rem 0.85rem; font-size: 0.85rem; font-weight: 500; color: var(--green); }
+  .sms__chip svg { width: 15px; height: 15px; color: var(--coral); }
+  .sms__meta { margin: 0; font-size: 0.8rem; color: var(--ink); opacity: 0.55; }
+
+  /* Booking: two-tap time picker. */
+  .book__svc { margin: 0; font-weight: 600; color: var(--green); font-size: 0.95rem; }
+  .book__times { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .book__times span { border: 1px solid rgba(14, 47, 40, 0.2); border-radius: var(--radius); padding: 0.5rem 0.75rem; font-size: 0.85rem; color: var(--ink); }
+  .book__times .book__picked { background: var(--green); border-color: var(--green); color: var(--ivory); }
+  .book__note { margin: 0; font-size: 0.8rem; color: var(--ink); opacity: 0.55; }
+
+  /* Call answering: the text you get. */
+  .call__head { margin: 0; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); opacity: 0.55; }
+  .call__line { margin: 0; font-weight: 600; color: var(--green); font-size: 0.95rem; }
+  .call__quote { margin: 0; color: var(--ink); opacity: 0.85; font-size: 0.95rem; line-height: 1.5; }
+  .call__foot { display: flex; align-items: center; gap: 0.7rem; }
+  .call__urgent { background: var(--coral); color: #fff; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.3rem 0.6rem; border-radius: var(--radius); }
+
+  /* Social: the posted photo. */
+  .art--post { padding: 0.9rem; gap: 0.6rem; }
+  .post__top { display: flex; align-items: center; gap: 0.55rem; }
+  .post__avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--green); }
+  .post__handle { font-size: 0.88rem; font-weight: 600; color: var(--ink); }
+  .art--post img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 8px; display: block; }
+  .post__cap { margin: 0; font-size: 0.85rem; color: var(--ink); opacity: 0.85; }
+  .post__cap strong { font-weight: 600; }
+
+  /* Ads: ad → tracked call. */
+  .ad__tag { margin: 0; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; color: var(--ink); opacity: 0.6; }
+  .ad__title { margin: 0; font-weight: 600; color: var(--green); font-size: 0.98rem; }
+  .ad__track { display: flex; align-items: center; gap: 0.6rem; border-top: 1px solid rgba(14, 47, 40, 0.12); padding-top: 0.8rem; font-size: 0.88rem; color: var(--ink); }
+  .ad__track svg { width: 16px; height: 16px; color: var(--coral); flex: none; }
+
+  /* ------- Section shells (match the trade pages). ------- */
+  .ssec-h { max-width: 22ch; margin-bottom: clamp(1.75rem, 4.5vw, 3rem); }
+
+  .pains { border-top: 1px solid rgba(255, 255, 255, 0.28); }
+  .pain { border-bottom: 1px solid rgba(255, 255, 255, 0.28); padding: 1.1rem 0; }
+  .pain__t { color: var(--ivory); font-size: 1.2rem; font-weight: 500; margin: 0 0 0.35rem; }
+  .pain__b { color: var(--ivory); opacity: 0.85; margin: 0; max-width: 60ch; }
+  @media (min-width: 760px) {
+    .pains { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 2.5rem); border-top: 0; }
+    .pain { border-bottom: 0; border-top: 2px solid rgba(255, 255, 255, 0.45); padding: 1.25rem 0 0; }
+  }
+
+  .playbook {
+    background: var(--ivory);
+    border: 1px solid rgba(14, 47, 40, 0.12);
+    border-radius: 14px;
+    padding: clamp(1.5rem, 3.5vw, 2.5rem);
+    box-shadow: 0 14px 36px rgba(14, 47, 40, 0.1);
+    display: grid;
+    gap: clamp(1.4rem, 3vw, 2rem);
+  }
+  .play { position: relative; padding-left: 2rem; }
+  .play::before {
+    content: "";
+    position: absolute;
+    left: 0.15rem;
+    top: 0.5em;
+    width: 0.7rem;
+    height: 0.38rem;
+    border-left: 2.5px solid var(--coral);
+    border-bottom: 2.5px solid var(--coral);
+    transform: rotate(-45deg);
+  }
+  .play__t { font-size: 1.2rem; font-weight: 500; color: var(--green); margin: 0 0 0.35rem; }
+  .play__b { margin: 0; color: var(--ink); opacity: 0.82; font-size: 0.98rem; }
+  @media (min-width: 760px) {
+    .playbook { grid-template-columns: 1fr 1fr; column-gap: clamp(2rem, 4vw, 3rem); }
+  }
+  .sworth { margin: 1.5rem 0 0; font-size: clamp(1.02rem, 1.4vw, 1.15rem); color: var(--green); font-weight: 500; max-width: 60ch; }
+
+  .sprice__b { max-width: 62ch; opacity: 0.9; }
+  .sprice__link { color: var(--ivory); font-weight: 500; }
+
+  .salso { margin: 1.75rem 0 0; opacity: 0.85; max-width: 62ch; }
+</style>

@@ -249,8 +249,24 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   **first names only in schema too** (extends the visible-copy rule so SERPs can't surface
   last names). Title 50ch, meta 150ch, you 26 vs we 12 on the built page. Nav/Footer
   already pointed at /about, so this also fixed a dead nav link.
-
-## Open TODO(arya) (from spec §10)
+- **Services split into hub + 7 pages (2026-07-05, Arya: "if the best practice is breaking
+  down the services into multiple pages do it")**: `/services` hub + `/services/[slug]` ×7
+  (websites · local-seo · reviews · booking · call-answering · social · ads), standard in
+  `.claude/skills/service-pages/SKILL.md`, data in `src/data/servicePages.ts` + one
+  template (tradePages pattern; 2 exemplar entries written in-session, 5 drafted by fork
+  subagents against the skill briefs, then edited). Spec §6.2 rewritten to match. Notable
+  calls: (a) **hero visuals are CSS product artifacts**, not stock photos (missed-call
+  text, review-request SMS, map pack, booking picker, mini phone site, social frame
+  reusing the real landscapers poster, ad→call row) — truth rule: product output only,
+  never fake reviews/praise; awaiting Arya's taste sign-off. (b) Pricing strips name the
+  plan only where the published includes support it (Growth: websites; Autopilot:
+  local-seo/reviews/booking/ads); call-answering + social get the neutral strip because
+  neither is in a published plan list — do NOT claim otherwise. (c) Hub keeps the legacy
+  `#anchor` ids on the cards; home grid + footer now link the slug pages directly.
+  (d) Websites = the featured full-width coral accent card on the hub (the variant kept
+  from the home-grid revert). (e) New `camera` icon in ServiceCard for social.
+  (f) Profession rotation beyond the 8 trades (salons, physio, detailers, movers,
+  painters) especially on booking/social/reviews, per Arya's "suit more professions".
 416/647 phone (currently 514, reads as Montreal) · Provolta permission + quote + 3 screenshots ·
 Resend/Web3Forms key.
 - **Favicon (done 2026-07-05)**: real brush-stroke "S" logo Arya supplied
@@ -294,4 +310,11 @@ Resend/Web3Forms key.
   phone check today) and at 1400px via an injected same-origin iframe (container edges
   measured equal, 53–1333, across all five sections); copy checklist run (0 em-dashes,
   0 banned words, you 26 vs we 12). Committed, not deployed.
-- Remaining pages: services, work, privacy, 404. Build order: spec §11.
+- **`/services` hub + 7 service pages built 2026-07-05** (see Decisions). All 8 verified
+  at 500px + 1400px (hero 2-col, pains 3-col, playbook 2-col, hub featured card spans,
+  container edges 53–1333 everywhere); per-page checks all green (titles ≤60, metas
+  140–160, you>we on every page, 0 em-dashes/banned words, Service+FAQPage/ItemList
+  JSON-LD present). Committed, not deployed. NOTE: verified via dev server because the
+  repo build was transiently broken by an in-flight `tradePages.ts` edit from the
+  parallel session (undefined `.map` on /for/electricians), not by these pages.
+- Remaining pages: work, privacy, 404. Build order: spec §11.

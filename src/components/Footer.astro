@@ -1,13 +1,14 @@
 ---
 import { trades } from '../data/trades';
+import BookCall from './BookCall.astro';
 const services = [
-  { label: 'Websites that sell', href: '/services#websites' },
-  { label: 'Get found on Google', href: '/services#seo' },
-  { label: 'Reviews that keep coming', href: '/services#reviews' },
-  { label: 'Online booking', href: '/services#booking' },
-  { label: 'Never miss a call', href: '/services#phone' },
-  { label: 'Social media, handled', href: '/services#social' },
-  { label: 'Ads that pay for themselves', href: '/services#ads' },
+  { label: 'Websites that sell', href: '/services/websites' },
+  { label: 'Get found on Google', href: '/services/local-seo' },
+  { label: 'Reviews that keep coming', href: '/services/reviews' },
+  { label: 'Online booking', href: '/services/booking' },
+  { label: 'Never miss a call', href: '/services/call-answering' },
+  { label: 'Social media, handled', href: '/services/social' },
+  { label: 'Ads that pay for themselves', href: '/services/ads' },
 ];
 ---
 
@@ -30,6 +31,7 @@ const services = [
 
     <div class="footer__col">
       <p class="footer__head">Contact</p>
+      <BookCall class="footer__link footer__book" label="Book a 15-minute call" />
       <a href="tel:+15145602266" class="footer__link">(514) 560-2266</a>
       <a href="mailto:hi@sharplines.ca" class="footer__link">hi@sharplines.ca</a>
       <p class="footer__meta">Toronto &amp; GTA</p>
@@ -50,6 +52,12 @@ const services = [
   .footer__head { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mint); opacity: 0.45; margin: 0 0 1rem; }
   .footer__link { color: var(--mint); font-size: 0.95rem; padding: 0.35rem 0; opacity: 0.85; }
   .footer__link:hover { opacity: 1; color: #fff; text-decoration: underline; text-decoration-color: var(--coral); text-underline-offset: 3px; }
+  /* BookCall <button> in its own scope; reset UA styles, inherit footer__link look. */
+  :global(.footer__book) {
+    background: none; border: none; cursor: pointer; text-align: left;
+    font-family: var(--font); font-size: 0.95rem; color: var(--mint); opacity: 0.85; padding: 0.35rem 0;
+  }
+  :global(.footer__book):hover { opacity: 1; color: #fff; text-decoration: underline; text-decoration-color: var(--coral); text-underline-offset: 3px; }
   .footer__meta { color: var(--mint); opacity: 0.5; font-size: 0.85rem; letter-spacing: 0.04em; margin: 0.5rem 0; }
   .footer__privacy { margin-top: 0.25rem; }
   .footer__base { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.12); font-size: 0.82rem; letter-spacing: 0.04em; color: var(--mint); opacity: 0.5; }
