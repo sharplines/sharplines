@@ -191,7 +191,7 @@ Keep it to these six tokens — no gradients beyond the hero scrim, no extra acc
 6. **Social media, handled** — Your best work, posted to Instagram and TikTok on schedule. You send photos; we handle the rest.
 7. **Ads that pay for themselves** — Google Ads aimed at people ready to hire, tracked to the call, so you know what every dollar brought back.
 
-Below the grid, a full-width card: **The Sharplines dashboard** — `Log in any time and type what you want changed, like "add a photo of yesterday's panel job" or "post about our spring special". It's live in minutes. No tickets, no waiting on an agency.` Link: `See how it works →` (/services#dashboard)
+Below the grid, a full-width card: **The Sharplines dashboard** — `Log in any time and type what you want changed, like "add a photo of yesterday's panel job" or "post about our spring special". It's live in minutes. No tickets, no waiting on an agency.` Link: `See how it works →` (/services#dashboard). Right column (stacks below on mobile): stock photo `images/dashboard-code.jpg` (engineer at two monitors of code), 3:2 crop — added 2026-07-05 at Arya's direction to break up the imageless top half of the page.
 
 **CaseStudyFeature** — eyebrow `RESULTS`, H2 `Provolta Electric doubled their clients.` Body: `A licensed Toronto electrician serving homes, businesses, and industrial sites. We rebuilt provolta.ca from the ground up, with a clear homepage, pages for the neighbourhoods they serve, and a quote form people actually finish. Since launch, Provolta reports 2× more residential and commercial clients.` Visual: site screenshot `TODO(arya): asset`. Link: `Read the full story →` (/work). Optional pull-quote slot: `TODO(arya): Provolta quote + permission`.
 

@@ -42,8 +42,10 @@ Working notes for any agent on this repo. Keep this current as decisions land.
 - Home colour rhythm: hero(video, ~62vh not full-screen) → who-we-help(coral, signature; sits
   directly under the hero) → proof(green) → services(mint) → dashboard(coral) → results(mint) →
   how(green) → founders(mint) → FAQ(mint) → CTA(green) → footer(ink).
-- Hero media: looping muted `public/videos/hero.mp4` (2.8MB Pexels café clip, free licence),
-  poster `public/images/hero-poster.jpg` (a frame of it). TODO(arya): supply a better clip.
+- Hero media: looping muted `public/videos/hero.mp4` — warm studio/workspace clip Arya supplied
+  2026-07-05 (source: stock download "UHD 2560x1080 30fps", compressed to 1920×810 H.264 CRF 28,
+  no audio, faststart, 1.6MB via ffmpeg, now installed via brew). Poster
+  `public/images/hero-poster.jpg` = its first frame, so playback starts without a jump.
 - **Voice (MANDATORY for all visitor-facing text): follow `.claude/skills/site-copy/SKILL.md`**
   (invoke the `site-copy` skill before writing or editing any copy — pages, CTAs, FAQs,
   meta tags, alt text, form messages). Set by Arya 2026-07-05: warm/plain Fieldmark-style
@@ -76,7 +78,9 @@ Working notes for any agent on this repo. Keep this current as decisions land.
 - **Images** (`public/images/`): hero is now a looping video (`public/videos/hero.mp4`) with
   poster `hero-poster.jpg`. `founder-arya.jpg` / `founder-amir.jpg` = real founder photos Arya
   supplied (Image #1 = Amir, #2 = Arya), first names only in captions + bio. `provolta-site.png`
-  = real screenshot of provolta.ca via thum.io (Arya's own client). Plain `<img loading=lazy>`;
+  = real screenshot of provolta.ca via thum.io (Arya's own client). `dashboard-code.jpg` =
+  Arya-supplied stock shot (engineer at two monitors of code) in the home dashboard card,
+  added 2026-07-05. Plain `<img loading=lazy>`;
   migrate to Astro `<Image>` (AVIF/WebP) in the Lighthouse/polish pass.
 - **Home services grid = 6** (not 7): dropped "Social media, handled" to make a clean 3×2 and
   keep the strongest direct lead-drivers. Social still lives in the footer + on /services. Swap
