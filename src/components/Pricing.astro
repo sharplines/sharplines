@@ -1,0 +1,183 @@
+---
+/* Home pricing block — $0-down monthly model (Arya, 2026-07-05).
+   Copy follows .claude/skills/site-copy/SKILL.md: no em-dashes, sentence case,
+   one offer per page (free preview is the only CTA). Prices in CAD. */
+interface PlanRow { label: string; text: string }
+interface Plan { name: string; price: string; was: string; featured?: boolean; rows: PlanRow[] }
+
+const plans: Plan[] = [
+  {
+    name: 'Website',
+    price: '$179',
+    was: '$249',
+    rows: [
+      { label: 'Upfront', text: '$0. You pay when the site is live.' },
+      { label: 'Term', text: 'Monthly. Cancel any time.' },
+      { label: 'Your site', text: "Every payment builds toward the site. After 12 payments it's yours, and you can buy it out early any time." },
+      { label: "What's included", text: 'A custom site, hosting, unlimited edits through your dashboard, and support when you need it.' },
+      { label: 'Guarantee', text: 'You see the free preview before you pay a dollar.' },
+    ],
+  },
+  {
+    name: 'Growth',
+    price: '$649',
+    was: '$949',
+    featured: true,
+    rows: [
+      { label: 'Upfront', text: '$0. We waive the $1,500 setup fee.' },
+      { label: 'Term', text: "Monthly. Cancel any time with 30 days' notice." },
+      { label: 'Your site', text: 'Same terms as the Website plan.' },
+      { label: "What's included", text: 'Everything in Website, plus your Google Business Profile, pages for each area you serve, review follow-ups, online booking, call tracking, and a monthly report.' },
+      { label: 'Guarantee', text: 'More leads within 90 days.' },
+      { label: 'Pays for itself at', text: 'About 2 jobs a month.' },
+    ],
+  },
+  {
+    name: 'Autopilot',
+    price: '$1,249',
+    was: '$1,799',
+    rows: [
+      { label: 'Upfront', text: '$0. We waive the $2,500 setup fee.' },
+      { label: 'Term', text: "Monthly. Cancel any time with 30 days' notice." },
+      { label: 'Your site', text: 'Same terms as the Website plan.' },
+      { label: "What's included", text: 'Everything in Growth, plus after-hours call answering, social posts handled for you, Google Ads run and tracked for you, and a quarterly strategy call. Ad spend goes straight to Google.' },
+      { label: 'Guarantee', text: 'More leads within 90 days.' },
+      { label: 'Pays for itself at', text: 'About 3–4 jobs a month.' },
+    ],
+  },
+];
+---
+
+<section class="section theme-green pricing" id="pricing">
+  <div class="container fade-up">
+    <p class="eyebrow">Pricing</p>
+    <h2 class="display-lg pricing__h">Clear pricing, nothing up front.</h2>
+    <p class="lede pricing__lede">Every plan runs month to month and starts at $0 down. You see the free homepage preview before you pay anything.</p>
+
+    <div class="plans">
+      {plans.map((plan) => (
+        <article class={plan.featured ? 'plan plan--featured' : 'plan'}>
+          <header class="plan__head">
+            <h3 class="plan__name">{plan.name}</h3>
+            {plan.featured && <span class="plan__tag">Recommended</span>}
+          </header>
+          <p class="plan__price">
+            <span class="plan__amount">{plan.price}</span>
+            <span class="plan__per">a month</span>
+            <span class="plan__was"><span class="vh">regular price </span><s>{plan.was}</s></span>
+          </p>
+          {plan.rows.map((row) => (
+            <div class="plan__row">
+              <span class="plan__label">{row.label}</span>
+              <p class="plan__text">{row.text}</p>
+            </div>
+          ))}
+        </article>
+      ))}
+    </div>
+
+    <div class="pricing__cta">
+      <a href="/contact?offer=preview" class="btn btn--coral">Get my free homepage preview</a>
+      <p class="pricing__fine">Free preview in 48 hours · No obligation · Prices in Canadian dollars</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Sits directly under the green proof bar, so ease into it. */
+  .pricing { padding-top: clamp(1.5rem, 3.5vw, 3rem); }
+
+  .pricing__h { max-width: 22ch; margin-bottom: 1.1rem; }
+  .pricing__lede { opacity: 0.9; }
+
+  .plans {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-top: clamp(2.25rem, 5vw, 3.25rem);
+  }
+
+  .plan {
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: var(--radius);
+    padding: clamp(1.4rem, 3vw, 1.9rem);
+  }
+  .plan--featured { border: 2px solid var(--coral); }
+
+  .plan__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-bottom: 0.95rem;
+  }
+  .plan__name { color: var(--ivory); font-size: 1.35rem; font-weight: 500; }
+  .plan__tag {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: var(--coral);
+    color: #fff;
+    padding: 0.32rem 0.55rem;
+    border-radius: var(--radius);
+    white-space: nowrap;
+  }
+
+  .plan__price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin: 0;
+    padding-block: 1rem 1.15rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+  }
+  .plan__amount {
+    font-size: clamp(2.3rem, 4.5vw, 2.9rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--ivory);
+  }
+  .plan__per { font-size: 0.9rem; opacity: 0.75; }
+  .plan__was { font-size: 1rem; opacity: 0.55; }
+
+  .plan__row {
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    padding-block: 0.85rem;
+  }
+  .plan__label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 0.35rem;
+  }
+  .plan__text { margin: 0; font-size: 0.95rem; line-height: 1.5; }
+
+  /* Desktop: three columns with rows aligned across plans (subgrid). */
+  @media (min-width: 900px) {
+    .plans {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(8, auto);
+    }
+    .plan {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: 1 / span 8;
+      align-content: start;
+    }
+    .plan__head { align-items: start; }
+  }
+
+  .pricing__cta {
+    margin-top: clamp(2rem, 4vw, 2.75rem);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+  }
+  .pricing__fine { margin: 0; font-size: 0.85rem; letter-spacing: 0.02em; opacity: 0.75; }
+</style>

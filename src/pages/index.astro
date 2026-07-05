@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import ProofBar from '../components/ProofBar.astro';
+import Pricing from '../components/Pricing.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import CaseStudyFeature from '../components/CaseStudyFeature.astro';
 import StepTimeline from '../components/StepTimeline.astro';
@@ -20,11 +21,11 @@ const servicesList = [
 ];
 
 const faqs = [
-  { q: 'How much does it cost?', a: "Our pricing is competitive with GTA agencies, and every plan is scoped to what your business actually needs. The preview is free either way. Book a call and we'll give you a straight number." },
+  { q: 'How much does it cost?', a: "Plans start at $179 a month with $0 down, and the full pricing is published right on this page. The preview is free either way, so you see the work before you spend anything." },
   { q: "What's the catch with the free homepage preview?", a: "There isn't one. We design a homepage concept for your business in 48 hours. If you don't love it, you've lost nothing." },
   { q: 'How fast will I see results?', a: "The site and booking improvements show up right away. Reviews build within weeks. Google rankings usually take two to four months, and we'll show you the progress along the way." },
   { q: 'I already have a website.', a: "Most of our clients did. If your site isn't bringing you calls, it isn't doing its job. The free preview shows you the difference side by side." },
-  { q: 'Am I locked into a contract?', a: "No. There's no long-term contract. We keep clients by getting results, month after month." },
+  { q: 'Am I locked into a contract?', a: "No. Every plan is monthly and you can cancel any time. Growth and Autopilot ask for 30 days' notice, and on the Website plan every payment builds toward owning your site." },
 ];
 ---
 
@@ -42,6 +43,9 @@ const faqs = [
 
   <ProofBar />
 
+  <!-- Pricing (dark green block) -->
+  <Pricing />
+
   <!-- Services grid (light) -->
   <section class="section" id="services">
     <div class="container fade-up">
@@ -56,16 +60,7 @@ const faqs = [
           <p class="eyebrow">The Sharplines dashboard</p>
           <p class="dashboard__body">Log in any time and type what you want changed, like "add a photo of yesterday's panel job" or "post about our spring special". It's live in minutes. No tickets, no waiting on an agency.</p>
         </div>
-        <span class="dashboard__more">See how it works →</span>
       </a>
-    </div>
-  </section>
-
-  <!-- Results (light) -->
-  <section class="section">
-    <div class="container fade-up">
-      <p class="eyebrow">Results</p>
-      <CaseStudyFeature />
     </div>
   </section>
 
