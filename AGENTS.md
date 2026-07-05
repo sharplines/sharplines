@@ -165,6 +165,28 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   Home keeps the transparent hero behaviour; use `navSolid` on every non-home page.
 - **CTABand props (2026-07-05)**: optional `lede`, `preselectTrade`, `id`, plus existing
   `heading`/`variant`. Default heading stays "See your new homepage before you spend a dollar."
+- **Cal.com booking (Arya, 2026-07-05)**: element-click popup (Arya's chosen embed mode),
+  event `sharplines-vqqmqp/15min`, brand var `cal-brand` set to coral `#F4462F`. Loader is a
+  single inline `<script>` in `Base.astro` (before `</body>`, `forwardQueryParams` on); any
+  element with `data-cal-link`/`data-cal-namespace="15min"`/`data-cal-config` opens it.
+  Reusable trigger = `src/components/BookCall.astro` (renders a `<button>` carrying those
+  attrs + a `<slot>`; default label "Book a 15-minute call", the site-copy skill's secondary
+  CTA). **Free preview stays the single primary offer; booking is the secondary everywhere.**
+  Placed in: Hero secondary (was a dead `/contact` link), CTABand copy column, `/contact`
+  aside, Footer contact column, desktop Nav (subtle text link, hidden <940px) + mobile menu,
+  and the mobile sticky bar. Rationale from Arya's funnel: cold outreach ~10/day, so
+  self-scheduling kills phone tag ("I'll text you the link, grab a time"). **Gotcha:** Astro
+  scopes component styles, so styling the BookCall `<button>` from a parent needs `:global()`
+  (only truly global classes like `.btn` reach it) — every consumer uses `:global(.foo)` for
+  the trigger's helper class. Cal wiring verified in-browser (Cal.loaded, `15min` ns present);
+  the extension's synthetic click doesn't fire Cal's trusted-event listener, real taps do.
+- **MobileCTA redesign (Arya, 2026-07-05, "looks a bit dated ... they'll mostly use phone")**:
+  the old flat edge-to-edge strip with two hairline-outline icon squares read dated. Now a
+  floating rounded **card** (14px radius, side margins, soft shadow, blur; v3 language) holding
+  three one-tap actions kept because the audience is phone-first: coral "Get my free preview"
+  (primary) + two filled soft icon buttons (`:global(.mcta__icon)`, translucent ivory fill,
+  20px icons, 3px button radius) for book (Cal popup) and tap-to-call. Call stays in the bar on
+  Arya's note that visitors mostly use phones. 514 number still reads Montreal (open TODO).
 - **Trade-hero photos (2026-07-05, Arya asked for photos on the new pages)**: one Pexels
   photo per trade in `public/images/trades/{slug}.jpg`, shown beside the hero copy ≥900px
   (4:3, 14px radius + soft shadow, card language) and after the CTA on mobile (16:10 so
@@ -183,6 +205,20 @@ Working notes for any agent on this repo. Keep this current as decisions land.
 - **Contact-page people row (2026-07-05)**: the real founder photos (56px, 4:5, 10px radius,
   `object-position: center 22%` like the founders card) + "You'll hear directly from Arya or
   Amir." under What-happens-next. Real faces beat stock on the conversion page; deliberate.
+- **Electricians page v2 (Arya, 2026-07-05, "this is ridiculous, of course I know
+  everything")**: HARD copy rule learned. Never write lines that lecture the trade about
+  their own trade ("we know what an ESA number means" got rejected). Domain fluency is
+  shown by SPECIFICS a real operator would nod at: how residential / commercial /
+  industrial customers buy differently, insurance letters (aluminum wiring, knob-and-tube,
+  60-amp panels), COIs for property managers, EV rebates + panel capacity. Arya explicitly
+  likes the EV-charger angle; keep it. Implementation: optional `segments` /
+  `segmentsHeading` / `segmentsKicker` in `tradePages.ts` render a mint "The work" section
+  between hero and pains (hairline rows mobile, coral-ruled 3-col desktop). Colour rhythm
+  became green→mint→coral→mint→green→mint→green. Electricians-only until Arya reviews;
+  then write equally deep segment content per trade (each needs real thinking about how
+  that trade's customer types differ, not a template fill). FAQ pattern: "Have you worked
+  with electricians before?" answered with the Provolta build, plus "I only do residential.
+  Does this still fit?" mirroring the some-do-all-three-most-pick-a-lane reality.
 
 ## Open TODO(arya) (from spec §10)
 416/647 phone (currently 514, reads as Montreal) · Provolta permission + quote + 3 screenshots ·

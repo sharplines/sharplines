@@ -56,6 +56,26 @@ const faqSchema = {
     </div>
   </section>
 
+  <!-- Domain segments (mint, optional): how the trade's customer types differ.
+       Present on electricians for now; add per trade as the content is done. -->
+  {page.segments && (
+    <section class="section">
+      <div class="container fade-up">
+        <p class="eyebrow">The work</p>
+        <h2 class="display-lg tsec-h">{page.segmentsHeading}</h2>
+        <div class="segs">
+          {page.segments.map((s) => (
+            <div class="seg">
+              <h3 class="seg__t">{s.title}</h3>
+              <p class="seg__b">{s.body}</p>
+            </div>
+          ))}
+        </div>
+        {page.segmentsKicker && <p class="segs__kicker">{page.segmentsKicker}</p>}
+      </div>
+    </section>
+  )}
+
   <!-- Pains (coral) -->
   <section class="section theme-coral">
     <div class="container fade-up">
@@ -143,6 +163,18 @@ const faqSchema = {
   .thero__fine { margin: 0; font-size: 0.85rem; letter-spacing: 0.02em; color: var(--mint); opacity: 0.75; }
 
   .tsec-h { max-width: 22ch; margin-bottom: clamp(1.75rem, 4.5vw, 3rem); }
+
+  /* Segments: hairline rows on mobile, 3 coral-ruled columns on desktop
+     (light-theme sibling of the pains layout). */
+  .segs { border-top: 1px solid rgba(14, 47, 40, 0.16); }
+  .seg { border-bottom: 1px solid rgba(14, 47, 40, 0.16); padding: 1.1rem 0; }
+  .seg__t { color: var(--green); font-size: 1.2rem; font-weight: 500; margin: 0 0 0.35rem; }
+  .seg__b { color: var(--ink); opacity: 0.82; margin: 0; max-width: 62ch; }
+  @media (min-width: 760px) {
+    .segs { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 2.5rem); border-top: 0; }
+    .seg { border-bottom: 0; border-top: 2px solid var(--coral); padding: 1.25rem 0 0; }
+  }
+  .segs__kicker { margin: 1.75rem 0 0; font-size: clamp(1.02rem, 1.4vw, 1.15rem); color: var(--green); font-weight: 500; max-width: 60ch; }
 
   /* Pains: hairline rows on mobile (quick to scan), 3 ruled columns on desktop. */
   .pains { border-top: 1px solid rgba(255, 255, 255, 0.28); }

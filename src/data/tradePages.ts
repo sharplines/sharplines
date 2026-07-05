@@ -12,6 +12,12 @@ export interface TradePage {
   h1Accent: string; // the phrase inside h1 that takes the coral line (keep short; nowrap)
   imgAlt: string; // hero photo (/images/trades/{slug}.jpg), one plain sentence
   sub: string;
+  // Optional domain-fluency section (Arya, 2026-07-05: show we know how the
+  // trade's customer types differ; never lecture the trade about their own
+  // trade). Rendered between hero and pains when present.
+  segmentsHeading?: string;
+  segments?: { title: string; body: string }[];
+  segmentsKicker?: string;
   pains: { title: string; body: string }[];
   plan: { title: string; body: string }[];
   proof?: string; // one-line Provolta proof; omitted where the sub already carries it
@@ -29,24 +35,35 @@ export const tradePages: TradePage[] = [
     slug: 'electricians',
     imgAlt: 'An electrician tests a panel with a multimeter.',
     noun: 'electricians',
-    h1: 'More panel upgrades. Fewer missed emergency calls.',
+    h1: 'More panel upgrades and EV installs. Fewer missed emergency calls.',
     h1Accent: 'emergency calls.',
-    sub: 'We build and run the website for Provolta Electric, a licensed Toronto contractor that reports twice as many clients since the rebuild. The same system is ready for your electrical business.',
+    sub: 'We build and run the website for Provolta Electric, a licensed Toronto contractor working residential, commercial and industrial. They report twice as many clients since the rebuild.',
+    segmentsHeading: "Residential, commercial and industrial don't buy the same way.",
+    segments: [
+      { title: 'Residential', body: 'Service upgrades from 60 or 100 amps to 200, rewires, pot lights, EV chargers, hot tubs and backup generators. Homeowners read your reviews and check your ESA licence before they call, and a lot of the good jobs start with an insurance letter about knob-and-tube or aluminum wiring and a deadline attached. The site answers the permit, timeline and cost questions up front, so the people who call are already close to booking.' },
+      { title: 'Commercial', body: "Tenant fit-outs, LED retrofits, service maintenance and permitted work for offices, restaurants and retail. Property managers don't browse and they don't wait. They shortlist whoever quotes fast, sends a certificate of insurance without being chased, can work after hours so the tenant stays open, and picks up the second time too." },
+      { title: 'Industrial and automation', body: "Machine wiring, control panels, three-phase power, PLCs. This work is won on reputation and referral, so the site's job is quieter. It has to hold up when a plant engineer or a purchasing manager looks you up before an RFQ, and show the certifications and the finished jobs that prove you can actually do the work." },
+    ],
+    segmentsKicker: 'Some shops run all three. Most pick a lane. We build the site around the work you actually want more of, and it quietly screens out the calls you would rather not take.',
     pains: [
-      { title: 'Invisible at 9pm', body: 'Emergencies happen after hours. If your phone rings out, that burst-panel job goes to whoever answers.' },
-      { title: 'Losing to the map pack', body: 'Three competitors own the top of Google in your area, and their work is no better than yours. They just show up first.' },
-      { title: 'Big jobs need trust', body: 'An EV charger or a rewire is a $2,000+ decision. A dated site quietly tells people to keep scrolling.' },
+      { title: 'Invisible at 9pm', body: 'The panel is sparking and the breaker won\'t reset. If your phone rings out, that job goes to whoever answers, and you never even know it happened.' },
+      { title: 'Losing to the map pack', body: 'Three shops own the top of Google in your area and their work is no better than yours. They just show up first, so they get the call first.' },
+      { title: 'Big jobs need trust', body: 'A 200-amp service upgrade, an EV charger or a full rewire is a $2,000 to $6,000 decision. A dated site quietly tells people to keep scrolling to the next electrician.' },
     ],
     plan: [
-      { title: 'Your licence above the fold', body: "Your ECRA/ESA number, insurance and certifications sit right at the top, because that's what people check before they call." },
-      { title: 'A page for every neighbourhood', body: '"Electrician in Leaside" gets its own page, and so does every other area you serve. That is how you show up in more searches.' },
-      { title: 'After-hours calls, answered', body: 'Every missed call gets answered, the details get taken, and you get a text with who called and why.' },
-      { title: 'Reviews after every job', body: 'Every finished job triggers a friendly follow-up asking for a Google review. Your rating climbs while you work.' },
+      { title: 'A quote form that sorts the work', body: 'It asks what the job is, where, and how urgent, so a service upgrade doesn\'t read like an outlet swap and a real emergency doesn\'t sit unread in an inbox overnight.' },
+      { title: 'Pages for the searches that pay', body: '"200 amp panel upgrade Toronto", "knob and tube replacement", "EV charger installer", "Tesla wall connector", plus every neighbourhood you cover. One page each, because that is exactly what people type into Google.' },
+      { title: 'An EV charger page that closes', body: 'It answers what homeowners actually ask before they book: whether their panel has the capacity, what the ESA permit and inspection involve, which rebates apply, and the real installed cost. Then ads point the people who just bought the car straight at it.' },
+      { title: 'Ready for the insurance deadlines', body: 'Knob-and-tube, aluminum wiring, an old 60-amp panel. When the insurer sets a date, the homeowner searches with the letter in hand, and the electrician whose site explains the fix and the permit is the one who gets called.' },
+      { title: 'After-hours calls answered and sorted', body: 'Calls you miss get picked up, and you get a text with who called, where, and how urgent, so you jump on the burst-panel job tonight and let the outlet swap wait until morning.' },
+      { title: 'Reviews after the jobs that count', body: 'Finished a big upgrade or an EV install? The customer gets a friendly follow-up asking for a Google review while the work is still fresh, so your profile keeps climbing.' },
     ],
     faq: [
-      { q: 'Do you understand electrical work?', a: 'Yes. We build and run the site for Provolta Electric, a licensed Toronto contractor doing residential, commercial and industrial work. We know what an ESA number means and why it belongs at the top of the page.' },
-      { q: 'Can you help me sell EV charger installs?', a: 'Yes. You get a dedicated EV charger page plus ads aimed at homeowners searching for exactly that.' },
-      { q: 'What about emergency calls?', a: 'Your after-hours calls get answered and sorted by urgency, so you can jump on the profitable ones and let the rest wait until morning.' },
+      { q: 'Have you worked with electricians before?', a: 'Yes. We build and run the site for Provolta Electric, a licensed Toronto contractor working across residential, commercial and industrial. Everything on this page came straight out of that work.' },
+      { q: 'I only do residential. Does this still fit?', a: "Yes, and it works the other way too. The site leads with the work you want, so a two-person residential shop isn't fielding factory RFQs, and an industrial shop isn't quoting pot lights." },
+      { q: 'Can you help me sell more EV charger installs?', a: 'Yes, and it is one of the best searches to own right now. EV chargers get their own page that answers panel capacity, the ESA permit and inspection, rebates and real cost, plus ads aimed at people who just ordered a car.' },
+      { q: 'Do you handle the ESA permits and inspections?', a: "No, that stays with you. We're not electricians and we don't pull permits. What we do is explain the ESA permit and inspection process to homeowners in plain words on the site, so they aren't surprised by it and you spend less time explaining the basics before you can quote." },
+      { q: 'What about emergency calls?', a: 'Your after-hours calls get answered and sorted by urgency, so you can jump on the profitable ones and let the rest wait until morning without losing the customer.' },
     ],
     closing: "The next \"electrician near me\" search in your area happens tonight. Be the answer.",
     metaTitle: 'Websites for Toronto electricians | Sharplines Studio',
