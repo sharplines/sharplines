@@ -11,21 +11,20 @@ import FAQ from '../components/FAQ.astro';
 import CTABand from '../components/CTABand.astro';
 
 const servicesList = [
-  { title: 'Websites that sell', blurb: 'A fast, clean site built to turn visitors into calls and quotes. Rebuilt from scratch, live in weeks.', href: '/services#websites' },
+  { title: 'Websites that sell', blurb: 'A fast, clean site built to turn visitors into calls and quotes. We rebuild it from scratch and take it live in weeks.', href: '/services#websites' },
   { title: 'Get found on Google', blurb: 'Local SEO and your Google Business Profile, tuned so you show up when your neighbourhood searches for what you do.', href: '/services#seo' },
-  { title: 'Reviews on autopilot', blurb: 'Every finished job triggers a friendly follow-up asking for a Google review. Your rating climbs while you work.', href: '/services#reviews' },
+  { title: 'Reviews that keep coming', blurb: 'Every finished job triggers a friendly follow-up asking for a Google review. Your rating climbs while you work.', href: '/services#reviews' },
   { title: 'Online booking', blurb: 'Customers book you in two taps. Reminders cut no-shows.', href: '/services#booking' },
   { title: 'Never miss a call', blurb: 'After hours, your phone gets answered, the details get taken, and you get a text with who called and why.', href: '/services#phone' },
-  { title: 'Social on autopilot', blurb: 'Your best work, posted to Instagram and TikTok on schedule. You send photos; we handle the rest.', href: '/services#social' },
-  { title: 'Ads that pay for themselves', blurb: 'Google Ads aimed at people ready to hire, tracked to the call — so you know what every dollar brought back.', href: '/services#ads' },
+  { title: 'Ads that pay for themselves', blurb: 'Google Ads aimed at people ready to hire, tracked to the call, so you know what every dollar brought back.', href: '/services#ads' },
 ];
 
 const faqs = [
-  { q: 'How much does it cost?', a: "Our pricing is competitive with GTA agencies, and every plan is scoped to what your business actually needs. The preview is free either way — book a call and we'll give you a straight number." },
+  { q: 'How much does it cost?', a: "Our pricing is competitive with GTA agencies, and every plan is scoped to what your business actually needs. The preview is free either way. Book a call and we'll give you a straight number." },
   { q: "What's the catch with the free homepage preview?", a: "There isn't one. We design a homepage concept for your business in 48 hours. If you don't love it, you've lost nothing." },
-  { q: 'How fast will I see results?', a: "The site and booking improvements show up immediately. Reviews build within weeks. Google rankings typically move in 2–4 months — we'll show you the progress either way." },
-  { q: 'I already have a website.', a: "Most of our clients did. If it isn't bringing you calls, it's a brochure, not a salesperson. The preview will show you the difference side by side." },
-  { q: 'Am I locked into a contract?', a: 'No long-term lock-in. We keep clients by performing, month after month.' },
+  { q: 'How fast will I see results?', a: "The site and booking improvements show up right away. Reviews build within weeks. Google rankings usually take two to four months, and we'll show you the progress along the way." },
+  { q: 'I already have a website.', a: "Most of our clients did. If your site isn't bringing you calls, it isn't doing its job. The free preview shows you the difference side by side." },
+  { q: 'Am I locked into a contract?', a: "No. There's no long-term contract. We keep clients by getting results, month after month." },
 ];
 ---
 
@@ -55,7 +54,7 @@ const faqs = [
       <a href="/services#dashboard" class="dashboard theme-coral">
         <div>
           <p class="eyebrow">The Sharplines dashboard</p>
-          <p class="dashboard__body">Log in any time, type what you want changed — "add a photo of yesterday's panel job", "post about our spring special" — and it's live in minutes. Your website, finally under your control.</p>
+          <p class="dashboard__body">Log in any time and type what you want changed, like "add a photo of yesterday's panel job" or "post about our spring special". It's live in minutes. No tickets, no waiting on an agency.</p>
         </div>
         <span class="dashboard__more">See how it works →</span>
       </a>
@@ -83,7 +82,7 @@ const faqs = [
   <section class="section">
     <div class="container fade-up">
       <p class="eyebrow">Who's behind it</p>
-      <h2 class="display-lg sec-h">Two engineers, obsessed with your phone ringing.</h2>
+      <h2 class="display-lg sec-h">Meet the two engineers behind Sharplines.</h2>
       <FounderStrip />
     </div>
   </section>
@@ -92,7 +91,7 @@ const faqs = [
   <section class="section">
     <div class="container fade-up faq-wrap">
       <p class="eyebrow">Questions</p>
-      <h2 class="display-lg sec-h">Good questions, straight answers.</h2>
+      <h2 class="display-lg sec-h">Answers to the questions we hear most.</h2>
       <FAQ items={faqs} />
     </div>
   </section>

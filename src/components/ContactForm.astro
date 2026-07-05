@@ -84,7 +84,7 @@ const interests = [
 
   <p class="cform__consent">
     By sending this you're okay with us contacting you about your request.
-    No newsletters, no spam — ever. <a href="/privacy" class="link">Privacy</a>
+    No newsletters and no spam, ever. <a href="/privacy" class="link">Privacy</a>
   </p>
 
   <p class="cform__status" role="status" aria-live="polite" hidden data-status></p>
@@ -145,7 +145,7 @@ const interests = [
         const data = new FormData(f);
         await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(data as any).toString() });
         f.querySelectorAll('.cform__grid, .cform__submit, .cform__consent').forEach((el) => ((el as HTMLElement).hidden = true));
-        if (status) { status.hidden = false; status.dataset.state = 'ok'; status.textContent = "Got it. You'll hear from us today — and your preview lands within 48 hours."; }
+        if (status) { status.hidden = false; status.dataset.state = 'ok'; status.textContent = "Got it. You'll hear from us today, and your preview will be ready within 48 hours."; }
       } catch {
         btn.disabled = false; btn.textContent = 'Get my free preview';
         if (status) { status.hidden = false; status.dataset.state = 'err'; status.textContent = "Something went wrong. Email us at hi@sharplines.ca and we'll jump on it."; }

@@ -44,14 +44,13 @@ Working notes for any agent on this repo. Keep this current as decisions land.
   how(green) → founders(mint) → FAQ(mint) → CTA(green) → footer(ink).
 - Hero media: looping muted `public/videos/hero.mp4` (2.8MB Pexels café clip, free licence),
   poster `public/images/hero-poster.jpg` (a frame of it). TODO(arya): supply a better clip.
-- Voice (spec §2): plain, concrete, sentence case, no exclamation marks. **Banned words:**
-  solutions, synergy, leverage, cutting-edge, revolutionize, digital transformation,
-  unleash, empower, elevate, seamless, world-class. Only published client metric is
-  Provolta's client-reported 2×. Never invent testimonials/ratings/agency years.
-- Voice (spec §2): plain, concrete, sentence case, no exclamation marks. **Banned words:**
-  solutions, synergy, leverage, cutting-edge, revolutionize, digital transformation,
-  unleash, empower, elevate, seamless, world-class. Only published client metric is
-  Provolta's client-reported 2×. Never invent testimonials/ratings/agency years.
+- **Voice (MANDATORY for all visitor-facing text): follow `.claude/skills/site-copy/SKILL.md`**
+  (invoke the `site-copy` skill before writing or editing any copy — pages, CTAs, FAQs,
+  meta tags, alt text, form messages). Set by Arya 2026-07-05: warm/plain Fieldmark-style
+  register, **no em-dashes ever in visible copy**, no AI-sounding constructions, banned-word
+  list, lead-gen + SEO rules. Spec §2 carries the summary; the skill wins over older §6–§7
+  sample copy. Only published client metric is Provolta's client-reported 2×. Never invent
+  testimonials/ratings/agency years.
 
 ## Structure
 - `src/components/` — Nav, Footer, MobileCTA, Hero, ProofBar, ServiceCard, CaseStudyFeature,

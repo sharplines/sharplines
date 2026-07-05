@@ -1,30 +1,34 @@
 ---
-// §6.1 FounderStrip. Stock placeholder portraits (4:5). TODO(arya): real photos.
+// §6.1 FounderStrip. Real founder photos supplied by Arya (Image #1 = Amir,
+// Image #2 = Arya). First names only. Copy follows the site-copy voice skill.
 const founders = [
-  { name: 'Arya Khaligh', img: '/images/founder-arya.jpg' },
-  { name: 'Amir Gholizad', img: '/images/founder-amir.jpg' },
+  { name: 'Arya', img: '/images/founder-arya.jpg' },
+  { name: 'Amir', img: '/images/founder-amir.jpg' },
 ];
 ---
 <div class="founders">
   <div class="founders__photos">
     {founders.map((f) => (
       <figure class="founders__fig">
-        <img src={f.img} width="640" height="800" loading="lazy" decoding="async" alt={`${f.name}, co-founder of Sharplines Studio (placeholder photo).`} />
+        <img src={f.img} width="545" height="820" loading="lazy" decoding="async" alt={`${f.name}, co-founder of Sharplines Studio.`} />
         <figcaption>{f.name}</figcaption>
       </figure>
     ))}
   </div>
   <div class="founders__copy">
-    <p class="lede">Sharplines is Arya Khaligh and Amir Gholizad — senior software engineers who spent years building software in the tech industry. Now we point that experience at one problem: getting local businesses more customers. Everything we make is fast, measurable, and yours.</p>
+    <p class="lede">Sharplines is Arya and Amir, two senior software engineers who spent years shipping software in tech. We now put that experience toward one problem: getting local businesses more customers. Everything we build is fast, measurable, and yours to keep.</p>
   </div>
 </div>
 
 <style>
-  .founders { display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
-  .founders__photos { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 460px; }
+  .founders { display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 5vw, 3.5rem); align-items: center; }
+  .founders__photos { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(0.85rem, 2vw, 1.5rem); }
   .founders__fig { margin: 0; }
-  .founders__fig img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); }
-  .founders__fig figcaption { margin-top: 0.7rem; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); opacity: 0.6; }
+  .founders__fig img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 22%; border-radius: var(--radius); }
+  .founders__fig figcaption { margin-top: 0.75rem; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); opacity: 0.65; }
   .founders__copy .lede { color: var(--ink); max-width: 40ch; }
-  @media (min-width: 860px) { .founders { grid-template-columns: 0.85fr 1fr; } }
+
+  @media (min-width: 820px) {
+    .founders { grid-template-columns: 1.3fr 1fr; gap: clamp(2.5rem, 5vw, 4.5rem); }
+  }
 </style>

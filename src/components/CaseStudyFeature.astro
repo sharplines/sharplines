@@ -1,16 +1,16 @@
 ---
-// Provolta case study feature (spec §6.1). Copy verbatim.
+// Provolta case study feature (spec §6.1). Copy follows the site-copy voice skill.
 interface Props { compact?: boolean; }
 const { compact = false } = Astro.props;
 ---
 <div class:list={['casestudy', compact && 'casestudy--compact']}>
   <div class="casestudy__media">
     <img src="/images/provolta-site.png" width="1200" height="820" loading="lazy" decoding="async"
-         alt="The Provolta Electric website Sharplines built — a conversion-first homepage for a licensed Toronto electrician." />
+         alt="The homepage of provolta.ca, the website Sharplines built for Provolta Electric, a licensed Toronto electrician." />
   </div>
   <div class="casestudy__body">
     <h2 class="display-xl casestudy__h">Provolta Electric doubled their clients.</h2>
-    <p>A licensed Toronto electrician serving homes, businesses, and industrial sites. We rebuilt provolta.ca from the ground up — conversion-first design, neighbourhood SEO pages, and a quote form people actually finish. Since launch, Provolta reports 2× more residential and commercial clients.</p>
+    <p>A licensed Toronto electrician serving homes, businesses, and industrial sites. We rebuilt provolta.ca from the ground up, with a clear homepage, pages for the neighbourhoods they serve, and a quote form people actually finish. Since launch, Provolta reports 2× more residential and commercial clients.</p>
     <a href="/work" class="link casestudy__link">Read the full story →</a>
   </div>
 </div>

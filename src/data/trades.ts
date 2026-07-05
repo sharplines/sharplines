@@ -8,12 +8,12 @@ export interface Trade {
 }
 
 export const trades: Trade[] = [
-  { slug: 'electricians', label: 'Electricians',            hook: 'Own the "electrician near me" search.' },
+  { slug: 'electricians', label: 'Electricians',            hook: 'Show up first for "electrician near me".' },
   { slug: 'plumbers',     label: 'Plumbers',                hook: 'Be the first call when the pipe bursts.' },
   { slug: 'hvac',         label: 'HVAC',                    hook: 'Book the season before it starts.' },
   { slug: 'landscapers',  label: 'Landscapers & gardeners', hook: 'Turn your best yards into your next clients.' },
   { slug: 'barbers',      label: 'Barbershops & salons',    hook: 'Full chairs, fewer no-shows.' },
   { slug: 'cleaners',     label: 'Cleaning services',       hook: 'Recurring clients, not one-off gigs.' },
-  { slug: 'roofers',      label: 'Roofers',                 hook: 'Win the storm season — and the trust battle.' },
+  { slug: 'roofers',      label: 'Roofers',                 hook: 'Be the roofer people trust when the storm hits.' },
   { slug: 'auto-repair',  label: 'Auto repair shops',       hook: 'Fill the bays, keep them coming back.' },
 ];

@@ -28,14 +28,30 @@ This spec is the source of truth. Where the existing Astro template conflicts wi
 
 ## 2. Voice & copy rules
 
-- Audience: busy owner-operators (1–10 employees). They care about **booked jobs**, not marketing.
+> **v2 — updated 2026-07-05 at Arya's direction.** The authoritative, expanded voice
+> guide is **`.claude/skills/site-copy/SKILL.md`** — it MUST be followed for every
+> piece of visitor-facing text (pages, CTAs, FAQs, meta tags, alt text, form
+> messages). Where older sample copy in §6–§7 conflicts with it, the skill wins;
+> bring the sample into compliance when you touch it. Summary below.
+
+- Tone model: **fieldmark.studio** — warm, plain, calm, complete sentences that
+  explain rather than pitch. Confidence comes from being specific, not loud.
+- **No em-dashes (`—`) anywhere in visible copy** (Arya: reads as AI-written).
+  Use a period, a comma, or restructure. En-dash only in numeric ranges (`2–3 weeks`).
+  Also banned: "it's not X, it's Y", "whether you're X or Y", rhetorical hype
+  questions, colon-formula headlines, stacked hype adjectives.
+- Audience: busy owner-operators (1–10 employees). They care about **booked jobs**,
+  not marketing.
 - Plain verbs, short sentences, active voice, second person ("you get", not "clients receive").
 - Concrete over clever: "More calls from Google" beats "Amplify your digital presence."
-- Numbers wherever honest: "2× more clients", "48-hour preview", "15-min call".
-- Mention AI as an outcome, not a buzzword: say "your phone gets answered after hours and you get a text with the details" — not "AI-powered voice agent."
-- **Banned words:** solutions, synergy, leverage (verb), cutting-edge, revolutionize, digital transformation, unleash, empower, elevate, seamless, "world-class".
+- Numbers wherever honest: "2× more clients", "48-hour preview", "15-minute call".
+- Mention AI as an outcome, not a buzzword: say "your phone gets answered after hours
+  and you get a text with the details", not "AI-powered voice agent."
+- **Banned words:** solutions, synergy, leverage (verb), cutting-edge, revolutionize,
+  digital transformation, unleash, empower, elevate, seamless, "world-class", plus the
+  AI-speak list in the skill (unlock, streamline, effortless, "on autopilot", …).
 - Claims must be verifiable or clearly framed: the only client metric we publish is Provolta's 2× (client-reported). Do not invent testimonials, client counts, star ratings, or years-in-business for the studio.
-- Experience framing (exact angle to use): the founders' experience is **engineering experience** — "built by two senior software engineers who've spent years shipping software in tech." Never imply years running an agency.
+- Experience framing (exact angle to use): the founders' experience is **engineering experience**, i.e. "built by two senior software engineers who've spent years shipping software in tech." Never imply years running an agency.
 - Sentence case everywhere, including buttons and headings. No exclamation marks.
 
 ---
@@ -154,46 +170,46 @@ Keep it to these six tokens — no gradients beyond the hero scrim, no extra acc
 
 ### 6.1 Home `/`
 
-**Hero**
-- Eyebrow (mono): `TORONTO & GTA — LOCAL BUSINESS GROWTH`
+**Hero** (copy rewritten 2026-07-05 per §2 v2 voice)
+- Eyebrow (mono): `FOR LOCAL BUSINESSES IN TORONTO AND THE GTA`
 - H1: `We turn local searches into booked jobs.` (chalk line draws under "booked jobs")
-- Sub: `Sharplines builds the website, reviews, and follow-up systems that make GTA businesses the obvious choice — then keeps the calls coming.`
-- Buttons: `See my new homepage — free` (primary, → /contact with `?offer=preview`) · `Book a 15-min call` (secondary, → /contact)
+- Sub: `Sharplines builds the website, the reviews, and the follow-up that make your business the one people call. Based in Toronto, working across the GTA.`
+- Buttons: `Get my free homepage preview` (primary, → /contact with `?offer=preview`) · `Book a 15-minute call` (secondary, → /contact)
 - Under buttons (mono, small): `Free preview in 48 hours · No obligation`
 
 **ProofBar** (3 items, hairline-separated):
-- `2× more clients — Provolta Electric, Toronto`
+- `2× more clients for Provolta Electric, Toronto`
 - `Built by senior software engineers`
-- `Websites, reviews, booking & ads — one team`
+- `Websites, reviews, booking and ads from one team`
 
 **Services grid** — eyebrow `WHAT YOU GET`, H2 `Everything a local business needs to win online.` Seven `ServiceCard`s (title / two-line blurb / anchor link to /services#slug):
-1. **Websites that sell** — A fast, clean site built to turn visitors into calls and quotes. Rebuilt from scratch, live in weeks.
+1. **Websites that sell** — A fast, clean site built to turn visitors into calls and quotes. We rebuild it from scratch and take it live in weeks.
 2. **Get found on Google** — Local SEO and your Google Business Profile, tuned so you show up when your neighbourhood searches for what you do.
-3. **Reviews on autopilot** — Every finished job triggers a friendly follow-up asking for a Google review. Your rating climbs while you work.
+3. **Reviews that keep coming** — Every finished job triggers a friendly follow-up asking for a Google review. Your rating climbs while you work.
 4. **Online booking** — Customers book you in two taps. Reminders cut no-shows.
 5. **Never miss a call** — After hours, your phone gets answered, the details get taken, and you get a text with who called and why.
-6. **Social on autopilot** — Your best work, posted to Instagram and TikTok on schedule. You send photos; we handle the rest.
-7. **Ads that pay for themselves** — Google Ads aimed at people ready to hire, tracked to the call — so you know what every dollar brought back.
+6. **Social media, handled** — Your best work, posted to Instagram and TikTok on schedule. You send photos; we handle the rest.
+7. **Ads that pay for themselves** — Google Ads aimed at people ready to hire, tracked to the call, so you know what every dollar brought back.
 
-Below the grid, a full-width card: **The Sharplines dashboard** — `Log in any time, type what you want changed — "add a photo of yesterday's panel job", "post about our spring special" — and it's live in minutes. Your website, finally under your control.` Link: `See how it works →` (/services#dashboard)
+Below the grid, a full-width card: **The Sharplines dashboard** — `Log in any time and type what you want changed, like "add a photo of yesterday's panel job" or "post about our spring special". It's live in minutes. No tickets, no waiting on an agency.` Link: `See how it works →` (/services#dashboard)
 
-**CaseStudyFeature** — eyebrow `RESULTS`, H2 `Provolta Electric doubled their clients.` Body: `A licensed Toronto electrician serving homes, businesses, and industrial sites. We rebuilt provolta.ca from the ground up — conversion-first design, neighbourhood SEO pages, and a quote form people actually finish. Since launch, Provolta reports 2× more residential and commercial clients.` Visual: site screenshot `TODO(arya): asset`. Link: `Read the full story →` (/work). Optional pull-quote slot: `TODO(arya): Provolta quote + permission`.
+**CaseStudyFeature** — eyebrow `RESULTS`, H2 `Provolta Electric doubled their clients.` Body: `A licensed Toronto electrician serving homes, businesses, and industrial sites. We rebuilt provolta.ca from the ground up, with a clear homepage, pages for the neighbourhoods they serve, and a quote form people actually finish. Since launch, Provolta reports 2× more residential and commercial clients.` Visual: site screenshot `TODO(arya): asset`. Link: `Read the full story →` (/work). Optional pull-quote slot: `TODO(arya): Provolta quote + permission`.
 
 **StepTimeline** — eyebrow `HOW IT WORKS`, H2 `Three steps, no risk.` (numbered 01–03):
-1. **Preview** — Tell us your business name. Within 48 hours you'll see a homepage designed for you — free, no strings.
+1. **Preview** — Tell us your business name. Within 48 hours you'll see a homepage designed for you. It's free, and there are no strings attached.
 2. **Launch** — Like it? We build the full site and switch on the systems you choose. Most launches take 2–3 weeks.
 3. **Grow** — Reviews, rankings, bookings, and posts run week after week. You'll see every call and lead in your dashboard.
 
-**TradeGrid** — eyebrow `WHO WE HELP`, H2 `Built for the businesses that keep the GTA running.` 8 tiles linking to /for/* (label + one-line hook from §7 data). Footer line: `Different trade? The playbook still fits — get in touch.`
+**TradeGrid** — eyebrow `WHO WE HELP`, H2 `Built for the businesses that keep the GTA running.` 8 tiles linking to /for/* (label + one-line hook from §7 data). Footer line: `Don't see your trade? The same approach works for most local businesses. Get in touch.`
 
-**FounderStrip** — eyebrow `WHO'S BEHIND IT`, H2 `Two engineers, obsessed with your phone ringing.` Body: `Sharplines is Arya Khaligh and Amir Gholizad — senior software engineers who spent years building software in the tech industry. Now we point that experience at one problem: getting local businesses more customers. Everything we make is fast, measurable, and yours.` Photos: `TODO(arya): supply photos (stock placeholders for now, 4:5 ratio)`.
+**FounderStrip** — eyebrow `WHO'S BEHIND IT`, H2 `Meet the two engineers behind Sharplines.` Body: `Sharplines is Arya Khaligh and Amir Gholizad, two senior software engineers who spent years shipping software in tech. We now put that experience toward one problem: getting local businesses more customers. Everything we build is fast, measurable, and yours to keep.` Photos: `TODO(arya): supply photos (stock placeholders for now, 4:5 ratio)`.
 
 **FAQ** (5):
-1. *How much does it cost?* — Our pricing is competitive with GTA agencies, and every plan is scoped to what your business actually needs. The preview is free either way — book a call and we'll give you a straight number.
+1. *How much does it cost?* — Our pricing is competitive with GTA agencies, and every plan is scoped to what your business actually needs. The preview is free either way. Book a call and we'll give you a straight number.
 2. *What's the catch with the free homepage preview?* — There isn't one. We design a homepage concept for your business in 48 hours. If you don't love it, you've lost nothing.
-3. *How fast will I see results?* — The site and booking improvements show up immediately. Reviews build within weeks. Google rankings typically move in 2–4 months — we'll show you the progress either way.
-4. *I already have a website.* — Most of our clients did. If it isn't bringing you calls, it's a brochure, not a salesperson. The preview will show you the difference side by side.
-5. *Am I locked into a contract?* — No long-term lock-in. We keep clients by performing, month after month.
+3. *How fast will I see results?* — The site and booking improvements show up right away. Reviews build within weeks. Google rankings usually take two to four months, and we'll show you the progress along the way.
+4. *I already have a website.* — Most of our clients did. If your site isn't bringing you calls, it isn't doing its job. The free preview shows you the difference side by side.
+5. *Am I locked into a contract?* — No. There's no long-term contract. We keep clients by getting results, month after month.
 
 **CTABand** (ink bg, paper text): H2 `See your new homepage before you spend a dollar.` + `<ContactForm variant="short" />` + mono line `Prefer to talk? (514) 560-2266 · hi@sharplines.ca`
 
@@ -208,7 +224,7 @@ H1 `Results, not promises.` Provolta case study long-form: Challenge (a skilled 
 H1 `Precision people.` Founder bios (2–3 sentences each, engineering framing per §2) + "How we work" trio: **Verifiable** (we only claim what we can show), **Plain-spoken** (no jargon, no padded reports), **Fast** (software people move in days, not quarters). Photos `TODO(arya)`. CTABand.
 
 ### 6.5 Contact `/contact`
-H1 `Start with a free preview.` Sub: `Fill this in — you'll hear from us the same business day, and your homepage preview lands within 48 hours.` `<ContactForm variant="full" />` + direct contact block. If URL has `?offer=preview`, preselect interest = "Free homepage preview".
+H1 `Start with a free preview.` Sub: `Fill this in and you'll hear from us the same business day. Your homepage preview will be ready within 48 hours.` `<ContactForm variant="full" />` + direct contact block. If URL has `?offer=preview`, preselect interest = "Free homepage preview".
 
 ### 6.6 Privacy `/privacy`
 Plain-language policy: what the form collects, that it's used only to respond and provide services, email/SMS contact requires consent and every message includes an opt-out, no selling data, contact for deletion. `TODO(claude-code): draft ~400 words, PIPEDA/CASL-aware, plain English; note at top of PR that a lawyer should review — this is not legal advice.`
@@ -232,7 +248,7 @@ H1 `This page doesn't exist.` Sub: `The chalk line stops here. Head home or tell
 
 **Data (final copy):**
 
-**electricians** — hook: `Own the "electrician near me" search.`
+**electricians** — hook: `Show up first for "electrician near me".`
 - h1: `More panel upgrades. Fewer missed emergency calls.`
 - sub: `We built provolta.ca — and the calls followed. The same system is ready for your electrical business.`
 - pains: (1) *Invisible at 9pm* — Emergencies happen after hours. If your phone rings out, that burst-panel job goes to whoever answers. (2) *Losing to the map pack* — Three competitors own the top of Google in your area. Their work isn't better — their presence is. (3) *High-ticket jobs need trust* — EV chargers and rewires are $2,000+ decisions. A dated site quietly tells people to keep scrolling.
@@ -286,7 +302,7 @@ H1 `This page doesn't exist.` Sub: `The chalk line stops here. Head home or tell
 - closing: `Your next weekly client is searching right now. Be the obvious safe choice.`
 - meta: `Websites & Marketing for Cleaning Services in Toronto | Sharplines` / `Trust-first websites, instant quotes and recurring-client booking for GTA cleaning companies. Free homepage preview in 48 hours.`
 
-**roofers** — hook: `Win the storm season — and the trust battle.`
+**roofers** — hook: `Be the roofer people trust when the storm hits.`
 - h1: `Roofing is a trust business. Look like the safe choice.`
 - sub: `Homeowners are terrified of roofing scams. The contractor who looks credible online wins the $15,000 job before the first ladder goes up.`
 - pains: (1) *Scam shadow* — Storm-chaser horror stories make homeowners suspicious of everyone — including the good contractors. (2) *Huge tickets, long decisions* — A roof is one of the biggest cheques a homeowner writes; they compare three or four companies. (3) *Weather-driven demand spikes* — After a storm, whoever's visible gets the calls.

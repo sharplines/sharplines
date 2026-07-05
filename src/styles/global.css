@@ -26,7 +26,7 @@
   /* Layout */
   --maxw: 1280px;
   --gutter: clamp(1.25rem, 5vw, 4rem);
-  --section-y: clamp(4rem, 10vw, 8rem);
+  --section-y: clamp(3.25rem, 6.5vw, 5.5rem);
   --radius: 3px;
 
   --bg: var(--mint);
@@ -70,6 +70,8 @@ strong { font-weight: 600; }
 /* ---------- Layout helpers ---------- */
 .container { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
 .section { padding-block: var(--section-y); }
+/* Consecutive light (untinted) sections share one gap instead of doubling up. */
+.section:not([class*="theme-"]) + .section:not([class*="theme-"]) { padding-top: 0; }
 
 .display-xxl { font-size: var(--t-xxl); line-height: 0.98; font-weight: 400; }
 .display-xl  { font-size: var(--t-xl); line-height: 1.03; font-weight: 400; }
