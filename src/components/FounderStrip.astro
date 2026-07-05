@@ -26,10 +26,11 @@ const founders = [
   .founders__photos { display: flex; gap: clamp(1.25rem, 3vw, 2rem); }
   .founders__fig { margin: 0; text-align: center; }
   .founders__fig img {
-    width: clamp(112px, 20vw, 164px);
-    aspect-ratio: 1;
+    --avatar: clamp(116px, 18vw, 168px);
+    width: var(--avatar);
+    height: var(--avatar); /* explicit square box so border-radius:50% is a true circle */
     object-fit: cover;
-    object-position: center 20%;
+    object-position: center 22%;
     border-radius: 50%;
   }
   .founders__fig figcaption { margin-top: 0.75rem; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); opacity: 0.65; }
